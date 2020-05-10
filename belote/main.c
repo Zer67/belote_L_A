@@ -1,11 +1,21 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "menu.h"
 
 int main()
 {
-    char character;
-    printf("Hello world!\n");
-    scanf("%c", character);
-    printf("%c", character);
-    return 0;
+    switch(main_menu()){
+        case 1:
+            printf("\n\nWe will start a new game, keep ready !");
+            break;
+        case 2:
+            printf("\n\nLet's see the higher scores, could you beat them ?");
+            break;
+        case 3:
+            printf("\n\nGoodbye :'(");
+            return EXIT_SUCCESS;
+        case -1:
+            printf("\n\nError during the initialization, please restart the game");
+            return EXIT_FAILURE;
+    }
+
+    return EXIT_SUCCESS;
 }
