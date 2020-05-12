@@ -58,6 +58,7 @@ int main_menu(){
 /** display the bidding's menu
  */
 void bid_menu(){
+    DistributeCards(North, South, East, West);
     char bidString[20];
     int bid;
     int nbr_bid_option = 5;
