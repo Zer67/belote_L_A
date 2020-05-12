@@ -4,7 +4,11 @@ int main()
 {
     switch(main_menu()){
         case 1:
+            clrscr();
             printf("\n\nWe will start a new game, keep ready !");
+            /* distribution des cartes */
+            bid_menu();
+
             break;
         case 2:
             printf("\n\nLet's see the higher scores, could you beat them ?");
