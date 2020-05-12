@@ -2,7 +2,9 @@
 
 int main()
 {
-    switch(main_menu()){
+
+  char** Cards = (char**) malloc(sizeof(char*)*32);
+  switch(main_menu()){
         case 1:
             clrscr();
             printf("\n\nWe will start a new game, keep ready !");
