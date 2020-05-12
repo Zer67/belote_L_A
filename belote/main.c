@@ -1,17 +1,27 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "menu.h"
 
 int main()
 {
 
-    char** Cards = (char**) malloc(sizeof(char*)*32);
-    
-    for (int i = 0; i < 32; i++) {
-        Cards[i] = (char*)malloc(sizeof(char)*5);
+  char** Cards = (char**) malloc(sizeof(char*)*32);
+  switch(main_menu()){
+        case 1:
+            clrscr();
+            printf("\n\nWe will start a new game, keep ready !");
+            /* distribution des cartes */
+            bid_menu();
+
+            break;
+        case 2:
+            printf("\n\nLet's see the higher scores, could you beat them ?");
+            break;
+        case 3:
+            printf("\n\nGoodbye :'(");
+            return EXIT_SUCCESS;
+        case -1:
+            printf("\n\nError during the initialization, please restart the game");
+            return EXIT_FAILURE;
     }
 
-    printf("Hello world!\n");
-    scanf("%c", character);
-    return 0;
-    
+    return EXIT_SUCCESS;
 }
