@@ -3,11 +3,13 @@
 
 int main()
 {
-<<<<<<< HEAD
-    //coucou
-=======
-    char character;
->>>>>>> d3d94d8a23384b6a5a7bd577a9bb2a2603495c9e
+
+    char** Cards = (char**) malloc(sizeof(char*)*32);
+    
+    for (int i = 0; i < 32; i++) {
+        Cards[i] = (char*)malloc(sizeof(char)*5);
+    }
+
     printf("Hello world!\n");
     scanf("%c", character);
     return 0;
