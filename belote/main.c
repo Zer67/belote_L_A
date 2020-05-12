@@ -3,7 +3,15 @@
 int main()
 {
 
-  char** Cards = (char**) malloc(sizeof(char*)*32);
+   int sizeJ = 8;
+    
+    char** North = (char**)malloc(sizeof(char*)*sizeJ);
+    char** South = (char**)malloc(sizeof(char*)*sizeJ);
+    char** East = (char**)malloc(sizeof(char*)*sizeJ);
+    char** West = (char**)malloc(sizeof(char*)*sizeJ);
+    
+  DistributeCards(North, South, East, West);
+  
   switch(main_menu()){
         case 1:
             clrscr();
