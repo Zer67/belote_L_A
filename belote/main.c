@@ -9,14 +9,16 @@ int main() {
     char** East = (char**)malloc(sizeof(char*)*sizeJ);
     char** West = (char**)malloc(sizeof(char*)*sizeJ);
     
-    DistributeCards(North, South, East, West);
+
   char** Cards = (char**) malloc(sizeof(char*)*32);
   switch(main_menu()){
         case 1:
             clrscr();
             printf("\n\nWe will start a new game, keep ready !");
             /* distribution des cartes */
+              DistributeCards(North, South, East, West);
             bid_menu();
+          
 
             break;
         case 2:
