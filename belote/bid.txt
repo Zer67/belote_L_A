@@ -1,0 +1,6 @@
+north:  General  C
+west:   Capot   C
+east:   General H
+
+south:	Capot	C
+south:	Capot	C

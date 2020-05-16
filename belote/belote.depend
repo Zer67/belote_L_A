@@ -1,13 +1,20 @@
 # depslib dependency file v1.0
-1589301274 source:c:\users\alex\documents\github\belote_l_a\belote\main.c
-	"menu.h"
+1589306842 source:c:\users\alex\documents\github\belote_l_a\belote\cartes.c
+	"Cartes.h"
 
-1589305098 c:\users\alex\documents\github\belote_l_a\belote\menu.h
+1589306842 c:\users\alex\documents\github\belote_l_a\belote\cartes.h
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+
+1589651218 source:c:\users\alex\documents\github\belote_l_a\belote\main.c
+	"menu.h"
+	"Cartes.h"
+
+1589652387 c:\users\alex\documents\github\belote_l_a\belote\menu.h
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
 	<limits.h>
-
-1589305098 source:c:\users\alex\documents\github\belote_l_a\belote\menu.c
-	"menu.h"
 
