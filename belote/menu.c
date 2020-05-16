@@ -27,6 +27,8 @@ char askForTrump(char* title){
     return trump;
 }
 
+
+
 /** function that take an array of string in argument. Each element in this array is an option except the first element which is the title of the menu.
  * @param options - the array containing the options of the menu
  * @param nbr_option - number of options in the menu
@@ -77,6 +79,11 @@ int main_menu(){
  */
 void bid_menu(int current_contract){
     // DistributeCards(North, South, East, West); I can't compile with this function at this place
+    /* variables used to read the file bid.txt */
+    char read_player[10];
+    char read_bid[7]; /* it is not the same bid that we have in case 2 but here, it is  a string which let us put the value "capot" or "general" in the the second column */
+    char read_trump;
+
     FILE *bid_file;
     char bidString[20];
     int bid;
@@ -112,16 +119,11 @@ void bid_menu(int current_contract){
             /* write this bid in a file with the other bids to stock this data */
             bid_file = fopen("bid.txt","w");
             fprintf(bid_file,"south:\t%d\t%c",bid,trump);
-            fclose(bid_file);
 
             break;
         case 3:
             clrscr();
             bid_file = fopen("bid.txt", "a+");
-
-            char read_player[10];
-            char read_bid[7]; /* it is not the same bid that we have in case 2 but here, it is  a string which let us put the value "capot" or "general" in the the second column */
-            char read_trump;
 
             while((fscanf(bid_file,"%s\t%s\t%c\n",read_player,read_bid,&read_trump) != EOF)&&(strcmp(read_bid,"General")!=0)&&(strcmp(read_bid,"Capot")!=0)){
                 fscanf(bid_file, "%*[^\n]\n");
@@ -131,15 +133,69 @@ void bid_menu(int current_contract){
             } else {
                 trump = askForTrump(bid_options[0]);
                 fprintf(bid_file,"\nsouth:\tCapot\t%c",trump);
-                printf("\nyou bet that you'll make a 'Capot' with the trump %c", trump);
+                printf("\nyou bet that you'll make a 'Capot' with the trump %c\n", trump);
             }
 
             break;
         case 4:
+            clrscr();
+            bid_file = fopen("bid.txt", "a+");
+
+            while((fscanf(bid_file,"%s\t%s\t%c\n",read_player,read_bid,&read_trump) != EOF)&&(strcmp(read_bid,"General")!=0)){
+                fscanf(bid_file, "%*[^\n]\n");
+            }
+            if (getc(bid_file)!= EOF){
+                printf("%s\n\n\tYou can't do that, someone already made a %s",bid_options[0], read_bid);
+            } else {
+                trump = askForTrump(bid_options[0]);
+                fprintf(bid_file,"\nsouth:\tGeneral\t%c",trump);
+                printf("\nyou bet that you'll make a 'General' with the trump %c\n", trump);
+            }
             break;
         case 5:
+            clrscr();
+
+            printf("%s",bid_options[0]);
+            bid_file = fopen("bid.txt","a+");
+
+            while((fscanf(bid_file,"%s\t%s\t%c\n",read_player,read_bid,&read_trump) != EOF)&&(strcmp(read_bid,"Coinche")!=0)){
+                fscanf(bid_file, "%*[^\n]\n");
+            }
+            if (getc(bid_file)== EOF){
+                fprintf(bid_file,"\nsouth:\tGeneral\t%c",read_trump); /* it is read_trump instead of trump because here we took the bet of the last player who bet and we keep the same trump */
+                printf("\nyou bet that you'll make a 'Coinche'\n");
+            }
             break;
         default :
             printf("It seems that something wrong happened :(");
+
+    }
+    fclose(bid_file);
+}
+
+void menu_surcoinche(char trump){
+    clrscr();
+    char surcoinche_y_n = 'y';
+    char surcoincheString[20];
+
+    FILE *bid_file;
+    bid_file = fopen("bid.txt","a+");
+    printf("_________        .__              .__\n"
+"\\_   ___ \\  ____ |__| ____   ____ |  |__   ____"
+"/    \\  \\/ /  _ \\|  |/    \\_/ ___\\|  |  \\_/ __ \\n"
+"\\     \\___(  <_> )  |   |  \\  \\___|   Y  \\  ___/\n"
+" \\______  /\\____/|__|___|  /\\___  >___|  /\\___  >\n"
+"        \\/               \\/     \\/     \\/     \\/");
+
+    do{
+        printf("Someone make a coinche on your bet. You could make a surcoinche, would you ?(answer with 'y' or 'n')\t");
+        scanf("%s",surcoincheString);
+        printf("\n\n");
+    } while((sscanf(surcoincheString,"%c",&surcoinche_y_n)==EOF) && ((surcoinche_y_n!='y')||(surcoinche_y_n!='n')));
+    if (surcoinche_y_n == 'y'){
+        fprintf(bid_file,"\nsouth:\tSurCoinche\t%c",trump);
+        printf("\nyou bet that you'll make a 'SurCoinche'\n");
+    } else {
+        printf("let's go back to the game\n");
     }
 }

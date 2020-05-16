@@ -15,6 +15,11 @@ typedef enum {
  */
 void clrscr();
 
+/** a function which ask the player to choose a trump during the bidding time
+ * @param title - the title of the menu to make the interface more a e s t h e t i c
+ * @return a char which is the chosen trump
+ */
+char askForTrump(char* title);
 /**
  * @param options - the array containing the options of the menu
  * @param nbre_option - number of options in the menu

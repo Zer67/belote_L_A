@@ -12,9 +12,13 @@
 	"menu.h"
 	"Cartes.h"
 
-1589652387 c:\users\alex\documents\github\belote_l_a\belote\menu.h
+1589659944 c:\users\alex\documents\github\belote_l_a\belote\menu.h
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
 	<limits.h>
+
+1589660427 source:c:\users\alex\documents\github\belote_l_a\belote\menu.c
+	"menu.h"
+	"Cartes.h"
 
