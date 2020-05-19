@@ -5,11 +5,24 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <limits.h>
-
+#include <string.h>
 typedef enum {
     True = 1,
     False = 0
 } Boolean;
+
+
+
+typedef struct {
+    char* player;
+    char* bet;
+    char trump;
+} bid;
+
+typedef struct {
+    bid** bidding_array;
+    int turn;
+} biddings;
 
 /** function which erase all the things on the screen no matter the OS usedvoid clrscr()
  */
@@ -37,5 +50,11 @@ int main_menu();
 
 /** display the menu of bidding
  */
-void bid_menu();
+int bid_menu(int current_contract, biddings* struct_bid);
+
+void menu_surcoinche(biddings* struct_bid);
+
+void printBids(biddings b);
+
+biddings* AddABet(biddings* b, char* GivenPlayer, int sizeGivenPlayer, char* GivenBet, int sizeGivenBet, char GivenTrump);
 #endif // MENUHEADER

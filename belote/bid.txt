@@ -1,4 +1,0 @@
-north:	256  C
-west:   180 H
-east:   Capot   C
-south:	Capot    S

@@ -77,16 +77,12 @@ int main_menu(){
 
 /** display the bidding's menu
  */
-void bid_menu(int current_contract){
+int bid_menu(int current_contract, biddings* struct_bid){
     // DistributeCards(North, South, East, West); I can't compile with this function at this place
-    /* variables used to read the file bid.txt */
-    char read_player[10];
-    char read_bid[7]; /* it is not the same bid that we have in case 2 but here, it is  a string which let us put the value "capot" or "general" in the the second column */
-    char read_trump;
 
-    FILE *bid_file;
     char bidString[20];
     int bid;
+    int i=0; /* variable used to iterate in few while loops */
     char trump;
     int nbr_bid_option = 5;
     int choice = 0;
@@ -113,79 +109,90 @@ void bid_menu(int current_contract){
                 printf("%s",bid_options[0]);
                 printf("\ntell me your bid knowing that the last contract was %d:\t",current_contract);
                 scanf("%s",bidString);
-            } while((sscanf(bidString,"%d",&bid)==EOF)||(bid<current_contract));
+            } while((strcmp(bidString,"u")==0)||(sscanf(bidString,"%d",&bid)==EOF)||(bid<current_contract));
+            if (strcmp(bidString,"u")==0){
+                break;
+            }
             trump = askForTrump(bid_options[0]);
             printf("\nyou bet that you'll make a score of %d with the trump %c",bid, trump);
-            /* write this bid in a file with the other bids to stock this data */
-            bid_file = fopen("bid.txt","w");
-            fprintf(bid_file,"south:\t%d\t%c",bid,trump);
+            /* write this bid in a structure with the other bids to stock this data */
 
-            break;
+            struct_bid = AddABet(struct_bid, "south",5,bidString,strlen(bidString), trump);
+            printBids(*struct_bid);
+            return 1;
         case 3:
             clrscr();
-            bid_file = fopen("bid.txt", "a+");
-
-            while((fscanf(bid_file,"%s\t%s\t%c\n",read_player,read_bid,&read_trump) != EOF)&&(strcmp(read_bid,"General")!=0)&&(strcmp(read_bid,"Capot")!=0)){
-                fscanf(bid_file, "%*[^\n]\n");
+            i =0;
+            while((i<struct_bid->turn)&&(strcmp(struct_bid->bidding_array[i]->bet,"General")!=0)&&(strcmp(struct_bid->bidding_array[i]->bet,"Capot")!=0)){
+                i++;
             }
-            if (getc(bid_file)!= EOF){
-                printf("%s\n\n\tYou can't do that, someone already made a %s",bid_options[0], read_bid);
-            } else {
+            if (i >= struct_bid->turn){
                 trump = askForTrump(bid_options[0]);
-                fprintf(bid_file,"\nsouth:\tCapot\t%c",trump);
+                struct_bid = AddABet(struct_bid, "south",5,"Capot",5, trump);
+
                 printf("\nyou bet that you'll make a 'Capot' with the trump %c\n", trump);
+                printBids(*struct_bid);
+                return 1;
+            } else {
+                printf("%s\n\n\tYou can't do that, someone already made a Capot",bid_options[0]);
             }
+
 
             break;
         case 4:
             clrscr();
-            bid_file = fopen("bid.txt", "a+");
-
-            while((fscanf(bid_file,"%s\t%s\t%c\n",read_player,read_bid,&read_trump) != EOF)&&(strcmp(read_bid,"General")!=0)){
-                fscanf(bid_file, "%*[^\n]\n");
+            i =0;
+            while((i<struct_bid->turn)&&(strcmp(struct_bid->bidding_array[i]->bet,"General")!=0)){
+                i++;
             }
-            if (getc(bid_file)!= EOF){
-                printf("%s\n\n\tYou can't do that, someone already made a %s",bid_options[0], read_bid);
-            } else {
+            if (i >= struct_bid->turn){
                 trump = askForTrump(bid_options[0]);
-                fprintf(bid_file,"\nsouth:\tGeneral\t%c",trump);
+                struct_bid = AddABet(struct_bid, "south",5,"General",7, trump);
+
                 printf("\nyou bet that you'll make a 'General' with the trump %c\n", trump);
+                printBids(*struct_bid);
+                return 1;
+            } else {
+                printf("%s\n\n\tYou can't do that, someone already made a General",bid_options[0]);
             }
             break;
         case 5:
             clrscr();
-
+            i=0;
             printf("%s",bid_options[0]);
-            bid_file = fopen("bid.txt","a+");
+            if ((struct_bid == NULL) || (struct_bid->turn==1)){
+                printf("nobody makes a bid, you can't bet a Coinche !");
+            } else if(strcmp(struct_bid->bidding_array[struct_bid->turn-1]->bet,"Coinche")==0){
+                trump = askForTrump(bid_options[0]);
+                struct_bid = AddABet(struct_bid, "south",5,"Coinche",7, trump);
 
-            while((fscanf(bid_file,"%s\t%s\t%c\n",read_player,read_bid,&read_trump) != EOF)&&(strcmp(read_bid,"Coinche")!=0)){
-                fscanf(bid_file, "%*[^\n]\n");
+                printf("\nyou bet that you'll make a 'Coinche' with the trump %c\n", trump);
+                printBids(*struct_bid);
+                return 2;
+            } else {
+                printf("somebody already makes 'Coinche', you can't do coinche now");
             }
-            if (getc(bid_file)== EOF){
-                fprintf(bid_file,"\nsouth:\tGeneral\t%c",read_trump); /* it is read_trump instead of trump because here we took the bet of the last player who bet and we keep the same trump */
-                printf("\nyou bet that you'll make a 'Coinche'\n");
-            }
+
             break;
         default :
-            printf("It seems that something wrong happened :(");
+            printf("It seems that something wrong happened :(\n");
 
     }
-    fclose(bid_file);
+    printf("Let's come back to your choice !");
+    return -1;
 }
 
-void menu_surcoinche(char trump){
+void menu_surcoinche(biddings* struct_bid){
     clrscr();
+    char trump;
     char surcoinche_y_n = 'y';
     char surcoincheString[20];
-
-    FILE *bid_file;
-    bid_file = fopen("bid.txt","a+");
     printf("_________        .__              .__\n"
-"\\_   ___ \\  ____ |__| ____   ____ |  |__   ____"
-"/    \\  \\/ /  _ \\|  |/    \\_/ ___\\|  |  \\_/ __ \\n"
-"\\     \\___(  <_> )  |   |  \\  \\___|   Y  \\  ___/\n"
-" \\______  /\\____/|__|___|  /\\___  >___|  /\\___  >\n"
-"        \\/               \\/     \\/     \\/     \\/");
+            "\\_   ___ \\  ____ |__| ____   ____ |  |__   ____"
+            "/    \\  \\/ /  _ \\|  |/    \\_/ ___\\|  |  \\_/ __ \\n"
+            "\\     \\___(  <_> )  |   |  \\  \\___|   Y  \\  ___/\n"
+            " \\______  /\\____/|__|___|  /\\___  >___|  /\\___  >\n"
+            "        \\/               \\/     \\/     \\/     \\/");
 
     do{
         printf("Someone make a coinche on your bet. You could make a surcoinche, would you ?(answer with 'y' or 'n')\t");
@@ -193,9 +200,36 @@ void menu_surcoinche(char trump){
         printf("\n\n");
     } while((sscanf(surcoincheString,"%c",&surcoinche_y_n)==EOF) && ((surcoinche_y_n!='y')||(surcoinche_y_n!='n')));
     if (surcoinche_y_n == 'y'){
-        fprintf(bid_file,"\nsouth:\tSurCoinche\t%c",trump);
+        trump = struct_bid->bidding_array[struct_bid->turn-1]->trump;
+        struct_bid = AddABet(struct_bid, "south",5,"Surcoinche",10, trump);
         printf("\nyou bet that you'll make a 'SurCoinche'\n");
     } else {
         printf("let's go back to the game\n");
     }
+}
+
+
+void printBids(biddings b){
+    for(int i =0; i<b.turn;i++){
+
+        printf("\nPlayer %d :\t%s\t%s\t%c\n",i+1,b.bidding_array[i]->player,b.bidding_array[i]->bet,b.bidding_array[i]->trump);
+    }
+}
+
+biddings* AddABet(biddings* b, char* GivenPlayer, int sizeGivenPlayer, char* GivenBet, int sizeGivenBet, char GivenTrump){
+    if ((b != NULL) && (b->bidding_array != NULL) && (b->turn>0)){
+        b->turn++;
+        b->bidding_array = (bid**) realloc(b->bidding_array, sizeof(bid*)*b->turn);
+        b->bidding_array[b->turn-1] = (bid*) malloc(sizeof(bid));
+    } else {
+        b->turn = 1;
+        b->bidding_array = (bid**) malloc( sizeof(bid*)*b->turn);
+        b->bidding_array[b->turn-1] = (bid*) malloc( sizeof(bid)*b->turn);
+    }
+    b->bidding_array[b->turn-1]->player = (char*) malloc( sizeof(char)*sizeGivenPlayer);
+    b->bidding_array[b->turn-1]->bet = (char*) malloc( sizeof(char)*sizeGivenBet);
+    b->bidding_array[b->turn-1]->player = strcpy(b->bidding_array[b->turn-1]->player, GivenPlayer);
+    b->bidding_array[b->turn-1]->bet = strcpy(b->bidding_array[b->turn-1]->bet,GivenBet);
+        b->bidding_array[b->turn-1]->trump = GivenTrump;
+    return b;
 }

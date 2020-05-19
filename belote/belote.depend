@@ -8,17 +8,18 @@
 	<time.h>
 	<string.h>
 
-1589651218 source:c:\users\alex\documents\github\belote_l_a\belote\main.c
+1589912490 source:c:\users\alex\documents\github\belote_l_a\belote\main.c
 	"menu.h"
 	"Cartes.h"
 
-1589659944 c:\users\alex\documents\github\belote_l_a\belote\menu.h
+1589910077 c:\users\alex\documents\github\belote_l_a\belote\menu.h
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
 	<limits.h>
+	<string.h>
 
-1589660427 source:c:\users\alex\documents\github\belote_l_a\belote\menu.c
+1589912450 source:c:\users\alex\documents\github\belote_l_a\belote\menu.c
 	"menu.h"
 	"Cartes.h"
 
