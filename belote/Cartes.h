@@ -9,10 +9,22 @@
 #ifndef Cartes_h
 #define Cartes_h
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <string.h>
+struct Cards {
+    char color[6];
+    int power;
+    int point;
+};
 
-void DistributeCards(char** North, char** South, char** East, char** West);
+struct Team {
+    char name[5];
+    struct Cards deck;
+    int score;
+};
+
+typedef struct Cards Cards;
+typedef struct Player Player;
+
+void DistributeCards(Cards* North, Cards* South, Cards* East, Cards* West);
+void SorteDeck(Cards* Player);
+
 #endif /* Cartes_h */
