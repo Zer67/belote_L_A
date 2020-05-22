@@ -2,15 +2,14 @@
 #include "Cartes.h"
 
 int main() {
-    int sizeJ = 8;
+    Cards* North = (Cards*)malloc(sizeof(Cards)*8);
+    Cards* South = (Cards*)malloc(sizeof(Cards)*8);
+    Cards* East = (Cards*)malloc(sizeof(Cards)*8);
+    Cards* West = (Cards*)malloc(sizeof(Cards)*8);
     
-    char** North = (char**)malloc(sizeof(char*)*sizeJ);
-    char** South = (char**)malloc(sizeof(char*)*sizeJ);
-    char** East = (char**)malloc(sizeof(char*)*sizeJ);
-    char** West = (char**)malloc(sizeof(char*)*sizeJ);
     
+    DistributeCards(North, South, East, West);
 
-  char** Cards = (char**) malloc(sizeof(char*)*32);
   switch(main_menu()){
         case 1:
             clrscr();
