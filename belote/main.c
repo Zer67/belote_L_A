@@ -14,14 +14,10 @@ int main() {
 
     switch(main_menu()){
 
-    Player North = {"North", (Cards*)malloc(sizeof(Cards)*8),(Cards*)malloc(sizeof(Cards)*8), 0};
-    Player South = {"South", (Cards*)malloc(sizeof(Cards)*8),(Cards*)malloc(sizeof(Cards)*8), 0};
-    Player East = {"East", (Cards*)malloc(sizeof(Cards)*8),(Cards*)malloc(sizeof(Cards)*8), 0};
-    Player West= {"West", (Cards*)malloc(sizeof(Cards)*8),(Cards*)malloc(sizeof(Cards)*8), 0};
-
-    
-
-
+        Player North = {"North", (Cards*)malloc(sizeof(Cards)*8),(Cards*)malloc(sizeof(Cards)*8), 0};
+        Player South = {"South", (Cards*)malloc(sizeof(Cards)*8),(Cards*)malloc(sizeof(Cards)*8), 0};
+        Player East = {"East", (Cards*)malloc(sizeof(Cards)*8),(Cards*)malloc(sizeof(Cards)*8), 0};
+        Player West= {"West", (Cards*)malloc(sizeof(Cards)*8),(Cards*)malloc(sizeof(Cards)*8), 0};
         case 1:
             clrscr();
             int contract = 82;
@@ -33,8 +29,8 @@ int main() {
                 bet_choice = bid_menu(contract,round_bets);
                 clrscr();
             }
-            
-          
+
+
 
 
             break;
