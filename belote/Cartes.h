@@ -15,16 +15,18 @@ struct Cards {
     int point;
 };
 
-struct Team {
+struct Player {
     char name[5];
-    struct Cards deck;
+    struct Cards* hand;
+    struct Cards* tricks;
     int score;
 };
 
 typedef struct Cards Cards;
 typedef struct Player Player;
 
-void DistributeCards(Cards* North, Cards* South, Cards* East, Cards* West);
-void SorteDeck(Cards* Player);
+void DistributeCards(Player* North, Player* South, Player* East, Player* West);
+int FullingHand (Player* player, int l, Cards* Distribution);
+void SorteDeck(Player* Player);
 
 #endif /* Cartes_h */
