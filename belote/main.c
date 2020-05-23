@@ -2,20 +2,19 @@
 #include "Cartes.h"
 
 int main() {
-    Cards* North = (Cards*)malloc(sizeof(Cards)*8);
-    Cards* South = (Cards*)malloc(sizeof(Cards)*8);
-    Cards* East = (Cards*)malloc(sizeof(Cards)*8);
-    Cards* West = (Cards*)malloc(sizeof(Cards)*8);
+    Player North = {"North", (Cards*)malloc(sizeof(Cards)*8),(Cards*)malloc(sizeof(Cards)*8), 0};
+    Player South = {"South", (Cards*)malloc(sizeof(Cards)*8),(Cards*)malloc(sizeof(Cards)*8), 0};
+    Player East = {"East", (Cards*)malloc(sizeof(Cards)*8),(Cards*)malloc(sizeof(Cards)*8), 0};
+    Player West= {"West", (Cards*)malloc(sizeof(Cards)*8),(Cards*)malloc(sizeof(Cards)*8), 0};
+
     
-    
-    DistributeCards(North, South, East, West);
 
   switch(main_menu()){
         case 1:
             clrscr();
             printf("\n\nWe will start a new game, keep ready !");
             /* distribution des cartes */
-              DistributeCards(North, South, East, West);
+            DistributeCards(&North, &South, &East, &West);
             bid_menu();
           
 
@@ -33,3 +32,4 @@ int main() {
 
     return EXIT_SUCCESS;
 }
+
