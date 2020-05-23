@@ -23,7 +23,7 @@ char askForTrump(char* title){
         printf("%s",title);
         printf("\nChoose a trump between 'H', 'D', 'S' and 'C':\t");
         scanf("%s",trumpString);
-    } while((sscanf(trumpString,"%c",&trump)==EOF)||((trump != 'H') && (trump != 'D')&& (trump != 'S') && (trump != 'C')));
+    } while((sscanf(trumpString,"%c",&trump)==EOF)||((trump != 'H') && (trump != 'D')&& (trump != 'S') && (trump != 'C')&&(trump != 'u')));
     return trump;
 }
 
@@ -109,11 +109,14 @@ int bid_menu(int current_contract, biddings* struct_bid){
                 printf("%s",bid_options[0]);
                 printf("\ntell me your bid knowing that the last contract was %d:\t",current_contract);
                 scanf("%s",bidString);
-            } while((strcmp(bidString,"u")==0)||(sscanf(bidString,"%d",&bid)==EOF)||(bid<current_contract));
+            } while((strcmp(bidString,"u")!=0)&&((sscanf(bidString,"%d",&bid)==EOF)||(bid<current_contract)));
             if (strcmp(bidString,"u")==0){
                 break;
             }
             trump = askForTrump(bid_options[0]);
+            if (trump == 'u'){
+                break;
+            }
             printf("\nyou bet that you'll make a score of %d with the trump %c",bid, trump);
             /* write this bid in a structure with the other bids to stock this data */
 
@@ -123,38 +126,63 @@ int bid_menu(int current_contract, biddings* struct_bid){
         case 3:
             clrscr();
             i =0;
-            while((i<struct_bid->turn)&&(strcmp(struct_bid->bidding_array[i]->bet,"General")!=0)&&(strcmp(struct_bid->bidding_array[i]->bet,"Capot")!=0)){
-                i++;
-            }
-            if (i >= struct_bid->turn){
-                trump = askForTrump(bid_options[0]);
-                struct_bid = AddABet(struct_bid, "south",5,"Capot",5, trump);
-
-                printf("\nyou bet that you'll make a 'Capot' with the trump %c\n", trump);
-                printBids(*struct_bid);
-                return 1;
+            if (struct_bid != NULL){
+                while((i<struct_bid->turn)&&(strcmp(struct_bid->bidding_array[i]->bet,"General")!=0)&&(strcmp(struct_bid->bidding_array[i]->bet,"Capot")!=0)){
+                    i++;
+                }
+                if (i >= struct_bid->turn){
+                    trump = askForTrump(bid_options[0]);
+                    if (trump == 'u'){
+                        break;
+                    }
+                } else {
+                    printf("%s\n\n\tYou can't do that, someone already made a Capot",bid_options[0]);
+                    break;
+                }
             } else {
-                printf("%s\n\n\tYou can't do that, someone already made a Capot",bid_options[0]);
+                trump = askForTrump(bid_options[0]);
+                if (trump == 'u'){
+                    break;
+                }
             }
+
+            struct_bid = AddABet(struct_bid, "south",5,"Capot",5, trump);
+
+            printf("\nyou bet that you'll make a 'Capot' with the trump %c\n", trump);
+            printBids(*struct_bid);
+            return 1;
+
 
 
             break;
         case 4:
             clrscr();
             i =0;
-            while((i<struct_bid->turn)&&(strcmp(struct_bid->bidding_array[i]->bet,"General")!=0)){
+            if (struct_bid != NULL){
+                while((i<struct_bid->turn)&&(strcmp(struct_bid->bidding_array[i]->bet,"General")!=0)){
                 i++;
-            }
-            if (i >= struct_bid->turn){
+                }
+                if (i >= struct_bid->turn){
+                    trump = askForTrump(bid_options[0]);
+                    if (trump == 'u'){
+                        break;
+                    }
+                } else {
+                    printf("%s\n\n\tYou can't do that, someone already made a General",bid_options[0]);
+                    break;
+                }
+            } else {
                 trump = askForTrump(bid_options[0]);
+                if (trump == 'u'){
+                        break;
+                }
+            }
                 struct_bid = AddABet(struct_bid, "south",5,"General",7, trump);
 
                 printf("\nyou bet that you'll make a 'General' with the trump %c\n", trump);
                 printBids(*struct_bid);
                 return 1;
-            } else {
-                printf("%s\n\n\tYou can't do that, someone already made a General",bid_options[0]);
-            }
+
             break;
         case 5:
             clrscr();
@@ -164,6 +192,9 @@ int bid_menu(int current_contract, biddings* struct_bid){
                 printf("nobody makes a bid, you can't bet a Coinche !");
             } else if(strcmp(struct_bid->bidding_array[struct_bid->turn-1]->bet,"Coinche")==0){
                 trump = askForTrump(bid_options[0]);
+                if (trump == 'u'){
+                    break;
+                }
                 struct_bid = AddABet(struct_bid, "south",5,"Coinche",7, trump);
 
                 printf("\nyou bet that you'll make a 'Coinche' with the trump %c\n", trump);
@@ -222,6 +253,7 @@ biddings* AddABet(biddings* b, char* GivenPlayer, int sizeGivenPlayer, char* Giv
         b->bidding_array = (bid**) realloc(b->bidding_array, sizeof(bid*)*b->turn);
         b->bidding_array[b->turn-1] = (bid*) malloc(sizeof(bid));
     } else {
+        b = (biddings*) malloc(sizeof(biddings));
         b->turn = 1;
         b->bidding_array = (bid**) malloc( sizeof(bid*)*b->turn);
         b->bidding_array[b->turn-1] = (bid*) malloc( sizeof(bid)*b->turn);

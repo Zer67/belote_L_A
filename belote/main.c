@@ -24,6 +24,7 @@ int main() {
             /* distribution des cartes */
             while (bet_choice == -1){
                 bet_choice = bid_menu(contract,round_bets);
+                clrscr();
             }
             break;
         case 2:
