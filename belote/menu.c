@@ -77,9 +77,9 @@ int main_menu(){
 
 /** display the bidding's menu
  */
+
 int bid_menu(int current_contract, biddings* struct_bid){
     // DistributeCards(North, South, East, West); I can't compile with this function at this place
-
     char bidString[20];
     int bid;
     int i=0; /* variable used to iterate in few while loops */
