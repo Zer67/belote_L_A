@@ -9,7 +9,6 @@ int main() {
     biddings* round_bets = (biddings*) malloc(sizeof(biddings));
     round_bets = NULL;
     int bet_choice = -1;
-    char** Cards = (char**) malloc(sizeof(char*)*32);
 
 
     switch(main_menu()){

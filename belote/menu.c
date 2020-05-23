@@ -1,8 +1,8 @@
 #include "menu.h"
-#include "Cartes.h"
+
 /** function which erase all the things on the screen no matter the OS usedvoid clrscr()
  */
-void clrscr(){
+void clrscr(void){
    #if defined(__linux__) || defined(__unix__) || defined(__APPLE__)
        system("clear");
    #endif
@@ -52,7 +52,7 @@ int menu(char** options, int nbr_option){
 /** a function that display the main menu of the game
  * @return the option chosen in the main menu or -1 if there was a problem during the creation of the array main_options
  */
-int main_menu(){
+int main_menu(void){
     int nbr_main_option = 3;
     char** main_options = (char**) malloc(sizeof(char*)*(1+nbr_main_option));
     int return_menu = -1;
@@ -109,7 +109,7 @@ int bid_menu(int current_contract, biddings* struct_bid){
                 printf("%s",bid_options[0]);
                 printf("\ntell me your bid knowing that the last contract was %d:\t",current_contract);
                 scanf("%s",bidString);
-            } while((strcmp(bidString,"u")!=0)&&((sscanf(bidString,"%d",&bid)==EOF)||(bid<current_contract)));
+            } while((strcmp(bidString,"u")!=0)&&((sscanf(bidString,"%d",&bid)==EOF)||(bid<current_contract)||(bid%10 != 0)));
             if (strcmp(bidString,"u")==0){
                 break;
             }
