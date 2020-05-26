@@ -6,8 +6,8 @@ int main() {
     int sizeJ = 8;
 
 
-    biddings* round_bets = (biddings*) malloc(sizeof(biddings));
-    round_bets = NULL;
+    biddings* round_bets = NULL;
+    round_bets = (biddings*) malloc(sizeof(biddings));
     int bet_choice = -1;
 
 

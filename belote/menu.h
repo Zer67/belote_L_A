@@ -9,8 +9,8 @@
 #include "Cartes.h"
 
 typedef enum {
-    True = 1,
-    False = 0
+    True = 0,
+    False = 1
 } Boolean;
 
 

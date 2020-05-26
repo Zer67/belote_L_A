@@ -4,11 +4,11 @@
 
 1590242192 c:\users\alex\documents\github\belote_l_a\belote\cartes.h
 
-1590245473 source:c:\users\alex\documents\github\belote_l_a\belote\main.c
+1590511476 source:c:\users\alex\documents\github\belote_l_a\belote\main.c
 	"menu.h"
 	"Cartes.h"
 
-1590242613 c:\users\alex\documents\github\belote_l_a\belote\menu.h
+1590513309 c:\users\alex\documents\github\belote_l_a\belote\menu.h
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
@@ -19,9 +19,9 @@
 1590245721 source:c:\users\alex\documents\github\belote_l_a\belote\menu.c
 	"menu.h"
 
-1590246618 source:c:\users\alex\documents\github\belote_l_a\belote\ia.c
+1590518804 source:c:\users\alex\documents\github\belote_l_a\belote\ia.c
 	"ia.h"
 
-1590246759 c:\users\alex\documents\github\belote_l_a\belote\ia.h
+1590518140 c:\users\alex\documents\github\belote_l_a\belote\ia.h
 	"menu.h"
 
