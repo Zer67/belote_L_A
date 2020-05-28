@@ -9,17 +9,6 @@
 typedef struct {
     int* valueWithTrump;
     char* color;
-    /* arrays containing the figure in a certain color */
-    char* FigureInH;
-    char* FigureInD;
-    char* FigureInS;
-    char* FigureInC;
-    /* score possible with the actual hand if the player is alone and he win all the trick */
-    int scorewH;
-    int scorewS;
-    int scorewD;
-    int scorewC;
-
 } choiceMaker;
 
 

@@ -102,7 +102,7 @@ int bid_menu(int current_contract, biddings* struct_bid){
         case 1:
             clrscr();
             printf("\nyou just decided to skip, time for the player West to play");
-            break;
+            return 0;
         case 2:
             do{
                 clrscr();
@@ -188,7 +188,7 @@ int bid_menu(int current_contract, biddings* struct_bid){
             clrscr();
             i=0;
             printf("%s",bid_options[0]);
-            if ((struct_bid == NULL) || (struct_bid->turn==1)){
+            if ((struct_bid == NULL) || (struct_bid->turn<=1)){
                 printf("nobody makes a bid, you can't bet a Coinche !");
             } else if(strcmp(struct_bid->bidding_array[struct_bid->turn-1]->bet,"Coinche")==0){
                 trump = askForTrump(bid_options[0]);

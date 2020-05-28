@@ -7,7 +7,6 @@ int main() {
 
 
     biddings* round_bets = NULL;
-    round_bets = (biddings*) malloc(sizeof(biddings));
     int bet_choice = -1;
 
 
@@ -23,9 +22,10 @@ int main() {
             printf("\n\nWe will start a new game, keep ready !");
             /* distribution des cartes */
 
-            DistributeCards(&North, &South, &East, &West);
+            //DistributeCards(&North, &South, &East, &West);
             while (bet_choice == -1){
                 bet_choice = bid_menu(contract,round_bets);
+                system("pause");
                 clrscr();
             }
 
