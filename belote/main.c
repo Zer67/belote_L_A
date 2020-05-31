@@ -42,7 +42,7 @@ int main() {
             /************************************************   Biddings    *********************************************************************************/
 
             int i = 0;
-            while((i<4)&&(contract!=999)){
+            while((i<4)&&(coinche==TRUE)){
                 if(strcmp(players[i].name,"South") == 0){
                     while (bet_choice == -1){
                         bet_choice = bid_menu(contract,round_bets);
@@ -85,7 +85,7 @@ int main() {
 
             /*******************************************   Loop of the tricks  ******************************************************************************/
 
-            players = shiftPlayers(players,FindPosition(players,lastPlayer)+1, 4);
+            players = shiftPlayers(players,FindPosition(players,lastPlayer), 4);
 
 
 
