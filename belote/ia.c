@@ -1,5 +1,11 @@
 #include "ia.h"
-biddings* AIbid(Player* ai_player, int current_bet_value, biddings* current_bet){
+
+/** the function which allow the ai to make a bet.
+ * @param ai_player - the struct which allows us to know which ai_player is playing
+ * @param current_bet_value - the value of the current bet, by example a General have a value of 500
+ * @param current_bet - the array containing all the bets already made
+ */
+int AIbid(Player* ai_player, int current_bet_value, biddings* current_bet){
 
     /*******************************************************************************************************************************************************************
      **  Computations to set up the information that the ai-player will use to make a choice for his bet ***************************************************************
@@ -117,28 +123,31 @@ biddings* AIbid(Player* ai_player, int current_bet_value, biddings* current_bet)
 
     if ((array_color[0]->nbrStg>= 4)&&(120>current_bet_value)){
         current_bet = AddABet(current_bet,ai_player->name,sizeof(ai_player->name),"120",3,array_color[0]->color);
+        return 1;
     } else if((array_color[0]->nbrStg>= 3)&&(80>current_bet_value)) {
         current_bet = AddABet(current_bet,ai_player->name,sizeof(ai_player->name),"80",2,array_color[0]->color);
+        return 1;
     } else {
         printf("\nthe ai-player %s decided to skip", ai_player->name);
+        return 0;
     }
 
-    return current_bet;
+    return -1;
 }
 
 
 Cardtype** BubbleSortChoice(Cardtype** array){
-    Boolean sorted=False;
+    Boolean sorted=FALSE;
     Cardtype* buff = (Cardtype*) malloc(sizeof(Cardtype));
     int i = 3;
     while((!sorted)&&(i>0)){
-        sorted = True;
+        sorted = TRUE;
         for(int j=0;j<i;j++){
             if(array[j+1]->nbrStg<array[j]->nbrStg){
                 buff = array[j+1];
                 array[j+1] = array[j];
                 array[j] = buff;
-                sorted = False;
+                sorted = FALSE;
             }
         }
         i-= 1;

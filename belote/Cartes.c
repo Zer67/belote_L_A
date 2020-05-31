@@ -9,7 +9,6 @@
 #include "Cartes.h"
 
 
-
 void DistributeCards (Player* North, Player* South, Player* East, Player* West) {
     srand(time(0));
 
@@ -91,4 +90,35 @@ void SorteDeck(Player* Player) {  // I use the Selection sort
         printf("%s, ", Player->hand[i].color);
     }
 
+}
+
+/** this function shift an array of four players from a specified number.
+ * @param playerArray - the array of player we want to shift
+ * @param shift - the number of shift we want to do
+ * @return the array of player shifted
+ */
+Player* shiftPlayers(Player* playerArray, int shift, int size){
+    if((playerArray != NULL)||(size!=4)){
+        for(int j=0; j<(shift%size);j++){   /* here we use the modulo to avoid extra shifts which will be useless */
+            Player temp = playerArray[0];   /* here is a temporal variable which is useful to stock the first player of the array */
+            for(int i; i<size-1; i++){
+                playerArray[i] = playerArray[i+1];
+            }
+            playerArray[size-1] = temp;
+        }
+    }
+    return playerArray;
+}
+
+/** this function allows us to know where a given player is in an array of player.
+ * @param playerArray - the array where we're looking for the player
+ * @param player - the player we're looking for
+ * @return the position of the player in the array
+ */
+int FindPosition(Player* playerArray,char* player){
+    int index = 0;
+    while((strcmp(playerArray[index].name, player)!=0) &&(index<4)){
+        index++;
+    }
+    return index;
 }
