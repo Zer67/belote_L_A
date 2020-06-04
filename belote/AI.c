@@ -1,4 +1,4 @@
-#include "Bid_of_AI.h"
+#include "AI.h"
 #include "Cartes.h"
 #include "menu.h"
 
