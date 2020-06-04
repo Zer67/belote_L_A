@@ -1,6 +1,7 @@
 #include "menu.h"
 #include "Cartes.h"
-#include "Bid_of_AI.h"
+#include "ia.h"
+
 
 int main() {
 
@@ -11,6 +12,7 @@ int main() {
 
         case 1:
             srand(time(0));
+
             biddings* round_bets = NULL;
             int bet_choice = -1, GameTurn = 7;
 

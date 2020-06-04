@@ -1,21 +1,30 @@
 # depslib dependency file v1.0
-1590241848 source:c:\users\alex\documents\github\belote_l_a\belote\cartes.c
+1590937192 source:c:\users\alex\documents\github\belote_l_a\belote\cartes.c
 	"Cartes.h"
 
-1590241781 c:\users\alex\documents\github\belote_l_a\belote\cartes.h
+1590937154 c:\users\alex\documents\github\belote_l_a\belote\cartes.h
+	<time.h>
+	"menu.h"
 
-1590241070 source:c:\users\alex\documents\github\belote_l_a\belote\main.c
+1590937287 source:c:\users\alex\documents\github\belote_l_a\belote\main.c
 	"menu.h"
 	"Cartes.h"
+	"ia.h"
 
-1590238991 c:\users\alex\documents\github\belote_l_a\belote\menu.h
+1590938740 c:\users\alex\documents\github\belote_l_a\belote\menu.h
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
 	<limits.h>
 	<string.h>
-
-1590240949 source:c:\users\alex\documents\github\belote_l_a\belote\menu.c
-	"menu.h"
 	"Cartes.h"
+
+1590934813 source:c:\users\alex\documents\github\belote_l_a\belote\menu.c
+	"menu.h"
+
+1590934841 source:c:\users\alex\documents\github\belote_l_a\belote\ia.c
+	"ia.h"
+
+1590938740 c:\users\alex\documents\github\belote_l_a\belote\ia.h
+	"menu.h"
 

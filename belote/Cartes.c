@@ -10,6 +10,7 @@
 #include "menu.h"
 
 
+
 /*
  *******************************************************************************************************************
  ****************************************** Distribution of the Cards **********************************************
@@ -129,7 +130,9 @@ Player* shiftPlayers(Player* playerArray, int shift, int size){
     if((playerArray != NULL)||(size!=4)){
         for(int j=0; j<(shift%size);j++){   /* here we use the modulo to avoid extra shifts which will be useless */
             Player temp = playerArray[0];   /* here is a temporal variable which is useful to stock the first player of the array */
+
             for(int i = 0; i<size-1; i++){
+
                 playerArray[i] = playerArray[i+1];
             }
             playerArray[size-1] = temp;
@@ -239,3 +242,4 @@ void printTheTrick(TricksStats* TheTrick, Player* players, int Card_in_theTrick)
        }
     printf("\n\t\tSouth");
 }
+

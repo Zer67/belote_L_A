@@ -1,8 +1,8 @@
 #include "menu.h"
-#include "Cartes.h"
+
 /** function which erase all the things on the screen no matter the OS usedvoid clrscr()
  */
-void clrscr(){
+void clrscr(void){
    #if defined(__linux__) || defined(__unix__) || defined(__APPLE__)
        system("clear");
    #endif
@@ -52,7 +52,7 @@ int menu(char** options, int nbr_option){
 /** a function that display the main menu of the game
  * @return the option chosen in the main menu or -1 if there was a problem during the creation of the array main_options
  */
-int main_menu(){
+int main_menu(void){
     int nbr_main_option = 3;
     char** main_options = (char**) malloc(sizeof(char*)*(1+nbr_main_option));
     int return_menu = -1;
@@ -75,9 +75,11 @@ int main_menu(){
 }
 
 
-/** display the bidding's menu
+/** display the menu of bidding and allow the player to make a bid
+ * @param current_contract - the value of the current contract
+ * @param struct_bid - the structure containing all the bets
+ * @return an integer : -1 if no correct choice have been chosen, 0 if the player skipped, 1 if the player made a "classic" bet, 2 if the player made a coinche
  */
-
 int bid_menu(int current_contract, biddings* struct_bid){
     // DistributeCards(North, South, East, West); I can't compile with this function at this place
     char bidString[20];
@@ -102,14 +104,14 @@ int bid_menu(int current_contract, biddings* struct_bid){
         case 1:
             clrscr();
             printf("\nyou just decided to skip, time for the player West to play");
-            break;
+            return 0;
         case 2:
             do{
                 clrscr();
                 printf("%s",bid_options[0]);
                 printf("\ntell me your bid knowing that the last contract was %d:\t",current_contract);
                 scanf("%s",bidString);
-            } while((strcmp(bidString,"u")!=0)&&((sscanf(bidString,"%d",&bid)==EOF)||(bid<current_contract)));
+            } while((strcmp(bidString,"u")!=0)&&((sscanf(bidString,"%d",&bid)==EOF)||(bid<current_contract)||(bid%10 != 0)));
             if (strcmp(bidString,"u")==0){
                 break;
             }
@@ -188,7 +190,7 @@ int bid_menu(int current_contract, biddings* struct_bid){
             clrscr();
             i=0;
             printf("%s",bid_options[0]);
-            if ((struct_bid == NULL) || (struct_bid->turn==1)){
+            if ((struct_bid == NULL) || (struct_bid->turn<=1)){
                 printf("nobody makes a bid, you can't bet a Coinche !");
             } else if(strcmp(struct_bid->bidding_array[struct_bid->turn-1]->bet,"Coinche")==0){
                 trump = askForTrump(bid_options[0]);
@@ -213,6 +215,9 @@ int bid_menu(int current_contract, biddings* struct_bid){
     return -1;
 }
 
+/** display the menu of surcoinche if someone made a coinche
+ * @param struct_bid - the structure containing all the bets
+ */
 void menu_surcoinche(biddings* struct_bid){
     clrscr();
     char trump;
@@ -239,7 +244,9 @@ void menu_surcoinche(biddings* struct_bid){
     }
 }
 
-
+/** a function useful to display a structure of type biddings
+ * @param b - the structure to display
+ */
 void printBids(biddings b){
     for(int i =0; i<b.turn;i++){
 
@@ -247,6 +254,15 @@ void printBids(biddings b){
     }
 }
 
+/** A really significant function to add a bet inside a biddinngs struct
+ * @param b - a pointer on the struct of type biddings we want to modify
+ * @param GivenPlayer - the name of the player who made the bet
+ * @param sizeGivenPlayer - the size of the string containing the name of the player
+ * @param GivenBet - the bet that the player want to make inside a string
+ * @param sizeGivenBet - the size of the string containing the bet
+ * @param givenTrump - the trump that the player chose ( can be 'H', 'C', 'D' or 'S')
+ * @return the pointer on the struct b modified
+ */
 biddings* AddABet(biddings* b, char* GivenPlayer, int sizeGivenPlayer, char* GivenBet, int sizeGivenBet, char GivenTrump){
     if ((b != NULL) && (b->bidding_array != NULL) && (b->turn>0)){
         b->turn++;
@@ -262,6 +278,6 @@ biddings* AddABet(biddings* b, char* GivenPlayer, int sizeGivenPlayer, char* Giv
     b->bidding_array[b->turn-1]->bet = (char*) malloc( sizeof(char)*sizeGivenBet);
     b->bidding_array[b->turn-1]->player = strcpy(b->bidding_array[b->turn-1]->player, GivenPlayer);
     b->bidding_array[b->turn-1]->bet = strcpy(b->bidding_array[b->turn-1]->bet,GivenBet);
-        b->bidding_array[b->turn-1]->trump = GivenTrump;
+    b->bidding_array[b->turn-1]->trump = GivenTrump;
     return b;
 }

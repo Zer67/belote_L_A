@@ -8,11 +8,9 @@
 
 #ifndef Cartes_h
 #define Cartes_h
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <time.h>
+#include <string.h>
+#include "menu.h"
 
 struct Cards{
     char color[6];
@@ -94,4 +92,5 @@ Player* shiftPlayers(Player* playerArray, int shift, int size);
  * @return the position of the player in the array
  */
 int FindPosition(Player* playerArray,char* player);
+
 #endif /* Cartes_h */

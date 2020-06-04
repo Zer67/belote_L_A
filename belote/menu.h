@@ -6,9 +6,11 @@
 #include <ctype.h>
 #include <limits.h>
 #include <string.h>
+#include "Cartes.h"
+
 typedef enum {
-    True = 1,
-    False = 0
+    TRUE = 0,
+    FALSE = 1
 } Boolean;
 
 
@@ -44,17 +46,33 @@ int menu(char** options, int nbre_option);
  * @return the option chosen in the main menu
  */
 int main_menu();
-/** display the interface with the cards
- * @return the option chosen by the user
- */
 
-/** display the menu of bidding
+
+/** display the menu of bidding and allow the player to make a bid
+ * @param current_contract - the value of the current contract
+ * @param struct_bid - the structure containing all the bets
+ * @return an integer : -1 if no correct choice have been chosen, 0 if the player skipped, 1 if the player made a "classic" bet, 2 if the player made a coinche
  */
 int bid_menu(int current_contract, biddings* struct_bid);
 
+/** display the menu of surcoinche if someone made a coinche
+ * @param struct_bid - the structure containing all the bets
+ */
 void menu_surcoinche(biddings* struct_bid);
-
+/** a function useful to display a structure of type biddings
+ * @param b - the structure to display
+ */
 void printBids(biddings b);
 
+
+/** A really significant function to add a bet inside a biddinngs struct
+ * @param b - a pointer on the struct of type biddings we want to modify
+ * @param GivenPlayer - the name of the player who made the bet
+ * @param sizeGivenPlayer - the size of the string containing the name of the player
+ * @param GivenBet - the bet that the player want to make inside a string
+ * @param sizeGivenBet - the size of the string containing the bet
+ * @param givenTrump - the trump that the player chose ( can be 'H', 'C', 'D' or 'S')
+ * @return the pointer on the struct b modified
+ */
 biddings* AddABet(biddings* b, char* GivenPlayer, int sizeGivenPlayer, char* GivenBet, int sizeGivenBet, char GivenTrump);
 #endif // MENUHEADER
