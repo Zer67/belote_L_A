@@ -1,6 +1,6 @@
 #include "menu.h"
 #include "Cartes.h"
-#include "ia.h"
+#include "AI.h"
 
 
 int main() {
