@@ -1,37 +1,108 @@
 #include "menu.h"
 #include "Cartes.h"
+#include "Bid_of_AI.h"
 
 int main() {
 
-    int sizeJ = 8;
-
-
-    biddings* round_bets = (biddings*) malloc(sizeof(biddings));
-    round_bets = NULL;
-    int bet_choice = -1;
-    char** Cards = (char**) malloc(sizeof(char*)*32);
 
 
     switch(main_menu()){
 
-        Player North = {"North", (Cards*)malloc(sizeof(Cards)*8),(Cards*)malloc(sizeof(Cards)*8), 0};
-        Player South = {"South", (Cards*)malloc(sizeof(Cards)*8),(Cards*)malloc(sizeof(Cards)*8), 0};
-        Player East = {"East", (Cards*)malloc(sizeof(Cards)*8),(Cards*)malloc(sizeof(Cards)*8), 0};
-        Player West= {"West", (Cards*)malloc(sizeof(Cards)*8),(Cards*)malloc(sizeof(Cards)*8), 0};
+
         case 1:
+            srand(time(0));
+            biddings* round_bets = NULL;
+            int bet_choice = -1, GameTurn = 7;
+
+            Player North = {"North", (Cards*)malloc(sizeof(Cards)*8),(Cards*)malloc(sizeof(Cards)*8), 0, 1};
+            Player South = {"South", (Cards*)malloc(sizeof(Cards)*8),(Cards*)malloc(sizeof(Cards)*8), 0, 1};
+            Player East = {"East", (Cards*)malloc(sizeof(Cards)*8),(Cards*)malloc(sizeof(Cards)*8), 0, 2};
+            Player West = {"West", (Cards*)malloc(sizeof(Cards)*8),(Cards*)malloc(sizeof(Cards)*8), 0, 2};
+            Player* players  = (Player*) malloc(sizeof(Player)*4);
+            
+            TricksStats TheTrick = {(Cards*)malloc(sizeof(Cards)*4), "None", 0, 0};
+
+            players[0] = South;
+            players[1] = West;
+            players[2] = North;
+            players[3] = East;
+
+            char* lastPlayer = (char*)malloc(sizeof(char)*5); /* this string is used to know who is the last player who made a bet */
+
             clrscr();
-            int contract = 82;
+            int contract = 80;
+            Boolean coinche = FALSE; /* a variable which is equal to FALSE while nobody makes a coinche and then TRUE if someone makes a coinche */
             printf("\n\nWe will start a new game, keep ready !");
-            /* distribution des cartes */
+            /* cards are distributed */
 
             DistributeCards(&North, &South, &East, &West);
-            while (bet_choice == -1){
-                bet_choice = bid_menu(contract,round_bets);
-                clrscr();
+            /************************************************************************************************************************************************
+             ************************************************Start of the game loop**************************************************************************
+             ************************************************************************************************************************************************/
+
+            /************************************************   Biddings    *********************************************************************************/
+
+            int i = 0;
+            while((i<4)&&(coinche==TRUE)){
+                if(strcmp(players[i].name,"South") == 0){
+                    while (bet_choice == -1){
+                        bet_choice = bid_menu(contract,round_bets);
+                        clrscr();
+                    }
+                } else {
+                    bet_choice = AIbid(&(players[i]),contract,round_bets);
+                }
+                switch(bet_choice){
+                        case 1:
+                            if(strcmp(round_bets->bidding_array[round_bets->turn-1]->bet,"Capot")){
+                                contract = 250;
+                            } else if(strcmp(round_bets->bidding_array[round_bets->turn-1]->bet,"General")) {
+                                contract = 500;
+                            } else {
+                                contract = atoi(round_bets->bidding_array[round_bets->turn-1]->bet);
+                            }
+                            break;
+                        case 2:
+                            if((round_bets->turn >= 2) && (strcmp(round_bets->bidding_array[round_bets->turn-1]->bet,"Coinche")==0)){
+                                contract *= 2;
+                                coinche = TRUE;
+                            }
+                            break;
+                        default:
+                            break;
+                }
+            i++;
             }
 
+            if(coinche == TRUE){
+                if(strcmp(round_bets->bidding_array[round_bets->turn-2]->player,"South")==0){
+                    menu_surcoinche(round_bets);
+                } else {
+                    /* the ai can't make a surcoinche for the moment */
+                }
+            }
+            lastPlayer = strcpy(lastPlayer,round_bets->bidding_array[round_bets->turn-1]->player);
+            ChangeScore(round_bets->bidding_array[round_bets->turn-1]->trump, &North);
+            ChangeScore(round_bets->bidding_array[round_bets->turn-1]->trump, &South);
+            ChangeScore(round_bets->bidding_array[round_bets->turn-1]->trump, &East);
+            ChangeScore(round_bets->bidding_array[round_bets->turn-1]->trump, &West);
 
-
+            /*******************************************   Loop of the tricks  ******************************************************************************/
+            while (GameTurn > 0){
+                players = shiftPlayers(players,FindPosition(players,lastPlayer), 4);
+              
+                for (int y =0; y < 4; y++) {
+                    TheTrick.indexWinningCards = 0;
+                    
+                    if (players[y].name[0] == 'S' ){
+                        Game_of_South(&South, GameTurn, y, &TheTrick, round_bets->bidding_array[round_bets->turn-1]->trump);
+                    }else {
+                        Game_of_AI(&players[y], GameTurn, y, &TheTrick, round_bets->bidding_array[round_bets->turn-1]->trump);
+                    }
+                    printTheTrick(&TheTrick, players, y);
+                }
+                GameTurn++;
+            }
 
             break;
         case 2:
