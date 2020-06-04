@@ -2,6 +2,7 @@
 #include "Cartes.h"
 #include "ia.h"
 
+
 int main() {
 
 
@@ -11,15 +12,17 @@ int main() {
 
         case 1:
             srand(time(0));
-            int sizeJ = 8;
-            biddings* round_bets = NULL;
-            int bet_choice = -1;
 
-            Player North = {"North", (Cards*)malloc(sizeof(Cards)*8),(Cards*)malloc(sizeof(Cards)*8), 0};
-            Player South = {"South", (Cards*)malloc(sizeof(Cards)*8),(Cards*)malloc(sizeof(Cards)*8), 0};
-            Player East = {"East", (Cards*)malloc(sizeof(Cards)*8),(Cards*)malloc(sizeof(Cards)*8), 0};
-            Player West= {"West", (Cards*)malloc(sizeof(Cards)*8),(Cards*)malloc(sizeof(Cards)*8), 0};
+            biddings* round_bets = NULL;
+            int bet_choice = -1, GameTurn = 7;
+
+            Player North = {"North", (Cards*)malloc(sizeof(Cards)*8),(Cards*)malloc(sizeof(Cards)*8), 0, 1};
+            Player South = {"South", (Cards*)malloc(sizeof(Cards)*8),(Cards*)malloc(sizeof(Cards)*8), 0, 1};
+            Player East = {"East", (Cards*)malloc(sizeof(Cards)*8),(Cards*)malloc(sizeof(Cards)*8), 0, 2};
+            Player West = {"West", (Cards*)malloc(sizeof(Cards)*8),(Cards*)malloc(sizeof(Cards)*8), 0, 2};
             Player* players  = (Player*) malloc(sizeof(Player)*4);
+            
+            TricksStats TheTrick = {(Cards*)malloc(sizeof(Cards)*4), "None", 0, 0};
 
             players[0] = South;
             players[1] = West;
@@ -46,7 +49,6 @@ int main() {
                 if(strcmp(players[i].name,"South") == 0){
                     while (bet_choice == -1){
                         bet_choice = bid_menu(contract,round_bets);
-                        system("pause");
                         clrscr();
                     }
                 } else {
@@ -82,12 +84,27 @@ int main() {
                 }
             }
             lastPlayer = strcpy(lastPlayer,round_bets->bidding_array[round_bets->turn-1]->player);
+            ChangeScore(round_bets->bidding_array[round_bets->turn-1]->trump, &North);
+            ChangeScore(round_bets->bidding_array[round_bets->turn-1]->trump, &South);
+            ChangeScore(round_bets->bidding_array[round_bets->turn-1]->trump, &East);
+            ChangeScore(round_bets->bidding_array[round_bets->turn-1]->trump, &West);
 
             /*******************************************   Loop of the tricks  ******************************************************************************/
-
-            players = shiftPlayers(players,FindPosition(players,lastPlayer), 4);
-
-
+            while (GameTurn > 0){
+                players = shiftPlayers(players,FindPosition(players,lastPlayer), 4);
+              
+                for (int y =0; y < 4; y++) {
+                    TheTrick.indexWinningCards = 0;
+                    
+                    if (players[y].name[0] == 'S' ){
+                        Game_of_South(&South, GameTurn, y, &TheTrick, round_bets->bidding_array[round_bets->turn-1]->trump);
+                    }else {
+                        Game_of_AI(&players[y], GameTurn, y, &TheTrick, round_bets->bidding_array[round_bets->turn-1]->trump);
+                    }
+                    printTheTrick(&TheTrick, players, y);
+                }
+                GameTurn++;
+            }
 
             break;
         case 2:
