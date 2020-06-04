@@ -1,4 +1,4 @@
-#include "Bid_of_AI.h"
+#include "AI.h"
 #include "Cartes.h"
 #include "menu.h"
 
@@ -164,9 +164,9 @@ Cardtype** BubbleSortChoice(Cardtype** array){
 void Game_of_AI(Player* Player, int turn, int Card_in_theTrick, TricksStats* TheTrick, char trump_color){
     Boolean HasPlayed = FALSE;
     int i = 0;
-    
+
     if (Card_in_theTrick == 0){                                   //Checks if the Player plays the first card of the trick.
-        
+
         while (!HasPlayed && i<= turn) {            //First, plays a non-trump big Card, if possible
            if(Player->hand[i].color[0] != trump_color && Player->hand[i].power > 5){
                 TheTrick->CardsOfTheTrick[0] = Player->hand[i];
@@ -174,7 +174,7 @@ void Game_of_AI(Player* Player, int turn, int Card_in_theTrick, TricksStats* The
             }                                                     //then the function stops.
             i++;
         }
-        
+
         if(!HasPlayed){
             i = 0;
             while (!HasPlayed && i<= turn){          //If not played before, the Player plays a non-trump small Card.
@@ -198,34 +198,34 @@ void Game_of_AI(Player* Player, int turn, int Card_in_theTrick, TricksStats* The
                     TheTrick->CardsOfTheTrick[0] = Player->hand[i];
                 }
             }
-            
+
         }
         strcpy(TheTrick->NameOfWinner, Player->name);
         TheTrick->TeamWinningNumber = Player->TeamNumber;
-        
+
     }
     else {
-    
+
         int o = 0;
         Cards FirstCardPlayed = TheTrick->CardsOfTheTrick[0]; //It is the last card played.
         Cards WinningCard = TheTrick->CardsOfTheTrick[TheTrick->indexWinningCards];//It is the card that wins the trick
-            
+
         while (Player->hand[i].color[0] != TheTrick->CardsOfTheTrick[0].color[0] && i <= turn+1){
             i++;
         }
         // If i < turn+1, it means the player has at least one card of the trick's color,
         // and i is the index of the smallest card of the trick's color in his hand.
-        
-        
+
+
         if ( i <= turn){                                     //If the player has the trick's color
-            
+
                 while (!HasPlayed && o <= turn){                //We take the index of the biggest card of the trick's color in his hand
                     if (Player->hand[o].color[0] == FirstCardPlayed.color[0] && Player->hand[o].color[0] != Player->hand[o+1].color[o]){
                         HasPlayed = TRUE;
                     }
                     o++;
                 }
-                
+
         //Player->hand[o] is the biggest card of the trick's color in the player's hand
                 if (WinningCard.color[0] != trump_color && (TheTrick->TeamWinningNumber == Player->TeamNumber || Player->hand[o].power > WinningCard.power)){
                     TheTrick->CardsOfTheTrick[Card_in_theTrick] = Player->hand[o];
@@ -234,17 +234,17 @@ void Game_of_AI(Player* Player, int turn, int Card_in_theTrick, TricksStats* The
                 }else{
                     TheTrick->CardsOfTheTrick[Card_in_theTrick] = Player->hand[i];
                 }
-            
-        
+
+
         }else {                                              //If the player has not the trick's color
                 HasPlayed = FALSE;
                 o = 0; i =0;
-            
+
                 while (Player->hand[i].color[0] != trump_color && i <= turn+1){ //We check if the player has still some trump
                     i++;
                 }
                 // If i < turn+1, it means the player has at least a trump, and i is the index of the smallest trump card in his hand.
-            
+
                 if(WinningCard.color[0] == trump_color && (TheTrick->TeamWinningNumber == Player->TeamNumber && Card_in_theTrick == 3)){
                     while (!HasPlayed && o <= turn){                //We take the index of the biggest non-trump card
                         if (Player->hand[o].color[0] != trump_color && Player->hand[o].color[0] != Player->hand[o+1].color[o]){
@@ -253,8 +253,8 @@ void Game_of_AI(Player* Player, int turn, int Card_in_theTrick, TricksStats* The
                         o++;
                     }
                     TheTrick->CardsOfTheTrick[Card_in_theTrick] = Player->hand[o];
-                    
-                    
+
+
                 }else if (WinningCard.color[0] == trump_color && TheTrick->TeamWinningNumber != Player->TeamNumber && i <= turn){
                     o = 0;
                     while (!HasPlayed && o <= turn+1){
@@ -267,8 +267,8 @@ void Game_of_AI(Player* Player, int turn, int Card_in_theTrick, TricksStats* The
                         TheTrick->CardsOfTheTrick[Card_in_theTrick] = Player->hand[o];
                         strcpy(TheTrick->NameOfWinner, Player->name);
                         TheTrick->TeamWinningNumber = Player->TeamNumber;
-                        
-                        
+
+
                     }else {
                         o = 0;
                        while (!HasPlayed && o <= turn){                //We take the index of the smallest non-trump card
@@ -279,12 +279,12 @@ void Game_of_AI(Player* Player, int turn, int Card_in_theTrick, TricksStats* The
                         }
                         TheTrick->CardsOfTheTrick[Card_in_theTrick] = Player->hand[o];
                     }
-        
+
                 }else if (WinningCard.color[0] != trump_color && i <= turn) {
                     TheTrick->CardsOfTheTrick[Card_in_theTrick] = Player->hand[i];
                     strcpy(TheTrick->NameOfWinner, Player->name);
                     TheTrick->TeamWinningNumber = Player->TeamNumber;
-                    
+
                 }else{
                     o = 0;
                     while (!HasPlayed && o <= turn){                //We take the index of the smallest non-trump card

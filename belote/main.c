@@ -1,7 +1,7 @@
 #include "menu.h"
 #include "Cartes.h"
-#include "ia.h"
-
+#include "AI.h"
+#include <string.h>
 
 int main() {
 
@@ -21,7 +21,7 @@ int main() {
             Player East = {"East", (Cards*)malloc(sizeof(Cards)*8),(Cards*)malloc(sizeof(Cards)*8), 0, 2};
             Player West = {"West", (Cards*)malloc(sizeof(Cards)*8),(Cards*)malloc(sizeof(Cards)*8), 0, 2};
             Player* players  = (Player*) malloc(sizeof(Player)*4);
-            
+
             TricksStats TheTrick = {(Cards*)malloc(sizeof(Cards)*4), "None", 0, 0};
 
             players[0] = South;
@@ -45,27 +45,30 @@ int main() {
             /************************************************   Biddings    *********************************************************************************/
 
             int i = 0;
-            while((i<4)&&(coinche==TRUE)){
-                if(strcmp(players[i].name,"South") == 0){
+            while((i<4)&&(coinche==FALSE)){
+                if(players[i].name[0] == 'S'){
                     while (bet_choice == -1){
                         bet_choice = bid_menu(contract,round_bets);
                         clrscr();
                     }
                 } else {
+                    printf("\nai %s will makes a choice",players[i].name);
                     bet_choice = AIbid(&(players[i]),contract,round_bets);
+                    printf("\nai makes her choice");
                 }
+                printf("\nlet's start the switch");
                 switch(bet_choice){
                         case 1:
-                            if(strcmp(round_bets->bidding_array[round_bets->turn-1]->bet,"Capot")){
+                            if(round_bets->bidding_array[round_bets->turn-1]->bet[0]=='C'){
                                 contract = 250;
-                            } else if(strcmp(round_bets->bidding_array[round_bets->turn-1]->bet,"General")) {
+                            } else if(round_bets->bidding_array[round_bets->turn-1]->bet[0] == 'G') {
                                 contract = 500;
                             } else {
                                 contract = atoi(round_bets->bidding_array[round_bets->turn-1]->bet);
                             }
                             break;
                         case 2:
-                            if((round_bets->turn >= 2) && (strcmp(round_bets->bidding_array[round_bets->turn-1]->bet,"Coinche")==0)){
+                            if((round_bets->turn >= 2) && (round_bets->bidding_array[round_bets->turn-1]->bet[0]=='C')){
                                 contract *= 2;
                                 coinche = TRUE;
                             }
@@ -92,10 +95,10 @@ int main() {
             /*******************************************   Loop of the tricks  ******************************************************************************/
             while (GameTurn > 0){
                 players = shiftPlayers(players,FindPosition(players,lastPlayer), 4);
-              
+
                 for (int y =0; y < 4; y++) {
                     TheTrick.indexWinningCards = 0;
-                    
+
                     if (players[y].name[0] == 'S' ){
                         Game_of_South(&South, GameTurn, y, &TheTrick, round_bets->bidding_array[round_bets->turn-1]->trump);
                     }else {

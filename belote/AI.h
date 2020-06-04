@@ -1,5 +1,5 @@
-#ifndef IAHEADER
-#define IAHEADER
+#ifndef AIHEADER
+#define AIHEADER
 
 #include "menu.h"
 
