@@ -264,14 +264,14 @@ void printBids(biddings b){
  * @return the pointer on the struct b modified
  */
 biddings* AddABet(biddings* b, char* GivenPlayer, int sizeGivenPlayer, char* GivenBet, int sizeGivenBet, char GivenTrump){
-    if ((b != NULL) && (b->bidding_array != NULL) && (b->turn>0)){
+    if ((b->bidding_array != NULL) && (b->turn>1)){
         b->turn++;
         b->bidding_array = (bid**) realloc(b->bidding_array, sizeof(bid*)*b->turn);
-    } else {
+    }/* else {
         b = (biddings*) malloc(sizeof(biddings));
         b->turn = 1;
         b->bidding_array = (bid**) malloc( sizeof(bid*)*b->turn);
-    }
+    }*/
     b->bidding_array[b->turn-1] = (bid*) malloc(sizeof(bid));
     b->bidding_array[b->turn-1]->player = (char*) malloc( sizeof(char)*sizeGivenPlayer);
     b->bidding_array[b->turn-1]->bet = (char*) malloc( sizeof(char)*sizeGivenBet);

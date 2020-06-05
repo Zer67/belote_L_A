@@ -13,7 +13,10 @@ int main() {
         case 1:
             srand(time(0));
 
-            biddings* round_bets = NULL;
+            biddings round_bets;
+            round_bets.turn = 1;
+            round_bets.bidding_array = (bid**) malloc( sizeof(bid*));
+
             int bet_choice = -1, GameTurn = 7;
 
             Player North = {"North", (Cards*)malloc(sizeof(Cards)*8),(Cards*)malloc(sizeof(Cards)*8), 0, 1};
@@ -48,27 +51,27 @@ int main() {
             while((i<4)&&(coinche==FALSE)){
                 if(players[i].name[0] == 'S'){
                     while (bet_choice == -1){
-                        bet_choice = bid_menu(contract,round_bets);
+                        bet_choice = bid_menu(contract,&round_bets);
                         clrscr();
                     }
                 } else {
                     printf("\nai %s will makes a choice",players[i].name);
-                    bet_choice = AIbid(&(players[i]),contract,round_bets);
+                    bet_choice = AIbid(&(players[i]),contract,&round_bets);
                     printf("\nai makes her choice");
                 }
                 printf("\nlet's start the switch");
                 switch(bet_choice){
                         case 1:
-                            if(round_bets->bidding_array[round_bets->turn-1]->bet[0]=='C'){
+                            if(round_bets.bidding_array[round_bets.turn-1]->bet[0]=='C'){
                                 contract = 250;
-                            } else if(round_bets->bidding_array[round_bets->turn-1]->bet[0] == 'G') {
+                            } else if(round_bets.bidding_array[round_bets.turn-1]->bet[0] == 'G') {
                                 contract = 500;
                             } else {
-                                contract = atoi(round_bets->bidding_array[round_bets->turn-1]->bet);
+                                contract = atoi(round_bets.bidding_array[round_bets.turn-1]->bet);
                             }
                             break;
                         case 2:
-                            if((round_bets->turn >= 2) && (round_bets->bidding_array[round_bets->turn-1]->bet[0]=='C')){
+                            if((round_bets.turn >= 2) && (round_bets.bidding_array[round_bets.turn-1]->bet[0]=='C')){
                                 contract *= 2;
                                 coinche = TRUE;
                             }
@@ -80,17 +83,17 @@ int main() {
             }
 
             if(coinche == TRUE){
-                if(strcmp(round_bets->bidding_array[round_bets->turn-2]->player,"South")==0){
-                    menu_surcoinche(round_bets);
+                if(strcmp(round_bets.bidding_array[round_bets.turn-2]->player,"South")==0){
+                    menu_surcoinche(&round_bets);
                 } else {
                     /* the ai can't make a surcoinche for the moment */
                 }
             }
-            lastPlayer = strcpy(lastPlayer,round_bets->bidding_array[round_bets->turn-1]->player);
-            ChangeScore(round_bets->bidding_array[round_bets->turn-1]->trump, &North);
-            ChangeScore(round_bets->bidding_array[round_bets->turn-1]->trump, &South);
-            ChangeScore(round_bets->bidding_array[round_bets->turn-1]->trump, &East);
-            ChangeScore(round_bets->bidding_array[round_bets->turn-1]->trump, &West);
+            lastPlayer = strcpy(lastPlayer,round_bets.bidding_array[round_bets.turn-1]->player);
+            ChangeScore(round_bets.bidding_array[round_bets.turn-1]->trump, &North);
+            ChangeScore(round_bets.bidding_array[round_bets.turn-1]->trump, &South);
+            ChangeScore(round_bets.bidding_array[round_bets.turn-1]->trump, &East);
+            ChangeScore(round_bets.bidding_array[round_bets.turn-1]->trump, &West);
 
             /*******************************************   Loop of the tricks  ******************************************************************************/
             while (GameTurn > 0){
@@ -100,9 +103,9 @@ int main() {
                     TheTrick.indexWinningCards = 0;
 
                     if (players[y].name[0] == 'S' ){
-                        Game_of_South(&South, GameTurn, y, &TheTrick, round_bets->bidding_array[round_bets->turn-1]->trump);
+                        Game_of_South(&South, GameTurn, y, &TheTrick, round_bets.bidding_array[round_bets.turn-1]->trump);
                     }else {
-                        Game_of_AI(&players[y], GameTurn, y, &TheTrick, round_bets->bidding_array[round_bets->turn-1]->trump);
+                        Game_of_AI(&players[y], GameTurn, y, &TheTrick, round_bets.bidding_array[round_bets.turn-1]->trump);
                     }
                     printTheTrick(&TheTrick, players, y);
                 }

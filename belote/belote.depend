@@ -7,7 +7,7 @@
 1591282437 c:\users\alex\documents\github\belote_l_a\belote\ai.h
 	"menu.h"
 
-1591281203 c:\users\alex\documents\github\belote_l_a\belote\menu.h
+1591349761 c:\users\alex\documents\github\belote_l_a\belote\menu.h
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
@@ -24,6 +24,12 @@
 	"Cartes.h"
 	"menu.h"
 
-1591281203 source:c:\users\alex\documents\github\belote_l_a\belote\menu.c
+1591351409 source:c:\users\alex\documents\github\belote_l_a\belote\menu.c
 	"menu.h"
+
+1591351436 source:c:\users\alex\documents\github\belote_l_a\belote\main.c
+	"menu.h"
+	"Cartes.h"
+	"AI.h"
+	<string.h>
 

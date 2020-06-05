@@ -18,6 +18,7 @@ int AIbid(Player* ai_player, int current_bet_value, biddings* current_bet){
     Cardtype* s = (Cardtype*) malloc(sizeof(Cardtype));
     Cardtype* c = (Cardtype*) malloc(sizeof(Cardtype));
 
+    h->figures = NULL, d->figures =NULL, s->figures = NULL, c->figures = NULL;
     h->color = 'H'; (void)(d->color = 'D'); (void)(s->color = 'S'); c->color = 'C';
     (void)(h->counter = -1), (void)(d->counter = -1), (void)(s->counter = -1), c->counter = -1; /* these variables are used to count how much the ai player have a certain color in their hand */
     (void)(h->nbrStg = 0), (void)(d->nbrStg = 0), (void)(s->nbrStg = 0), c->nbrStg = 0; /* these variables are there to count the number of strongs figure in a certain color */
