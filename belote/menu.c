@@ -1,5 +1,5 @@
 #include "menu.h"
-
+#include <string.h>
 /** function which erase all the things on the screen no matter the OS usedvoid clrscr()
  */
 void clrscr(void){
@@ -128,7 +128,7 @@ int bid_menu(int current_contract, biddings* struct_bid){
         case 3:
             clrscr();
             i =0;
-            if (struct_bid != NULL){
+            if (struct_bid->bidding_array[0] != NULL){
                 while((i<struct_bid->turn)&&(strcmp(struct_bid->bidding_array[i]->bet,"General")!=0)&&(strcmp(struct_bid->bidding_array[i]->bet,"Capot")!=0)){
                     i++;
                 }
@@ -160,7 +160,7 @@ int bid_menu(int current_contract, biddings* struct_bid){
         case 4:
             clrscr();
             i =0;
-            if (struct_bid != NULL){
+            if (struct_bid->bidding_array[0] != NULL){
                 while((i<struct_bid->turn)&&(strcmp(struct_bid->bidding_array[i]->bet,"General")!=0)){
                 i++;
                 }
@@ -264,14 +264,10 @@ void printBids(biddings b){
  * @return the pointer on the struct b modified
  */
 biddings* AddABet(biddings* b, char* GivenPlayer, int sizeGivenPlayer, char* GivenBet, int sizeGivenBet, char GivenTrump){
-    if ((b->bidding_array != NULL) && (b->turn>1)){
-        b->turn++;
-        b->bidding_array = (bid**) realloc(b->bidding_array, sizeof(bid*)*b->turn);
-    }/* else {
-        b = (biddings*) malloc(sizeof(biddings));
-        b->turn = 1;
-        b->bidding_array = (bid**) malloc( sizeof(bid*)*b->turn);
-    }*/
+
+    b->turn++;
+    b->bidding_array = (bid**) realloc(b->bidding_array, sizeof(bid*)*b->turn);
+
     b->bidding_array[b->turn-1] = (bid*) malloc(sizeof(bid));
     b->bidding_array[b->turn-1]->player = (char*) malloc( sizeof(char)*sizeGivenPlayer);
     b->bidding_array[b->turn-1]->bet = (char*) malloc( sizeof(char)*sizeGivenBet);

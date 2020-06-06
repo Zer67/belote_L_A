@@ -14,8 +14,9 @@ int main() {
             srand(time(0));
 
             biddings round_bets;
-            round_bets.turn = 1;
+            round_bets.turn = 0;
             round_bets.bidding_array = (bid**) malloc( sizeof(bid*));
+            round_bets.bidding_array[0] = NULL;
 
             int bet_choice = -1, GameTurn = 7;
 
