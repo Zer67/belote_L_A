@@ -36,7 +36,7 @@ int main() {
             char* lastPlayer = (char*)malloc(sizeof(char)*5); /* this string is used to know who is the last player who made a bet */
 
             clrscr();
-            int contract = 80;
+            int contract = 79;
             Boolean coinche = FALSE; /* a variable which is equal to FALSE while nobody makes a coinche and then TRUE if someone makes a coinche */
             printf("\n\nWe will start a new game, keep ready !");
             /* cards are distributed */

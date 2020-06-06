@@ -53,7 +53,7 @@ int AIbid(Player* ai_player, int current_bet_value, biddings* current_bet){
                     h->counter++;
                     h->figures = realloc(h->figures,sizeof(char)*(h->counter));
                 }
-                h->figures[h->counter-1] = ai_player->hand[i].color[5];
+                h->figures[h->counter-1] = ai_player->hand[i].color[4];
                 if ((h->figures[h->counter-1]=='1')||(h->figures[h->counter-1]=='J') || (h->figures[h->counter-1]=='9') || (h->figures[h->counter-1]=='A')){
                     h->nbrStg++;
                 }
@@ -70,7 +70,7 @@ int AIbid(Player* ai_player, int current_bet_value, biddings* current_bet){
                     s->counter++;
                     s->figures = realloc(s->figures,sizeof(char)*(s->counter+1));
                 }
-                s->figures[s->counter-1] = ai_player->hand[i].color[5];
+                s->figures[s->counter-1] = ai_player->hand[i].color[4];
                 if ((s->figures[s->counter-1]=='1')||(s->figures[s->counter-1]=='J') || (s->figures[s->counter-1]=='9') || (s->figures[s->counter-1]=='A')){
                     s->nbrStg++;
                 }
@@ -87,7 +87,7 @@ int AIbid(Player* ai_player, int current_bet_value, biddings* current_bet){
                     d->counter++;
                     d->figures = realloc(d->figures,sizeof(char)*(d->counter));
                 }
-                d->figures[d->counter-1] = ai_player->hand[i].color[5];
+                d->figures[d->counter-1] = ai_player->hand[i].color[4];
                 if ((d->figures[d->counter-1]=='1')||(d->figures[d->counter-1]=='J') || (d->figures[d->counter-1]=='9') || (d->figures[d->counter-1]=='A')){
                     d->nbrStg++;
                 }
@@ -104,7 +104,7 @@ int AIbid(Player* ai_player, int current_bet_value, biddings* current_bet){
                     c->counter++;
                     c->figures = realloc(c->figures,sizeof(char)*(c->counter+1));
                 }
-                c->figures[c->counter-1] = ai_player->hand[i].color[5];
+                c->figures[c->counter-1] = ai_player->hand[i].color[4];
                 if ((c->figures[c->counter-1]=='1')||(c->figures[c->counter-1]=='J') || (c->figures[c->counter-1]=='9') || (c->figures[c->counter-1]=='A')){
                     c->nbrStg++;
                 }
