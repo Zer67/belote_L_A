@@ -1,4 +1,0 @@
-PLAYER  HIGHSCORE   NBRWINS
-Alex    553 3
-Leo 452 5
-Elise   254 7 

@@ -118,6 +118,7 @@ int main() {
         case 2:
             printf("\n\nLet's see the higher scores, could you beat them ?");
             ShowHighscore();
+            enterHighScore("William",1600); /** a simple example for the moment */
             break;
         case 3:
             printf("\n\nGoodbye :'(");
