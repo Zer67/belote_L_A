@@ -23,9 +23,9 @@ void DistributeCards (Player* North, Player* South, Player* East, Player* West) 
                               {"Clu_7",0,0}, {"Clu_8",1,0}, {"Clu_9",2,0}, {"Clu_Ja",3,2}, {"Clu_Qu",4,3}, {"Clu_Ki",5,4}, {"Clu_10",6,10},
         {"Clu_1",7,11},
                               {"Dia_7",0,0}, {"Dia_8",1,0}, {"Dia_9",2,0}, {"Dia_Ja",3,2}, {"Dia_Qu",4,3}, {"Dia_Ki",5,4}, {"Dia_10",6,10},
-        {"Dia_1",6,11},
-                              {"Spa_7",0,0}, {"Spa_8",1,0}, {"Spa_9",2,0}, {"Spa_Ja",3,2}, {"Spa_Qu",4,3}, {"Spa_Ki",5,10}, {"Spa_10",6,10},
-        {"Spa_1",6,11}};
+        {"Dia_1",7,11},
+                              {"Spa_7",0,0}, {"Spa_8",1,0}, {"Spa_9",2,0}, {"Spa_Ja",3,2}, {"Spa_Qu",4,3}, {"Spa_Ki",5,4}, {"Spa_10",6,10},
+        {"Spa_1",7,11}};
     //Heart :[0;7]   Club :[8;15]   Diamond :[16;23]   Spade :[23;31]
 
 
@@ -38,7 +38,19 @@ void DistributeCards (Player* North, Player* South, Player* East, Player* West) 
     for (int i = 0; i <8; i++){
         West->hand[i] = Distribution[i]; //Initializing West's Hand
     }
+  
+
     SorteHand(West);
+    
+    printf("\nWest : ");
+       for (int i = 0; i<8; i++) {
+          if (West->hand[i].color[0] == 'H' || West->hand[i].color[0] == 'D'){
+               printf("\x1b[107m\x1b[91m%s", West->hand[i].color);
+           }else {
+               printf("\x1b[107m\x1b[30m%s", West->hand[i].color);
+           }
+           printf("\x1b[0m, ");
+       }
 }
 
 
@@ -58,7 +70,15 @@ int FullingHand(Player* player, int l, Cards* Distribution) {
     }
 
     SorteHand(player);
-
+    printf("\n%s : ", player->name);
+       for (int i = 0; i<8; i++) {
+           if (player->hand[i].color[0] == 'H' || player->hand[i].color[0] == 'D'){
+               printf("\x1b[107m\x1b[91m%s", player->hand[i].color);
+           }else {
+               printf("\x1b[107m\x1b[30m%s", player->hand[i].color);
+           }
+            printf("\x1b[0m, ");
+       }
 
     return l;
 }
@@ -91,10 +111,6 @@ void SorteHand(Player* Player) {  // I use the Selection sort
 
      }while(l<7);
 
-    printf("\n%s : ", Player->name);
-    for (int i = 0; i<8; i++) {
-        printf("%s, ", Player->hand[i].color);
-    }
 
 }
 
@@ -103,16 +119,16 @@ void ChangeScore(char trump_color, Player* Player){
     //Changing the score of the Cards of North's hand.
     for (int i = 0; i < 8; i++){
         if(Player->hand[i].color[0] == trump_color){
-            Player->hand[i].power += 20;
+            Player->hand[i].power += 10;
             
-            switch (Player->hand[i].color[5]) {
+            switch (Player->hand[i].color[4]) {
                 case '9':
                     Player->hand[i].point = 14;
-                    Player->hand[i].power = 28;
+                    Player->hand[i].power = 18;
                     break;
                 case 'J':
                     Player->hand[i].point = 20;
-                    Player->hand[i].power =29;
+                    Player->hand[i].power = 19;
                 default:
                     break;
             }
@@ -121,31 +137,19 @@ void ChangeScore(char trump_color, Player* Player){
     
 }
 
-/** this function shift an array of four players from a specified number.
- * @param playerArray - the array of player we want to shift
- * @param shift - the number of shift we want to do
- * @return the array of player shifted
- */
-Player* shiftPlayers(Player* playerArray, int shift, int size){
-    if((playerArray != NULL)||(size!=4)){
-        for(int j=0; j<(shift%size);j++){   /* here we use the modulo to avoid extra shifts which will be useless */
-            Player temp = playerArray[0];   /* here is a temporal variable which is useful to stock the first player of the array */
 
-            for(int i = 0; i<size-1; i++){
-
-                playerArray[i] = playerArray[i+1];
-            }
-            playerArray[size-1] = temp;
+Player* shiftPlayers(Player* playerArray, int Index){
+    Player* Temp  = (Player*) malloc(sizeof(Player)*4);
+    
+    if(playerArray != NULL){
+        for(int j=0; j < 4;j++){
+            Temp[j] = playerArray[(j+Index)%4];        //If shift = 3, Temp[0] = playerArray[3], Temp[1] = playerArray[0]...
         }
     }
-    return playerArray;
+    return Temp;
+    
 }
 
-/** this function allows us to know where a given player is in an array of player.
- * @param playerArray - the array where we're looking for the player
- * @param player - the player we're looking for
- * @return the position of the player in the array
- */
 int FindPosition(Player* playerArray,char* player){
     int index = 0;
     while((strcmp(playerArray[index].name, player)!=0) &&(index<4)){
@@ -162,30 +166,87 @@ int FindPosition(Player* playerArray,char* player){
 
 void Game_of_South(Player* South, int turn, int Card_in_theTrick, TricksStats* TheTrick, char trump_color) {
     char readString[5];
-    int ind = -1;
-    
+    int ind = -1, i = 0;
     
     printf("\nYour Hand : ");
-    for (int i = 0; i <= turn; i++) {
-          printf("%s, ", South->hand[i].color);
+    for (int u = 0; u <= turn; u++) {
+          printf("%s, ", South->hand[u].color);
       }
+    
+    if ( Card_in_theTrick != 0) {
+            Cards FirstCardPlayed = TheTrick->CardsOfTheTrick[0]; //It is the first card played.
+            Cards WinningCard = TheTrick->CardsOfTheTrick[TheTrick->indexWinningCards];//It is the card that wins the trick
 
-    do {
-         printf("\nType the index of the Card you want to play (from 1 to %i) : ", turn+1);
-        scanf("%s",readString);
-    } while ((sscanf(readString, "%d", &ind) == EOF) || (ind <= 0) || (ind > turn+1));
+                   while (South->hand[i].color[0] != FirstCardPlayed.color[0] && i <= turn+1){  //We check if South has the color's trick.
+                       i++;
+                   }
+        
+            if (i <= turn) {                                                            //If South has the trick's color
+                do {
+                    do {
+                         printf("\nType the index of the Card you want to play (from 1 to %i) : ", turn+1);
+                        scanf("%s",readString);
+                    } while ((sscanf(readString, "%d", &ind) == EOF) || (ind <= 0) || (ind > turn+1));
+                    ind--;
+                    if (South->hand[ind].color[0] != FirstCardPlayed.color[0]){
+                        printf("\nYou must play a Card of the trick's color.");
+                    }
+                }while (South->hand[ind].color[0] != FirstCardPlayed.color[0]);
+                
     
-    ind--;
-    printf("\nSouth : %s", South->hand[ind].color);
+                    
+                if(WinningCard.color[0] == FirstCardPlayed.color[0] && South->hand[ind].power > WinningCard.power){
+                    TheTrick->NameOfWinner = strcpy(TheTrick->NameOfWinner, "South");
+                    TheTrick->TeamWinningNumber = South->TeamNumber;
+                    TheTrick->indexWinningCards = Card_in_theTrick;
+                }
+                
+                
+            }else {                                                                     //If South doesn't have the trick's color
+                int i = 0, o = i;
+                
+                while (South->hand[i].color[0] != trump_color && i <= turn+1){              //We check if South has some trump.
+                    i++;
+                }                                                                           //i is the index of the smallest trump card of South's hand.
+                
+                while (South->hand[o+1].color[0] == trump_color && o <= turn+1 ){           //We search for the biggest trump of South's hand.
+                    o++;
+                }
+                
+                    
+                    do {
+                        do {
+                             printf("\nType the index of the Card you want to play (from 1 to %i) : ", turn+1);
+                            scanf("%s",readString);
+                        } while ((sscanf(readString, "%d", &ind) == EOF) || (ind <= 0) || (ind > turn+1));
+                        ind--;
+                        if (South->hand[ind].color[0] == trump_color && ind != o && South->hand[o].power > WinningCard.power){
+                            printf("\nYou must play a bigger trump than the last one");
+                        }
+                    }while (ind != o && South->hand[o].power > WinningCard.power);
+                    
+                    if(South->hand[ind].color[0] == trump_color && South->hand[ind].power > WinningCard.power){
+                        TheTrick->NameOfWinner = strcpy(TheTrick->NameOfWinner, "South");
+                        TheTrick->TeamWinningNumber = South->TeamNumber;
+                        TheTrick->indexWinningCards = Card_in_theTrick;
+                    }
+                
+            }
+        
+    }else{
+        do {
+             printf("\nType the index of the Card you want to play (from 1 to %i) : ", turn+1);
+            scanf("%s",readString);
+        } while ((sscanf(readString, "%d", &ind) == EOF) || (ind <= 0) || (ind > turn+1));
+        ind--;
+    }
     
-    TheTrick->CardsOfTheTrick[0] = South->hand[ind];
-    strcpy(TheTrick->NameOfWinner, "South");
-    TheTrick->TeamWinningNumber = South->TeamNumber;
     
+    TheTrick->CardsOfTheTrick[Card_in_theTrick] = South->hand[ind];
     for (int u = ind; u < turn; u++) {
         South->hand[u] = South->hand[u+1];
     }
-    turn--;
+    South->hand = realloc(South->hand, sizeof(Cards)*turn);
     
 
 }
@@ -197,49 +258,55 @@ void Game_of_South(Player* South, int turn, int Card_in_theTrick, TricksStats* T
 
 
 void printTheTrick(TricksStats* TheTrick, Player* players, int Card_in_theTrick) {
-    int i = 0;
-    Boolean Found = FALSE;
+ 
+    int i = FindPosition(players, "North");
     
-    printf("\n\t\tNorth");
-    while(!Found) {
-        if (strcmp(players[i].name, "North")==0){
-            printf("\n\t\t%s", TheTrick->CardsOfTheTrick[i].color);
-            Found = TRUE;
+    
+    printf("\n\t\t\t\x1b[94mNorth\n\n\t\t\t");
+    
+    if (TheTrick->CardsOfTheTrick[i].color[0] == 'H' || TheTrick->CardsOfTheTrick[i].color[0] == 'D'){
+        printf("\x1b[107m\x1b[91m%s", TheTrick->CardsOfTheTrick[i].color);
+    }else if (TheTrick->CardsOfTheTrick[i].color[0] == 'C' || TheTrick->CardsOfTheTrick[i].color[0] == 'S') {
+        printf("\x1b[107m\x1b[30m%s", TheTrick->CardsOfTheTrick[i].color);
+    }
+    printf("\x1b[0m\t");
+    
+    i = FindPosition(players, "West");
+    printf("\n\x1b[93mWest\t\t");
+    if (TheTrick->CardsOfTheTrick[i].color[0] != 0) {
+        if (TheTrick->CardsOfTheTrick[i].color[0] == 'H' || TheTrick->CardsOfTheTrick[i].color[0] == 'D'){
+            printf("\x1b[107m\x1b[91m%s", TheTrick->CardsOfTheTrick[i].color);
+        }else {
+            printf("\x1b[107m\x1b[30m%s", TheTrick->CardsOfTheTrick[i].color);
         }
-        i++;
+    printf("\x1b[0m\t\t");
+    }else {
+        printf("\t\t\t");
     }
     
-    Found = FALSE;
-    i = 0;
-    printf("\nWest");
-       while(!Found) {
-           if (strcmp(players[i].name, "West")==0){
-               printf("\t%s", TheTrick->CardsOfTheTrick[i].color);
-               Found = TRUE;
-           }
-           i++;
-       }
     
-    Found = FALSE;
-    i = 0;
-       while(!Found) {
-           if (strcmp(players[i].name, "East")==0){
-               printf("   %s", TheTrick->CardsOfTheTrick[i].color);
-               Found = TRUE;
-           }
-           i++;
-       }
-    printf("\tEast");
+    i = FindPosition(players, "East");
+    if (TheTrick->CardsOfTheTrick[i].color[0] != 0) {
+        if (TheTrick->CardsOfTheTrick[i].color[0] == 'H' || TheTrick->CardsOfTheTrick[i].color[0] == 'D'){
+            printf("\x1b[107m\x1b[91m%s", TheTrick->CardsOfTheTrick[i].color);
+        }else {
+            printf("\x1b[107m\x1b[30m%s", TheTrick->CardsOfTheTrick[i].color);
+        }
+    printf("\x1b[0m\t");
+    }else {
+        printf("\t\t");
+    }
+    printf("\t\x1b[93mEast\n\t\t\t");
     
-    Found = FALSE;
-    i = 0;
-       while(!Found) {
-           if (strcmp(players[i].name, "South")==0){
-               printf("\n\t\t%s", TheTrick->CardsOfTheTrick[i].color);
-               Found = TRUE;
-           }
-           i++;
-       }
-    printf("\n\t\tSouth");
+    i = FindPosition(players, "South");
+    if (TheTrick->CardsOfTheTrick[i].color[0] == 'H' || TheTrick->CardsOfTheTrick[i].color[0] == 'D'){
+        printf("\x1b[107m\x1b[91m%s", TheTrick->CardsOfTheTrick[i].color);
+    }else if (TheTrick->CardsOfTheTrick[i].color[0] == 'C' || TheTrick->CardsOfTheTrick[i].color[0] == 'S') {
+        printf("\x1b[107m\x1b[30m%s", TheTrick->CardsOfTheTrick[i].color);
+    }
+    printf("\x1b[0m\t\n");
+
+    printf("\n\t\t\t\x1b[94mSouth");
+    printf("\x1b[0m \n");
 }
 
