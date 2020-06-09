@@ -40,4 +40,3 @@ void Game_of_AI(Player* Player, int turn, int Card_in_theTrick, TricksStats* The
 Cardtype** BubbleSortChoice(Cardtype** array);
 
 #endif // IAHEADER
-
