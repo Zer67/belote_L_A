@@ -22,14 +22,13 @@ struct Cards{
 struct Player{
     char name[5];
     struct Cards* hand;
-    struct Cards* WonTricks;
     int score;
     int TeamNumber;                     //Define the number of the Team : 1 for Team North-South, 2 for Team East-West;
 };
 
 typedef struct {
     struct Cards* CardsOfTheTrick;
-    char NameOfWinner[5];
+    char* NameOfWinner;
     int indexWinningCards;
     int TeamWinningNumber;
 }TricksStats;
@@ -77,14 +76,19 @@ void Game_of_South(Player* South, int turn, int Card_in_theTrick, TricksStats* T
 */
 void Game_of_AI(Player* Player, int turn, int Card_in_theTrick, TricksStats* TheTrick, char trump_color);
 
+/**
+ * @param TheTrick - The structure that gathered the cards that will be played, the name of the winner... (see the rest above)
+ * @param players - the array in which the players are placed according to when they play.
+ * @param Card_in_theTrick - The number of cards played in this trick
+ */
 void printTheTrick(TricksStats* TheTrick, Player* players, int Card_in_theTrick);
 
 /** this function shift an array of four players from a specified number.
  * @param playerArray - the array of player we want to shift
- * @param shift - the number of shift we want to do
+ * @param Index - the index of the future first player of the future array, so the index of the winner of the trick in playerArray;
  * @return the array of player shifted
  */
-Player* shiftPlayers(Player* playerArray, int shift, int size);
+Player* shiftPlayers(Player* playerArray, int Index);
 
 /** this function allows us to know where a given player is in an array of player.
  * @param playerArray - the array where we're looking for the player
