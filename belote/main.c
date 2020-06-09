@@ -117,8 +117,15 @@ int main() {
             break;
         case 2:
             printf("\n\nLet's see the higher scores, could you beat them ?");
+
             ShowHighscore();
-            enterHighScore("William",1600); /** a simple example for the moment */
+            /** simples tests ********/
+            enterHighScore("Paul",1200);
+            enterHighScore("Alice",1050);  /*a simple example for the moment */
+            enterHighScore("Bob",1100);
+            enterHighScore("Jerome", 1070);
+            enterHighScore("Alice",1110);
+            /** end of simples tests */
             break;
         case 3:
             printf("\n\nGoodbye :'(");

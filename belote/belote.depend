@@ -24,12 +24,8 @@
 	"Cartes.h"
 	"menu.h"
 
-1591655501 source:c:\users\alex\documents\github\belote_l_a\belote\main.c
-	"menu.h"
-	"Cartes.h"
-	"AI.h"
+1591724623 source:c:\users\alex\documents\github\belote_l_a\belote\highscores.c
 	"highscores.h"
-	<string.h>
 
 1591657492 c:\users\alex\documents\github\belote_l_a\belote\highscores.h
 	"menu.h"
@@ -38,6 +34,10 @@
 	"menu.h"
 	<string.h>
 
-1591657607 source:c:\users\alex\documents\github\belote_l_a\belote\highscores.c
+1591724158 source:c:\users\alex\documents\github\belote_l_a\belote\main.c
+	"menu.h"
+	"Cartes.h"
+	"AI.h"
 	"highscores.h"
+	<string.h>
 

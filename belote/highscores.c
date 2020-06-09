@@ -12,15 +12,16 @@ void ShowHighscore(void){
     clrscr();
     printf("\t%s\n", ascii_highscore);
     if (hs_array->winners == NULL){
-        printf("\n\n\aNo one won a game for the moment, so there is nothing to show...");
+        printf("\n\nNo one won a game for the moment, so there is nothing to show...");
     } else {
         printf("\n\tRANKING\tPLAYER\tSCORE\tNUMBER OF WINS\n\n");
         for(int i = 0; i<hs_array->nbrWinners;i++){
             printf("\t%d\t%s\t%d\t%d\n",hs_array->winners[i].line,hs_array->winners[i].name,hs_array->winners[i].bestScore,hs_array->winners[i].NbrWin);
         }
+        freeHighscore(hs_array);
+        free(hs_array);
     }
-    freeHighscore(hs_array);
-    free(hs_array);
+
 }
 
 /** a function that add a score to the scoreboard or at least one win to the player and save it into "highscore.txt"
@@ -29,7 +30,8 @@ void ShowHighscore(void){
  * @return an integer : TRUE if the name entered has a number of letter strictly lower to 8 or FALSE in the other case
  */
 Boolean enterHighScore(char* player, int score){
-    if(strlen(player)<8){
+    int sizePlayer = strlen(player);
+    if(sizePlayer<8){
 
         HIGHSCORES* current_highscore = (HIGHSCORES*) malloc(sizeof(HIGHSCORES));
         current_highscore->winners = NULL;
@@ -44,9 +46,11 @@ Boolean enterHighScore(char* player, int score){
             int index = findAwinner(player, *current_highscore);
 
             if(index == -1){
+
                 index = 0;
                 current_highscore->nbrWinners++;
                 current_highscore->winners = (PEOPLE*) realloc(current_highscore->winners, sizeof(PEOPLE)*current_highscore->nbrWinners);
+
                 while((index<current_highscore->nbrWinners)&&(score<current_highscore->winners[index].bestScore)){
                     index++;
                 }
@@ -60,7 +64,10 @@ Boolean enterHighScore(char* player, int score){
                 }
                 current_highscore->winners[index].bestScore = score;
                 current_highscore->winners[index].line = index;
-                current_highscore->winners[index].name = strcpy(current_highscore->winners[index-1].name, player);
+                current_highscore->winners[index].name = NULL;
+                free(current_highscore->winners[index].name);
+                current_highscore->winners[index].name = (char*) malloc(sizeof(char)*(sizePlayer));
+                current_highscore->winners[index].name = strcpy(current_highscore->winners[index].name, player);
                 current_highscore->winners[index].NbrWin = 1;
             } else {
                 if(score>current_highscore->winners[index].bestScore){
@@ -97,7 +104,8 @@ Boolean enterHighScore(char* player, int score){
  * @return the pointer on HIGHSCORES hs which will be modified inside the function
  */
 HIGHSCORES* getHighscore(HIGHSCORES* hs){
-    FILE* file_hs = fopen("highscore.txt","r");
+    FILE* file_hs = NULL;
+    file_hs = fopen("highscore.txt","r");
     if(file_hs != NULL){
 
         char playerName[40];
