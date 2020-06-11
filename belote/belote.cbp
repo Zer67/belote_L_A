@@ -39,6 +39,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Cartes.h" />
+		<Unit filename="highscores.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="highscores.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
