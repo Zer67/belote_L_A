@@ -29,8 +29,6 @@ int main() {
                 int bet_choice = -1, GameTurn = 7;
 
 
-                TricksStats TheTrick = {(Cards*)malloc(sizeof(Cards)*4), (char*)malloc(sizeof(char)*5), 0, 0};
-
                 players[0] = South;
                 players[1] = West;
                 players[2] = North;
@@ -57,7 +55,7 @@ int main() {
                     if(players[i].name[0] == 'S'){
                         while (bet_choice == -1){
                             bet_choice = bid_menu(contract,&round_bets);
-                            clrscr();
+                            //clrscr();
                         }
                     } else {
                         bet_choice = AIbid(&(players[i]),contract,&round_bets);
@@ -99,28 +97,48 @@ int main() {
                 ChangeScore(round_bets.bidding_array[round_bets.turn-1]->trump, &West);
                 SorteHand(&North);SorteHand(&South);SorteHand(&West);SorteHand(&East);
                 
-
+                players = shiftPlayers(players,FindPosition(players,lastPlayer));
                 /*******************************************   Loop of the tricks  ******************************************************************************/
                 while (GameTurn > 0){
-                    players = shiftPlayers(players,FindPosition(players,lastPlayer));
+                    TricksStats TheTrick = {(Cards*)malloc(sizeof(Cards)*4), (char*)malloc(sizeof(char)*5), 0, 0};
                     int y;
+                    
                     for (y =0; y < 4; y++) {
                         TheTrick.indexWinningCards = 0;
 
                         if (players[y].name[0] == 'S' ){
+                            if (y > 0){
+                                printTheTrick(&TheTrick, players);
+                            }
                             Game_of_South(&South, GameTurn, y, &TheTrick, round_bets.bidding_array[round_bets.turn-1]->trump);
                         }else {
                             Game_of_AI(&players[y], GameTurn, y, &TheTrick, round_bets.bidding_array[round_bets.turn-1]->trump);
                         }
+                        
+                        for (int A = 0; A<=y; A++){
+                            if (TheTrick.CardsOfTheTrick[A].power > TheTrick.CardsOfTheTrick[TheTrick.indexWinningCards].power){
+                                TheTrick.indexWinningCards = A;
+                            }
+                        }
+                        TheTrick.NameOfWinner = players[TheTrick.indexWinningCards].name;
+                        TheTrick.TeamWinningNumber = players[TheTrick.indexWinningCards].TeamNumber;
                     }
-                    printTheTrick(&TheTrick, players, y);
-                    players = shiftPlayers(players, TheTrick.indexWinningCards);
+                    
+                    printTheTrick(&TheTrick, players);
+
+                    
+                    
                     for (int A = 0; A < 4; A++){
                         players[TheTrick.indexWinningCards].score += TheTrick.CardsOfTheTrick[A].point;
                     }
-                    printf("\n%s wins the Trick", players[TheTrick.indexWinningCards].name);
+                    
+                    printf("\n%s wins the Trick, score : %i", players[TheTrick.indexWinningCards].name, players[TheTrick.indexWinningCards].score);
+                    
+                    players = shiftPlayers(players, TheTrick.indexWinningCards);
                     GameTurn--;
                 }
+                printf("\nScore of the North-South team : %i", South.score + North.score);
+                printf("\nScore of the East-West team : %i", West.score + East.score);
             }
             break;
         case 2:
