@@ -53,8 +53,8 @@ int AIbid(Player* ai_player, int current_bet_value, biddings* current_bet){
                     h->counter++;
                     h->figures = realloc(h->figures,sizeof(char)*(h->counter));
                 }
-                h->figures[h->counter-1] = ai_player->hand[i].color[4];
-                if ((h->figures[h->counter-1]=='1')||(h->figures[h->counter-1]=='J') || (h->figures[h->counter-1]=='9')){
+                h->figures[h->counter-1] = ai_player->hand[i].color[5];
+                if ((h->figures[h->counter-1]=='1')||(h->figures[h->counter-1]=='J') || (h->figures[h->counter-1]=='9') || (h->figures[h->counter-1]=='A')){
                     h->nbrStg++;
                 }
                 break;
@@ -70,8 +70,8 @@ int AIbid(Player* ai_player, int current_bet_value, biddings* current_bet){
                     s->counter++;
                     s->figures = realloc(s->figures,sizeof(char)*(s->counter+1));
                 }
-                s->figures[s->counter-1] = ai_player->hand[i].color[4];
-                if ((s->figures[s->counter-1]=='1')||(s->figures[s->counter-1]=='J') || (s->figures[s->counter-1]=='9')){
+                s->figures[s->counter-1] = ai_player->hand[i].color[5];
+                if ((s->figures[s->counter-1]=='1')||(s->figures[s->counter-1]=='J') || (s->figures[s->counter-1]=='9') || (s->figures[s->counter-1]=='A')){
                     s->nbrStg++;
                 }
                 break;
@@ -87,8 +87,8 @@ int AIbid(Player* ai_player, int current_bet_value, biddings* current_bet){
                     d->counter++;
                     d->figures = realloc(d->figures,sizeof(char)*(d->counter));
                 }
-                d->figures[d->counter-1] = ai_player->hand[i].color[4];
-                if ((d->figures[d->counter-1]=='1')||(d->figures[d->counter-1]=='J') || (d->figures[d->counter-1]=='9')){
+                d->figures[d->counter-1] = ai_player->hand[i].color[5];
+                if ((d->figures[d->counter-1]=='1')||(d->figures[d->counter-1]=='J') || (d->figures[d->counter-1]=='9') || (d->figures[d->counter-1]=='A')){
                     d->nbrStg++;
                 }
                 break;
@@ -104,8 +104,8 @@ int AIbid(Player* ai_player, int current_bet_value, biddings* current_bet){
                     c->counter++;
                     c->figures = realloc(c->figures,sizeof(char)*(c->counter+1));
                 }
-                c->figures[c->counter-1] = ai_player->hand[i].color[4];
-                if ((c->figures[c->counter-1]=='1')||(c->figures[c->counter-1]=='J') || (c->figures[c->counter-1]=='9')){
+                c->figures[c->counter-1] = ai_player->hand[i].color[5];
+                if ((c->figures[c->counter-1]=='1')||(c->figures[c->counter-1]=='J') || (c->figures[c->counter-1]=='9') || (c->figures[c->counter-1]=='A')){
                     c->nbrStg++;
                 }
 
@@ -120,16 +120,15 @@ int AIbid(Player* ai_player, int current_bet_value, biddings* current_bet){
     array_color[1] = d;
     array_color[2] = s;
     array_color[3] = c;
+
       /* sort by number of strong cards : */
     array_color = BubbleSortChoice(array_color);
 
     if ((array_color[0]->nbrStg>= 4)&&(120>current_bet_value)){
         current_bet = AddABet(current_bet,ai_player->name,sizeof(ai_player->name),"120",3,array_color[0]->color);
-        printf("The ai-player %s decided to bet 120 points\n", ai_player->name);
         return 1;
     } else if((array_color[0]->nbrStg>= 3)&&(80>current_bet_value)) {
         current_bet = AddABet(current_bet,ai_player->name,sizeof(ai_player->name),"80",2,array_color[0]->color);
-        printf("The ai-player %s decided to bet 80 points\n", ai_player->name);
         return 1;
     } else {
         printf("The ai-player %s decided to skip\n", ai_player->name);
@@ -144,18 +143,19 @@ Cardtype** BubbleSortChoice(Cardtype** array){
     Boolean sorted=FALSE;
     Cardtype* buff = (Cardtype*) malloc(sizeof(Cardtype));
     int i = 3;
-    while((sorted==FALSE)&&(i>0)){
+    while((!sorted)&&(i>0)){
         sorted = TRUE;
         for(int j=0;j<i;j++){
-            if(array[j+1]->nbrStg>array[j]->nbrStg){
-                buff = (array[j+1]);
+            if(array[j+1]->nbrStg<array[j]->nbrStg){
+                buff = array[j+1];
                 array[j+1] = array[j];
-                (array[j]) = buff;
+                array[j] = buff;
                 sorted = FALSE;
             }
         }
         i-= 1;
     }
+    free(buff);
     return array;
 }
 
@@ -165,38 +165,49 @@ Cardtype** BubbleSortChoice(Cardtype** array){
 void Game_of_AI(Player* Player, int turn, int Card_in_theTrick, TricksStats* TheTrick, char trump_color){
     Boolean HasPlayed = FALSE;
     int i = 0, min = 0, max = 0;
+    
+    for (int u = 0; u <= turn; u++){
+        if (Player->hand[u].color[0] != trump_color && Player->hand[u].power > Player->hand[max].power){
+            max = u;                                //max takes the index of the non-trump card with the most value in the player's hand
+        }
+    }
+    
 
+    for (int u = 0; u <= turn; u++){
+        if (Player->hand[u].power < Player->hand[min].power){
+            min = u;                                //min takes the index of the card with the less value in the player's hand.
+        }
+    }
 
-
+    
 if (Card_in_theTrick == 0){                                   //Checks if the Player plays the first card of the trick.
 
-        while (Player->hand[i].color[0] != trump_color && Player->hand[i].power < 5 && i<= turn) {  //First, plays a non-trump big Card, if possible
-            i++;
-        }
+        if (Player->hand[max].power > 5) {  //First, plays a non-trump big Card, if possible
+            i = max;
+        }else {
 
-        if(i > turn){                                    //If not played before, the Player plays a non-trump small Card.
-            i = 0;
-            while (Player->hand[i].color[0] != trump_color && Player->hand[i].power > 3 && i <= turn+1){
-                i++;
-            }
-            if (i > turn){
-                i = 0;
-                while (Player->hand[i].color[0] == trump_color && i<=turn){       //If not played before, the Player plays a trump.
-                   i++;
+                                                  //If not played before, the Player plays a non-trump small Card.
+                while (Player->hand[i].color[0] != trump_color && Player->hand[i].power > 3 && i <= turn+1){
+                    i++;
                 }
-
-                if (i > turn){                    //If the player can't respect all the previous condition,
-                    i = 0;                          //he plays the first card of his hand.
-                    TheTrick->CardsOfTheTrick[0] = Player->hand[i];
+                if (i > turn){
+                    i = 0;
+                    while (Player->hand[i].color[0] == trump_color && i<=turn){       //If not played before, the Player plays a trump.
+                       i++;
+                    }
+                    
+                    if (i > turn){                    //If the player can't respect all the previous condition,
+                        i = min;                          //he plays the first card of his hand.
+                    }
                 }
             }
-
-        }
+        
     TheTrick->CardsOfTheTrick[0] = Player->hand[i];
         for (int u = i; u <= turn; u++) {
               Player->hand[u] = Player->hand[u+1];
         }
         Player->hand = realloc(Player->hand, sizeof(Cards)*turn);
+        //printf("\n %s : %i", Player->name, i);
 
     }
 else {                                                                      //If the player isn't the first to play
@@ -205,78 +216,63 @@ else {                                                                      //If
         char FirstCardColor = TheTrick->CardsOfTheTrick[0].color[0]; //It is the first card played.
         Cards WinningCard = TheTrick->CardsOfTheTrick[TheTrick->indexWinningCards];//It is the card that wins the trick
 
-        for (int u = 0; u <= turn; u++){
-            if (Player->hand[u].power < Player->hand[min].power){
-                min = u;                                //min takes the index of the card with the less value in the player's hand.
-            }
-        }
-
-        for (int u = 0; u <= turn; u++){
-            if (Player->hand[u].color[0] != trump_color && Player->hand[u].power > Player->hand[max].power){
-                max = u;                                //max takes the index of the non-trump card with the most value in the player's hand
-            }
-        }
-
-
         while (Player->hand[i].color[0] != FirstCardColor && i <= turn+1){
             i++;
         }
         // If i < turn+1, it means the player has at least one card of the trick's color,
         // and i is the index of the smallest card of the trick's color in his hand.
-
+        
 
         if ( i <= turn){                                     //If the player has the trick's color
                 o = i;
-                while (HasPlayed == FALSE && o <= turn){                //We take the index of the biggest card of the trick's color in his hand
-                    if (Player->hand[o].color[0] != Player->hand[o+1].color[0]){
+            if( i < turn) {
+                while (HasPlayed == FALSE && o <= turn){                //We take the index of the biggest card
+                    if (o < turn && Player->hand[o].color[0] != Player->hand[o+1].color[0]){
                         HasPlayed = TRUE;
                         o--;
-                    } else if (o==turn){
+                    }else if(o == turn){
                         HasPlayed = TRUE;
                         o--;
                     }
                     o++;
                 }
+            
             //Player->hand[o] is the biggest card of the trick's color in the player's hand
-
-                if (Player->hand[o].power < WinningCard.power && TheTrick->TeamWinningNumber != Player->TeamNumber){
+            
+                if ((Player->hand[o].power < WinningCard.power) && (TheTrick->TeamWinningNumber != Player->TeamNumber)){
                 //If the player can't win the trick and if the player's team doesn't win the trick
                     o = i;
                 }
-
+            }
         }else {                                              //If the player has not the trick's color
                     o = 0; i =0;
-
+            
                     while (Player->hand[i].color[0] != trump_color && i <= turn+1){ //We check if the player has still some trump
                         i++;
                     }
                     // If i < turn+1, it means the player has at least a trump, and i is the index of the smallest trump card in his hand.
 
-                    if(TheTrick->TeamWinningNumber == Player->TeamNumber && Card_in_theTrick == 3){
+                    if(TheTrick->TeamWinningNumber == Player->TeamNumber){
                         // if the winning card is a trump, if the player's team wins the trick and if the player is the last to play
                         o = max;                                                        //He plays the biggest non-trump card
 
                     }else if (WinningCard.color[0] == trump_color && TheTrick->TeamWinningNumber != Player->TeamNumber && i <= turn){
                         //If the winning card is a trump, if the player's team looses the trick and if the player has a trump
                         o = i;
-                        while (HasPlayed==FALSE && o <= turn+1){       //We search for a trump card who wins the trick
-                            if (Player->hand[o].power > WinningCard.power) {
-                                HasPlayed = TRUE;
-                                o--;
-                            }
+                        while (Player->hand[o].power > WinningCard.power && o <= turn+1){       //We search for a trump card who wins the trick
                             o++;
                         }
-
-
+                        
+                        
                         if (o > turn){
                             o = min;
                         }
 
-
-
-                    }else if (WinningCard.color[0] != trump_color && i <= turn) {        //If the winning card is not a trump and if he has a trump
+                        
+                        
+                    }else if (WinningCard.color[0] != trump_color && o <= turn) {        //If the winning card is not a trump and if he has a trump
                         o = i;                                                          //he plays the smallest trump card
-
+                        
                     }else{                                                               //If he has no trump card
                         o = min;                                                    //he plays the smallest card of his hand
                     }
@@ -286,5 +282,8 @@ else {                                                                      //If
               Player->hand[u] = Player->hand[u+1];
         }
         Player->hand = realloc(Player->hand, sizeof(Cards)*turn);
+    //printf("\n %s : %i, %i", Player->name, i, o);
     }
+    
+    
 }

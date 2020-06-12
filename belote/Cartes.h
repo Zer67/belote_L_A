@@ -49,7 +49,7 @@ int FullingHand (Player* player, int l, Cards* Distribution);
 
 
 /**Function that sorte the hand of the player by group of color, and then by the power of each card
- *@param Player - the struct of the player that the function is treating
+ *@param Player - the struct of the player that the function is treating 
  */
 void SorteHand(Player* Player);
 
@@ -79,7 +79,6 @@ void Game_of_AI(Player* Player, int turn, int Card_in_theTrick, TricksStats* The
 /**
  * @param TheTrick - The structure that gathered the cards that will be played, the name of the winner... (see the rest above)
  * @param players - the array in which the players are placed according to when they play.
- * @param Card_in_theTrick - The number of cards played in this trick
  */
 void printTheTrick(TricksStats* TheTrick, Player* players);
 
@@ -97,5 +96,4 @@ Player* shiftPlayers(Player* playerArray, int Index);
  */
 int FindPosition(Player* playerArray,char* player);
 
-void updatePlayerScore(Player* playerToUpdate,Player* ArrayOfPlayers);
 #endif /* Cartes_h */
