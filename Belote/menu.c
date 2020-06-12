@@ -1,6 +1,8 @@
 #include "menu.h"
 #include <string.h>
-/** function which erase all the things on the screen no matter the OS usedvoid clrscr()
+/**
+ * \fn void clrscr(void)
+ * \brief function which erase all the things on the screen no matter the OS usedvoid clrscr()
  */
 void clrscr(void){
    #if defined(__linux__) || defined(__unix__) || defined(__APPLE__)
@@ -11,8 +13,10 @@ void clrscr(void){
        system("cls");
    #endif
 }
-/** a function which ask the player to choose a trump during the bidding time
- * @return a char which is the chosen trump
+/**
+ * \fn char askForTrump(void)
+ * \brief a function which ask the player to choose a trump during the bidding time
+ * \return a char which is the chosen trump
  */
 char askForTrump(void){
     char trump;
@@ -26,10 +30,12 @@ char askForTrump(void){
 
 
 
-/** function that take an array of string in argument. Each element in this array is an option except the first element which is the title of the menu.
- * @param options - the array containing the options of the menu
- * @param nbr_option - number of options in the menu
- * @return an integer which is the option chosen (from 1 to nbr_option)
+/**
+ * \fn int menu(char** options, int nbre_option)
+ * \brief a function displaying a menu with his title according to an array of strings
+ * \param options - the array containing the options of the menu
+ * \param nbre_option - number of options in the menu
+ * \return an integer which is the option chosen (from 1 to nbre_option)
  */
 int menu(char** options, int nbr_option){
     char input[20];
@@ -47,8 +53,10 @@ int menu(char** options, int nbr_option){
     return value;
 }
 
-/** a function that display the main menu of the game
- * @return the option chosen in the main menu or -1 if there was a problem during the creation of the array main_options
+/**
+ * \fn int main_menu(void)
+ * \brief a simple function which display the main menu and get the input of the player
+ * \return the option chosen in the main menu
  */
 int main_menu(void){
     int nbr_main_option = 3;
@@ -73,10 +81,12 @@ int main_menu(void){
 }
 
 
-/** display the menu of bidding and allow the player to make a bid
- * @param current_contract - the value of the current contract
- * @param struct_bid - the structure containing all the bets
- * @return an integer : -1 if no correct choice have been chosen, 0 if the player skipped, 1 if the player made a "classic" bet, 2 if the player made a coinche
+/**
+ * \fn int bid_menu(int current_contract, biddings* struct_bid)
+ * \brief display the menu of bidding and allow the player to make a bid
+ * \param current_contract - the value of the current contract
+ * \param struct_bid - the structure containing all the bets
+ * \return an integer : -1 if no correct choice have been chosen, 0 if the player skipped, 1 if the player made a "classic" bet, 2 if the player made a coinche
  */
 int bid_menu(int current_contract, biddings* struct_bid){
     // DistributeCards(North, South, East, West); I can't compile with this function at this place
@@ -208,8 +218,10 @@ int bid_menu(int current_contract, biddings* struct_bid){
     return -1;
 }
 
-/** display the menu of surcoinche if someone made a coinche
- * @param struct_bid - the structure containing all the bets
+/**
+ * \fn void menu_surcoinche(biddings* struct_bid)
+ * \brief display the menu of surcoinche if someone made a coinche
+ * \param struct_bid - the structure containing all the bets
  */
 void menu_surcoinche(biddings* struct_bid){
     char trump;
@@ -236,8 +248,10 @@ void menu_surcoinche(biddings* struct_bid){
     }
 }
 
-/** a function useful to display a structure of type biddings
- * @param b - the structure to display
+/**
+ * \fn void printBids(biddings b)
+ * \brief a function useful to display a structure of type biddings
+ * \param b - the structure to display
  */
 void printBids(biddings b){
     for(int i =0; i<b.turn;i++){
@@ -246,14 +260,16 @@ void printBids(biddings b){
     }
 }
 
-/** A really significant function to add a bet inside a biddinngs struct
- * @param b - a pointer on the struct of type biddings we want to modify
- * @param GivenPlayer - the name of the player who made the bet
- * @param sizeGivenPlayer - the size of the string containing the name of the player
- * @param GivenBet - the bet that the player want to make inside a string
- * @param sizeGivenBet - the size of the string containing the bet
- * @param GivenTrump - the trump that the player chose ( can be 'H', 'C', 'D' or 'S')
- * @return the pointer on the struct b modified
+/**
+ * \fn biddings* AddABet(biddings* b, char* GivenPlayer, int sizeGivenPlayer, char* GivenBet, int sizeGivenBet, char GivenTrump)
+ * \brief A really significant function to add a bet inside a biddinngs struct
+ * \param b - a pointer on the struct of type biddings we want to modify
+ * \param GivenPlayer - the name of the player who made the bet
+ * \param sizeGivenPlayer - the size of the string containing the name of the player
+ * \param GivenBet - the bet that the player want to make inside a string
+ * \param sizeGivenBet - the size of the string containing the bet
+ * \param GivenTrump - the trump that the player chose ( can be 'H', 'C', 'D' or 'S')
+ * \return the pointer on the struct b modified
  */
 biddings* AddABet(biddings* b, char* GivenPlayer, int sizeGivenPlayer, char* GivenBet, int sizeGivenBet, char GivenTrump){
 

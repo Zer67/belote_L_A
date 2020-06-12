@@ -1,0 +1,40 @@
+\hypertarget{struct_h_i_g_h_s_c_o_r_e_s}{}\doxysection{H\+I\+G\+H\+S\+C\+O\+R\+ES Struct Reference}
+\label{struct_h_i_g_h_s_c_o_r_e_s}\index{HIGHSCORES@{HIGHSCORES}}
+
+
+a structure containing the highscores of all the players who played the game  
+
+
+
+
+{\ttfamily \#include $<$highscores.\+h$>$}
+
+
+
+Collaboration diagram for H\+I\+G\+H\+S\+C\+O\+R\+ES\+:
+% FIG 0
+\doxysubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_h_i_g_h_s_c_o_r_e_s_a293e9563469cbe5942a98c3d46a6c248}\label{struct_h_i_g_h_s_c_o_r_e_s_a293e9563469cbe5942a98c3d46a6c248}} 
+int {\bfseries nbr\+Winners}
+\item 
+\mbox{\hyperlink{struct_p_e_o_p_l_e}{P\+E\+O\+P\+LE}} $\ast$ \mbox{\hyperlink{struct_h_i_g_h_s_c_o_r_e_s_a4aa3eccfdd6ff7ae215a5b950ec5946d}{winners}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+a structure containing the highscores of all the players who played the game 
+
+\doxysubsection{Field Documentation}
+\mbox{\Hypertarget{struct_h_i_g_h_s_c_o_r_e_s_a4aa3eccfdd6ff7ae215a5b950ec5946d}\label{struct_h_i_g_h_s_c_o_r_e_s_a4aa3eccfdd6ff7ae215a5b950ec5946d}} 
+\index{HIGHSCORES@{HIGHSCORES}!winners@{winners}}
+\index{winners@{winners}!HIGHSCORES@{HIGHSCORES}}
+\doxysubsubsection{\texorpdfstring{winners}{winners}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_p_e_o_p_l_e}{P\+E\+O\+P\+LE}}$\ast$ winners}
+
+length of the array of player 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+highscores.\+h\end{DoxyCompactItemize}

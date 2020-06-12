@@ -4,10 +4,10 @@
 	"Cartes.h"
 	"menu.h"
 
-1591282437 c:\users\alex\documents\github\belote_l_a\belote\ai.h
+1592005366 c:\users\alex\documents\github\belote_l_a\belote\ai.h
 	"menu.h"
 
-1591349761 c:\users\alex\documents\github\belote_l_a\belote\menu.h
+1592005366 c:\users\alex\documents\github\belote_l_a\belote\menu.h
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
@@ -15,26 +15,26 @@
 	<string.h>
 	"Cartes.h"
 
-1591282022 c:\users\alex\documents\github\belote_l_a\belote\cartes.h
+1592005366 c:\users\alex\documents\github\belote_l_a\belote\cartes.h
 	<time.h>
 	<string.h>
 	"menu.h"
 
-1591282022 source:c:\users\alex\documents\github\belote_l_a\belote\cartes.c
+1591999770 source:c:\users\alex\documents\github\belote_l_a\belote\cartes.c
 	"Cartes.h"
 	"menu.h"
 
 1591724623 source:c:\users\alex\documents\github\belote_l_a\belote\highscores.c
 	"highscores.h"
 
-1591657492 c:\users\alex\documents\github\belote_l_a\belote\highscores.h
+1592005366 c:\users\alex\documents\github\belote_l_a\belote\highscores.h
 	"menu.h"
 
-1591440878 source:c:\users\alex\documents\github\belote_l_a\belote\menu.c
+1591999770 source:c:\users\alex\documents\github\belote_l_a\belote\menu.c
 	"menu.h"
 	<string.h>
 
-1591724158 source:c:\users\alex\documents\github\belote_l_a\belote\main.c
+1591999770 source:c:\users\alex\documents\github\belote_l_a\belote\main.c
 	"menu.h"
 	"Cartes.h"
 	"AI.h"

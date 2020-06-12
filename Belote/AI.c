@@ -2,10 +2,12 @@
 #include "Cartes.h"
 #include "menu.h"
 
-/** the function which allow the ai to make a bet.
- * @param ai_player - the struct which allows us to know which ai_player is playing
- * @param current_bet_value - the value of the current bet, by example a General have a value of 500
- * @param current_bet - the array containing all the bets already made
+/**
+ * \fn int AIbid(Player* ai_player, int current_bet_value, biddings* current_bet)
+ * \brief the function which allow the ai to make a bet.
+ * \param ai_player - the struct which allows us to know which ai_player is playing
+ * \param current_bet_value - the value of the current bet, by example a General have a value of 500
+ * \param current_bet - the array containing all the bets already made
  */
 int AIbid(Player* ai_player, int current_bet_value, biddings* current_bet){
 
@@ -161,17 +163,25 @@ Cardtype** BubbleSortChoice(Cardtype** array){
 
 
 
-
+/**
+ * \fn void Game_of_AI(Player* Player, int turn, int Card_in_theTrick, TricksStats* TheTrick, char trump_color)
+ * \brief these  functions will allow the artificial player to play one card in a trick
+ * \param Player - the struct of the artificial player
+ * \param turn - it is two things : the number of turns it remains to do, and the size-1 (or the index of the last card) of the player's hand.
+ * \param Card_in_theTrick - the index of the last card of the actual trick
+ * \param TheTrick - the struct that will contain the cards of the trick
+ * \param trump_color - the color of the trump
+*/
 void Game_of_AI(Player* Player, int turn, int Card_in_theTrick, TricksStats* TheTrick, char trump_color){
     Boolean HasPlayed = FALSE;
     int i = 0, min = 0, max = 0;
-    
+
     for (int u = 0; u <= turn; u++){
         if (Player->hand[u].color[0] != trump_color && Player->hand[u].power > Player->hand[max].power){
             max = u;                                //max takes the index of the non-trump card with the most value in the player's hand
         }
     }
-    
+
 
     for (int u = 0; u <= turn; u++){
         if (Player->hand[u].power < Player->hand[min].power){
@@ -179,7 +189,7 @@ void Game_of_AI(Player* Player, int turn, int Card_in_theTrick, TricksStats* The
         }
     }
 
-    
+
 if (Card_in_theTrick == 0){                                   //Checks if the Player plays the first card of the trick.
 
         if (Player->hand[max].power > 5) {  //First, plays a non-trump big Card, if possible
@@ -195,13 +205,13 @@ if (Card_in_theTrick == 0){                                   //Checks if the Pl
                     while (Player->hand[i].color[0] == trump_color && i<=turn){       //If not played before, the Player plays a trump.
                        i++;
                     }
-                    
+
                     if (i > turn){                    //If the player can't respect all the previous condition,
                         i = min;                          //he plays the first card of his hand.
                     }
                 }
             }
-        
+
     TheTrick->CardsOfTheTrick[0] = Player->hand[i];
         for (int u = i; u <= turn; u++) {
               Player->hand[u] = Player->hand[u+1];
@@ -221,7 +231,7 @@ else {                                                                      //If
         }
         // If i < turn+1, it means the player has at least one card of the trick's color,
         // and i is the index of the smallest card of the trick's color in his hand.
-        
+
 
         if ( i <= turn){                                     //If the player has the trick's color
                 o = i;
@@ -236,9 +246,9 @@ else {                                                                      //If
                     }
                     o++;
                 }
-            
+
             //Player->hand[o] is the biggest card of the trick's color in the player's hand
-            
+
                 if ((Player->hand[o].power < WinningCard.power) && (TheTrick->TeamWinningNumber != Player->TeamNumber)){
                 //If the player can't win the trick and if the player's team doesn't win the trick
                     o = i;
@@ -246,7 +256,7 @@ else {                                                                      //If
             }
         }else {                                              //If the player has not the trick's color
                     o = 0; i =0;
-            
+
                     while (Player->hand[i].color[0] != trump_color && i <= turn+1){ //We check if the player has still some trump
                         i++;
                     }
@@ -262,17 +272,17 @@ else {                                                                      //If
                         while (Player->hand[o].power > WinningCard.power && o <= turn+1){       //We search for a trump card who wins the trick
                             o++;
                         }
-                        
-                        
+
+
                         if (o > turn){
                             o = min;
                         }
 
-                        
-                        
+
+
                     }else if (WinningCard.color[0] != trump_color && o <= turn) {        //If the winning card is not a trump and if he has a trump
                         o = i;                                                          //he plays the smallest trump card
-                        
+
                     }else{                                                               //If he has no trump card
                         o = min;                                                    //he plays the smallest card of his hand
                     }
@@ -284,6 +294,6 @@ else {                                                                      //If
         Player->hand = realloc(Player->hand, sizeof(Cards)*turn);
     //printf("\n %s : %i, %i", Player->name, i, o);
     }
-    
-    
+
+
 }

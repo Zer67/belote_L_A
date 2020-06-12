@@ -1,5 +1,6 @@
 #include "highscores.h"
-/** a function that display the highscore board
+/**\fn void ShowHighscore(void)
+ * \brief a function that display the highscore board
  */
 void ShowHighscore(void){
     HIGHSCORES* hs_array = (HIGHSCORES*) malloc(sizeof(HIGHSCORES));
@@ -24,10 +25,12 @@ void ShowHighscore(void){
 
 }
 
-/** a function that add a score to the scoreboard or at least one win to the player and save it into "highscore.txt"
- * @param player - a string containing the name of the player who won
- * @param score - an integer containing that the player made during his game
- * @return an integer : TRUE if the name entered has a number of letter strictly lower to 8 or FALSE in the other case
+/**
+ * \fn Boolean enterHighScore(char* player, int score)
+ * \brief a function that add a score to the scoreboard or at least one win to the player and save it into "highscore.txt"
+ * \param player - a string containing the name of the player who won
+ * \param score - an integer containing that the player made during his game
+ * \return an integer : TRUE if the name entered has a number of letter strictly lower to 8 or FALSE in the other case
  */
 Boolean enterHighScore(char* player, int score){
     int sizePlayer = strlen(player);
@@ -99,9 +102,11 @@ Boolean enterHighScore(char* player, int score){
     }
 }
 
-/** a function that allows us to write the highscore contained in the file into a struct which is more simple to manage
- * @param hs - a pointer on a struct HIGHSCORES which will contain the highscore
- * @return the pointer on HIGHSCORES hs which will be modified inside the function
+/**
+ * \fn HIGHSCORES* getHighscore(HIGHSCORES* hs)
+ * \brief a function that allows us to write the highscore contained in the file into a struct which is more simple to manage
+ * \param hs - a pointer on a struct HIGHSCORES which will contain the highscore
+ * \return the pointer on HIGHSCORES hs which will be modified inside the function
  */
 HIGHSCORES* getHighscore(HIGHSCORES* hs){
     FILE* file_hs = NULL;
@@ -141,10 +146,12 @@ HIGHSCORES* getHighscore(HIGHSCORES* hs){
     return hs;
 }
 
-/** a function allowing to find a given winner in a struct HIGHSCORES
- * @param name - the name of the player we're looking for
- * @param hs_array - a HIGHSCORES struct where we want to search our winner
- * @return the index of the player found in the winners field of hs_array OR -1 if the player isn't already there
+/**
+ * \fn int findAwinner(char* name, HIGHSCORES hs_array)
+ * \brief a function allowing to find a given winner in a struct HIGHSCORES
+ * \param name - the name of the player we're looking for
+ * \param hs_array - a HIGHSCORES struct where we want to search our winner
+ * \return the index of the player found in the winners field of hs_array OR -1 if the player isn't already there
  */
 int findAwinner(char* name, HIGHSCORES hs_array){
     int i = 0;
@@ -159,8 +166,9 @@ int findAwinner(char* name, HIGHSCORES hs_array){
 }
 
 
-/** a function which will free all the fields of a HIGHSCORES struct  but it won't free the pointer on HIGHSCORES because this depends of the way the struct was implemented
- * @param hs - the HIGHSCORES struct to free
+/**\fn void freeHighscore(HIGHSCORES* hs)
+ * \brief a function which will free all the fields of a HIGHSCORES struct  but it won't free the pointer on HIGHSCORES because this depends of the way the struct was implemented
+ * \param hs - the HIGHSCORES struct to free
  */
 void freeHighscore(HIGHSCORES* hs){
     for(int i = 0; i<hs->nbrWinners;i++){
