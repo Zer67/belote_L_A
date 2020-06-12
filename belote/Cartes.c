@@ -116,21 +116,18 @@ void SorteHand(Player* Player) {  // I use the Selection sort
 
 void ChangeScore(char trump_color, Player* Player){
 
-    //Changing the score of the Cards of North's hand.
+
     for (int i = 0; i < 8; i++){
         if(Player->hand[i].color[0] == trump_color){
-            Player->hand[i].power += 10;
-            
-            switch (Player->hand[i].color[4]) {
-                case '9':
+
+            if (Player->hand[i].color[4] == '9'){
                     Player->hand[i].point = 14;
                     Player->hand[i].power = 18;
-                    break;
-                case 'J':
+            }else if (Player->hand[i].color[4] == 'J'){
                     Player->hand[i].point = 20;
                     Player->hand[i].power = 19;
-                default:
-                    break;
+            }else{
+                    Player->hand[i].power = Player->hand[i].power + 10;
             }
         }
     }
@@ -166,74 +163,89 @@ int FindPosition(Player* playerArray,char* player){
 
 void Game_of_South(Player* South, int turn, int Card_in_theTrick, TricksStats* TheTrick, char trump_color) {
     char readString[5];
-    int ind = -1, i = 0;
+    int ind = -1, i = 0, o = i;
     
     printf("\nYour Hand : ");
     for (int u = 0; u <= turn; u++) {
-          printf("%s, ", South->hand[u].color);
-      }
+        if (South->hand[u].color[0] == 'H' || South->hand[u].color[0] == 'D'){
+            printf("\x1b[107m\x1b[91m%s", South->hand[u].color);
+        }else {
+            printf("\x1b[107m\x1b[30m%s", South->hand[u].color);
+        }
+         printf("\x1b[0m, ");
+    }
     
-    if ( Card_in_theTrick != 0) {
-            Cards FirstCardPlayed = TheTrick->CardsOfTheTrick[0]; //It is the first card played.
-            Cards WinningCard = TheTrick->CardsOfTheTrick[TheTrick->indexWinningCards];//It is the card that wins the trick
+if ( Card_in_theTrick != 0) {                                    //If South isn't the first to play
+        char FirstCardColor = TheTrick->CardsOfTheTrick[0].color[0]; //It is the trick's color, the color of the first played card
+        Cards WinningCard = TheTrick->CardsOfTheTrick[TheTrick->indexWinningCards];//It is the card that wins the trick
 
-                   while (South->hand[i].color[0] != FirstCardPlayed.color[0] && i <= turn+1){  //We check if South has the color's trick.
+                   while (South->hand[i].color[0] != FirstCardColor && i <= turn+1){  //We check if South has the color's trick.
                        i++;
                    }
-        
-            if (i <= turn) {                                                            //If South has the trick's color
-                do {
-                    do {
-                         printf("\nType the index of the Card you want to play (from 1 to %i) : ", turn+1);
-                        scanf("%s",readString);
-                    } while ((sscanf(readString, "%d", &ind) == EOF) || (ind <= 0) || (ind > turn+1));
-                    ind--;
-                    if (South->hand[ind].color[0] != FirstCardPlayed.color[0]){
-                        printf("\nYou must play a Card of the trick's color.");
+                    while (South->hand[o+1].color[0] == trump_color && o <= turn+1 ){         //We search for the biggest trump of South's hand.
+                            o++;
                     }
-                }while (South->hand[ind].color[0] != FirstCardPlayed.color[0]);
-                
-    
+        
+    if (i <= turn) {                                                            //If South has the trick's color
+        if (FirstCardColor != trump_color ||(FirstCardColor == trump_color && South->hand[o].power < WinningCard.power)){                             //If the trick's color is not the trump color, or if the trick's color is a trump and South doesn't have the biggest trump of trick
+                    do {
+                        do {
+                                printf("\nType the index of the Card you want to play (from 1 to %i) : ", turn+1);
+                                scanf("%s",readString);
+                        } while ((sscanf(readString, "%d", &ind) == EOF) || (ind <= 0) || (ind > turn+1));
+                        
+                        ind--;
+                        if (South->hand[ind].color[0] != FirstCardColor){
+                                printf("\nYou must play a Card of the trick's color.");
+                        }
+                        
+                    }while (South->hand[ind].color[0] != FirstCardColor);
                     
-                if(WinningCard.color[0] == FirstCardPlayed.color[0] && South->hand[ind].power > WinningCard.power){
-                    TheTrick->NameOfWinner = strcpy(TheTrick->NameOfWinner, "South");
-                    TheTrick->TeamWinningNumber = South->TeamNumber;
-                    TheTrick->indexWinningCards = Card_in_theTrick;
-                }
-                
-                
-            }else {                                                                     //If South doesn't have the trick's color
-                int i = 0, o = i;
-                
-                while (South->hand[i].color[0] != trump_color && i <= turn+1){              //We check if South has some trump.
-                    i++;
-                }                                                                           //i is the index of the smallest trump card of South's hand.
-                
-                while (South->hand[o+1].color[0] == trump_color && o <= turn+1 ){           //We search for the biggest trump of South's hand.
-                    o++;
-                }
-                
+                }else {                                                         //If the trick's color is the trump color and
+                                                                                //if South has a biggest trump than the Winning Card
+                        do {
+                            do {
+                                    printf("\nType the index of the Card you want to play (from 1 to %i) : ", turn+1);
+                                    scanf("%s",readString);
+                            } while ((sscanf(readString, "%d", &ind) == EOF) || (ind <= 0) || (ind > turn+1));
+                            
+                            ind--;
+                            if (ind != o){
+                                printf("\nYou must play a bigger trump than the last one");
+                            }
+                            
+                        }while (ind != o);                                                   //He must play the biggest trump of the trick
                     
+                
+                }
+    }else {                                                 //If South has not the trick's color
+                
+            if (WinningCard.color[0] == trump_color && South->hand[o].power > WinningCard.power) {//If South has a biggest trump than the Winning Card
                     do {
                         do {
                              printf("\nType the index of the Card you want to play (from 1 to %i) : ", turn+1);
                             scanf("%s",readString);
                         } while ((sscanf(readString, "%d", &ind) == EOF) || (ind <= 0) || (ind > turn+1));
+                        
                         ind--;
-                        if (South->hand[ind].color[0] == trump_color && ind != o && South->hand[o].power > WinningCard.power){
+                        if (ind != o){
                             printf("\nYou must play a bigger trump than the last one");
                         }
-                    }while (ind != o && South->hand[o].power > WinningCard.power);
+                        
+                    }while (ind != o);
+            } else {                                                //If the winning card is not a trump or if South doesn't have the biggest trump
+                    do {
+                         printf("\nType the index of the Card you want to play (from 1 to %i) : ", turn+1);
+                        scanf("%s",readString);
+                    } while ((sscanf(readString, "%d", &ind) == EOF) || (ind <= 0) || (ind > turn+1));
+                ind--;
+                }
                     
-                    if(South->hand[ind].color[0] == trump_color && South->hand[ind].power > WinningCard.power){
-                        TheTrick->NameOfWinner = strcpy(TheTrick->NameOfWinner, "South");
-                        TheTrick->TeamWinningNumber = South->TeamNumber;
-                        TheTrick->indexWinningCards = Card_in_theTrick;
-                    }
+        
                 
             }
         
-    }else{
+}else{                                                  //If South is the first to play
         do {
              printf("\nType the index of the Card you want to play (from 1 to %i) : ", turn+1);
             scanf("%s",readString);
@@ -248,7 +260,6 @@ void Game_of_South(Player* South, int turn, int Card_in_theTrick, TricksStats* T
     }
     South->hand = realloc(South->hand, sizeof(Cards)*turn);
     
-
 }
 
 
@@ -257,7 +268,7 @@ void Game_of_South(Player* South, int turn, int Card_in_theTrick, TricksStats* T
 
 
 
-void printTheTrick(TricksStats* TheTrick, Player* players, int Card_in_theTrick) {
+void printTheTrick(TricksStats* TheTrick, Player* players) {
  
     int i = FindPosition(players, "North");
     
@@ -281,7 +292,7 @@ void printTheTrick(TricksStats* TheTrick, Player* players, int Card_in_theTrick)
         }
     printf("\x1b[0m\t\t");
     }else {
-        printf("\t\t\t");
+        printf("\t\t");
     }
     
     
