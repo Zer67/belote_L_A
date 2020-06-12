@@ -2,7 +2,7 @@
 #define AIHEADER
 
 #include "menu.h"
-
+#include "Cartes.h"
 
 
 /**

@@ -4,8 +4,9 @@
 	"Cartes.h"
 	"menu.h"
 
-1592005366 c:\users\alex\documents\github\belote_l_a\belote\ai.h
+1592007876 c:\users\alex\documents\github\belote_l_a\belote\ai.h
 	"menu.h"
+	"Cartes.h"
 
 1592005366 c:\users\alex\documents\github\belote_l_a\belote\menu.h
 	<stdio.h>
@@ -24,7 +25,7 @@
 	"Cartes.h"
 	"menu.h"
 
-1591724623 source:c:\users\alex\documents\github\belote_l_a\belote\highscores.c
+1592005366 source:c:\users\alex\documents\github\belote_l_a\belote\highscores.c
 	"highscores.h"
 
 1592005366 c:\users\alex\documents\github\belote_l_a\belote\highscores.h

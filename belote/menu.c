@@ -1,5 +1,4 @@
 #include "menu.h"
-#include <string.h>
 /**
  * \fn void clrscr(void)
  * \brief function which erase all the things on the screen no matter the OS usedvoid clrscr()

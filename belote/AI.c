@@ -1,6 +1,4 @@
 #include "AI.h"
-#include "Cartes.h"
-#include "menu.h"
 
 /**
  * \fn int AIbid(Player* ai_player, int current_bet_value, biddings* current_bet)
