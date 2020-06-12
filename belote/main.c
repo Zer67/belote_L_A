@@ -14,12 +14,12 @@ int main() {
     Player* players  = (Player*) malloc(sizeof(Player)*4);
 
     switch(main_menu()){
-            
+
 
 
         case 1:
             while (North.score + South.score < 701 || East.score + West.score < 701 ){
-                
+
 
                 biddings round_bets;
                 round_bets.turn = 0;
@@ -62,7 +62,7 @@ int main() {
                     } else {
                         bet_choice = AIbid(&(players[i]),contract,&round_bets);
                     }
-                   
+
                     switch(bet_choice){
                             case 1:
                                 if(round_bets.bidding_array[round_bets.turn-1]->bet[0]=='C'){
@@ -98,29 +98,82 @@ int main() {
                 ChangeScore(round_bets.bidding_array[round_bets.turn-1]->trump, &East);
                 ChangeScore(round_bets.bidding_array[round_bets.turn-1]->trump, &West);
                 SorteHand(&North);SorteHand(&South);SorteHand(&West);SorteHand(&East);
+<<<<<<< Updated upstream
                 
 
                 /*******************************************   Loop of the tricks  ******************************************************************************/
                 while (GameTurn > 0){
                     players = shiftPlayers(players,FindPosition(players,lastPlayer));
                     int y;
+=======
+
+                players = shiftPlayers(players,FindPosition(players,lastPlayer));
+                /*******************************************   Loop of the tricks  ******************************************************************************/
+                while (GameTurn > 0){
+                    TricksStats* TheTrick = (TricksStats*) malloc(sizeof(TricksStats));
+                    TheTrick->CardsOfTheTrick = (Cards*)malloc(sizeof(Cards)*4);
+                    TheTrick->indexWinningCards = 0;
+                    TheTrick->NameOfWinner = (char*) malloc(sizeof(char)*5);
+                    TheTrick->TeamWinningNumber = 0;
+                    int y;
+
+>>>>>>> Stashed changes
                     for (y =0; y < 4; y++) {
-                        TheTrick.indexWinningCards = 0;
+                        TheTrick->indexWinningCards = 0;
 
                         if (players[y].name[0] == 'S' ){
+<<<<<<< Updated upstream
                             Game_of_South(&South, GameTurn, y, &TheTrick, round_bets.bidding_array[round_bets.turn-1]->trump);
+=======
+                            if (y > 0){
+                                printTheTrick(TheTrick, players);
+                            }
+                            Game_of_South(&South, GameTurn, y, TheTrick, round_bets.bidding_array[round_bets.turn-1]->trump);
+>>>>>>> Stashed changes
                         }else {
-                            Game_of_AI(&players[y], GameTurn, y, &TheTrick, round_bets.bidding_array[round_bets.turn-1]->trump);
+                            Game_of_AI(&players[y], GameTurn, y, TheTrick, round_bets.bidding_array[round_bets.turn-1]->trump);
                         }
+<<<<<<< Updated upstream
                     }
                     printTheTrick(&TheTrick, players, y);
                     players = shiftPlayers(players, TheTrick.indexWinningCards);
-                    for (int A = 0; A < 4; A++){
-                        players[TheTrick.indexWinningCards].score += TheTrick.CardsOfTheTrick[A].point;
+=======
+
+                        for (int A = 0; A<=y; A++){
+                            if (TheTrick->CardsOfTheTrick[A].power > TheTrick->CardsOfTheTrick[TheTrick->indexWinningCards].power){
+                                TheTrick->indexWinningCards = A;
+                            }
+                        }
+                        TheTrick->NameOfWinner = players[TheTrick->indexWinningCards].name;
+                        TheTrick->TeamWinningNumber = players[TheTrick->indexWinningCards].TeamNumber;
                     }
+
+                    printTheTrick(TheTrick, players);
+
+
+
+>>>>>>> Stashed changes
+                    for (int A = 0; A < 4; A++){
+                        players[TheTrick->indexWinningCards].score += TheTrick->CardsOfTheTrick[A].point;
+                    }
+<<<<<<< Updated upstream
                     printf("\n%s wins the Trick", players[TheTrick.indexWinningCards].name);
                     GameTurn--;
                 }
+=======
+
+                    printf("\n%s wins the Trick, score : %i", players[TheTrick->indexWinningCards].name, players[TheTrick->indexWinningCards].score);
+
+                    players = shiftPlayers(players, TheTrick->indexWinningCards);
+                    GameTurn--;
+                }
+                updatePlayerScore(&West,players);
+                updatePlayerScore(&East,players);
+                updatePlayerScore(&North,players);
+                updatePlayerScore(&South,players);
+                printf("\nScore of the North-South team : %i", South.score + North.score);
+                printf("\nScore of the East-West team : %i", West.score + East.score);
+>>>>>>> Stashed changes
             }
             break;
         case 2:
