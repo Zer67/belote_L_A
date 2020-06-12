@@ -95,16 +95,20 @@ int main() {
                 ChangeScore(round_bets.bidding_array[round_bets.turn-1]->trump, &South);
                 ChangeScore(round_bets.bidding_array[round_bets.turn-1]->trump, &East);
                 ChangeScore(round_bets.bidding_array[round_bets.turn-1]->trump, &West);
-                SorteHand(&North);SorteHand(&South);SorteHand(&West);SorteHand(&East);
+                SorteHand(&North);
+                SorteHand(&South);
+                SorteHand(&West);
+                SorteHand(&East);
                 
                 players = shiftPlayers(players,FindPosition(players,lastPlayer));
                 /*******************************************   Loop of the tricks  ******************************************************************************/
-                while (GameTurn > 0){
+                while (GameTurn >= 0){
                     TricksStats TheTrick = {(Cards*)malloc(sizeof(Cards)*4), (char*)malloc(sizeof(char)*5), 0, 0};
                     int y;
+                    TheTrick.indexWinningCards = 0;
+                    TheTrick.TeamWinningNumber = players[0].TeamNumber;
                     
                     for (y =0; y < 4; y++) {
-                        TheTrick.indexWinningCards = 0;
 
                         if (players[y].name[0] == 'S' ){
                             if (y > 0){
@@ -123,7 +127,6 @@ int main() {
                         TheTrick.NameOfWinner = players[TheTrick.indexWinningCards].name;
                         TheTrick.TeamWinningNumber = players[TheTrick.indexWinningCards].TeamNumber;
                     }
-                    
                     printTheTrick(&TheTrick, players);
 
                     
