@@ -28,13 +28,12 @@ typedef struct {
 
 /** function which erase all the things on the screen no matter the OS usedvoid clrscr()
  */
-void clrscr();
+void clrscr(void);
 
 /** a function which ask the player to choose a trump during the bidding time
- * @param title - the title of the menu to make the interface more a e s t h e t i c
  * @return a char which is the chosen trump
  */
-char askForTrump(char* title);
+char askForTrump(void);
 /**
  * @param options - the array containing the options of the menu
  * @param nbre_option - number of options in the menu
@@ -45,7 +44,7 @@ int menu(char** options, int nbre_option);
 /** a simple function which display the main menu and get the input of the player
  * @return the option chosen in the main menu
  */
-int main_menu();
+int main_menu(void);
 
 
 /** display the menu of bidding and allow the player to make a bid
@@ -71,7 +70,7 @@ void printBids(biddings b);
  * @param sizeGivenPlayer - the size of the string containing the name of the player
  * @param GivenBet - the bet that the player want to make inside a string
  * @param sizeGivenBet - the size of the string containing the bet
- * @param givenTrump - the trump that the player chose ( can be 'H', 'C', 'D' or 'S')
+ * @param GivenTrump - the trump that the player chose ( can be 'H', 'C', 'D' or 'S')
  * @return the pointer on the struct b modified
  */
 biddings* AddABet(biddings* b, char* GivenPlayer, int sizeGivenPlayer, char* GivenBet, int sizeGivenBet, char GivenTrump);
