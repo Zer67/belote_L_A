@@ -177,6 +177,7 @@ int bid_menu(int current_contract, biddings* struct_bid){
 
                 printf("\nyou bet that you'll make a 'General' with the trump %c\n", trump);
                 printBids(*struct_bid);
+                free(bid_options);
                 return 1;
 
             break;
@@ -194,6 +195,7 @@ int bid_menu(int current_contract, biddings* struct_bid){
 
                 printf("\nyou bet that you'll make a 'Coinche' with the trump %c\n", trump);
                 printBids(*struct_bid);
+                free(bid_options);
                 return 2;
             } else {
                 printf("somebody already makes 'Coinche', you can't do coinche now");
@@ -205,6 +207,7 @@ int bid_menu(int current_contract, biddings* struct_bid){
 
     }
     printf("Let's come back to your choice !");
+    free(bid_options);
     return -1;
 }
 
