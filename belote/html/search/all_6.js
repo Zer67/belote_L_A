@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['people_16',['PEOPLE',['../struct_p_e_o_p_l_e.html',1,'']]],
-  ['player_17',['Player',['../struct_player.html',1,'']]],
-  ['point_18',['point',['../struct_cards.html#a2dee8b7fcecc7c2d190e9304b43ea886',1,'Cards']]],
-  ['power_19',['power',['../struct_cards.html#a0a923163c4d4ac8a2ecbf16f95d21fe2',1,'Cards']]]
+  ['game_5fof_5fai_32',['Game_of_AI',['../_a_i_8c.html#ab5b7702134f2944cb75c6b2d61ccc405',1,'Game_of_AI(Player *Player, int turn, int Card_in_theTrick, TricksStats *TheTrick, char trump_color):&#160;AI.c'],['../_a_i_8h.html#ab5b7702134f2944cb75c6b2d61ccc405',1,'Game_of_AI(Player *Player, int turn, int Card_in_theTrick, TricksStats *TheTrick, char trump_color):&#160;AI.c'],['../_cartes_8h.html#ab5b7702134f2944cb75c6b2d61ccc405',1,'Game_of_AI(Player *Player, int turn, int Card_in_theTrick, TricksStats *TheTrick, char trump_color):&#160;AI.c']]],
+  ['game_5fof_5fsouth_33',['Game_of_South',['../_cartes_8c.html#a9d41caa57252a4c28cea0c92916759ce',1,'Game_of_South(Player *South, int turn, int Card_in_theTrick, TricksStats *TheTrick, char trump_color):&#160;Cartes.c'],['../_cartes_8h.html#a9d41caa57252a4c28cea0c92916759ce',1,'Game_of_South(Player *South, int turn, int Card_in_theTrick, TricksStats *TheTrick, char trump_color):&#160;Cartes.c']]],
+  ['gethighscore_34',['getHighscore',['../highscores_8c.html#acf9eeddefde47196f082c95e7609025c',1,'getHighscore(HIGHSCORES *hs):&#160;highscores.c'],['../highscores_8h.html#ab0122c386833291e2ae888b0a36ccbc2',1,'getHighscore(HIGHSCORES *hs):&#160;highscores.c']]]
 ];

@@ -1,0 +1,335 @@
+\hypertarget{_cartes_8h}{}\doxysection{Cartes.\+h File Reference}
+\label{_cartes_8h}\index{Cartes.h@{Cartes.h}}
+
+
+the library containing all the functions related to the cards.  
+
+
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}menu.\+h\char`\"{}}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_cards}{Cards}}
+\begin{DoxyCompactList}\small\item\em the structure containing one card \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{struct_player}{Player}}
+\begin{DoxyCompactList}\small\item\em the structure containing the player \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{struct_tricks_stats}{Tricks\+Stats}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{struct_cards}{Cards}} \mbox{\hyperlink{_cartes_8h_a662fe60833c7c112023fa78adc0533d1}{Cards}}
+\item 
+typedef struct \mbox{\hyperlink{struct_player}{Player}} \mbox{\hyperlink{_cartes_8h_a480a040facb94f90060562cd65274385}{Player}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_cartes_8h_ab50025445c4633f104394192aa882119}{Distribute\+Cards}} (\mbox{\hyperlink{struct_player}{Player}} $\ast$North, \mbox{\hyperlink{struct_player}{Player}} $\ast$South, \mbox{\hyperlink{struct_player}{Player}} $\ast$East, \mbox{\hyperlink{struct_player}{Player}} $\ast$West)
+\begin{DoxyCompactList}\small\item\em Sub-\/program that gathers the functions to distribute the cards to each \mbox{\hyperlink{struct_player}{Player}}. It will call the function \char`\"{}\+Fulling\+Hand\char`\"{}. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{_cartes_8h_a879e88f5af04517a85f5ebf00982665b}{Fulling\+Hand}} (\mbox{\hyperlink{struct_player}{Player}} $\ast$player, int l, \mbox{\hyperlink{struct_cards}{Cards}} $\ast$Distribution)
+\begin{DoxyCompactList}\small\item\em Function that randomly gives to each player 8 cards. It will call the function \char`\"{}\+Sorte\+Hand\char`\"{}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_cartes_8h_ac043c40393f30d2338b9eeaeeb7964c4}{Sorte\+Hand}} (\mbox{\hyperlink{struct_player}{Player}} $\ast$\mbox{\hyperlink{struct_player}{Player}})
+\begin{DoxyCompactList}\small\item\em Function that sorte the hand of the player by group of color, and then by the power of each card. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_cartes_8h_a4614915e91f8d620c475bbd5c331cf18}{Change\+Score}} (char trump\+\_\+color, \mbox{\hyperlink{struct_player}{Player}} $\ast$\mbox{\hyperlink{struct_player}{Player}})
+\begin{DoxyCompactList}\small\item\em Function that changes the score of each cards according to the chosen trump. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_cartes_8h_a9d41caa57252a4c28cea0c92916759ce}{Game\+\_\+of\+\_\+\+South}} (\mbox{\hyperlink{struct_player}{Player}} $\ast$South, int turn, int Card\+\_\+in\+\_\+the\+Trick, \mbox{\hyperlink{struct_tricks_stats}{Tricks\+Stats}} $\ast$The\+Trick, char trump\+\_\+color)
+\begin{DoxyCompactList}\small\item\em these two functions will allow the player to play one card in a trick \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_cartes_8h_ab5b7702134f2944cb75c6b2d61ccc405}{Game\+\_\+of\+\_\+\+AI}} (\mbox{\hyperlink{struct_player}{Player}} $\ast$\mbox{\hyperlink{struct_player}{Player}}, int turn, int Card\+\_\+in\+\_\+the\+Trick, \mbox{\hyperlink{struct_tricks_stats}{Tricks\+Stats}} $\ast$The\+Trick, char trump\+\_\+color)
+\begin{DoxyCompactList}\small\item\em these functions will allow the artificial player to play one card in a trick \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_cartes_8h_ab8495d8dde1d284832a5bff8b0226fb9}{print\+The\+Trick}} (\mbox{\hyperlink{struct_tricks_stats}{Tricks\+Stats}} $\ast$The\+Trick, \mbox{\hyperlink{struct_player}{Player}} $\ast$players)
+\begin{DoxyCompactList}\small\item\em function that print the current trick \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_player}{Player}} $\ast$ \mbox{\hyperlink{_cartes_8h_af474ceb15b8edc974cae1c7151416113}{shift\+Players}} (\mbox{\hyperlink{struct_player}{Player}} $\ast$player\+Array, int Index)
+\begin{DoxyCompactList}\small\item\em this function shift an array of four players from a specified number. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{_cartes_8h_a31aad3250848e706176bbc8910cbf331}{Find\+Position}} (\mbox{\hyperlink{struct_player}{Player}} $\ast$player\+Array, char $\ast$player)
+\begin{DoxyCompactList}\small\item\em this function allows us to know where a given player is in an array of player. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_cartes_8h_a5bf2f16b312cf9b51b149f65bcd51220}{update\+Player\+Score}} (\mbox{\hyperlink{struct_player}{Player}} $\ast$player\+To\+Update, \mbox{\hyperlink{struct_player}{Player}} $\ast$Array\+Of\+Players)
+\begin{DoxyCompactList}\small\item\em a function used to update the scores of the player. We search the player inside the array of players and then we update the player \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_cartes_8h_a32eb66c38875f1307e119e841c0813f8}{free\+The\+Trick}} (\mbox{\hyperlink{struct_tricks_stats}{Tricks\+Stats}} $\ast$trick)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+the library containing all the functions related to the cards. 
+
+\begin{DoxyAuthor}{Author}
+Léonard Hesse 
+
+Alexandre Viala 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+13th june 2020 
+\end{DoxyDate}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{_cartes_8h_a662fe60833c7c112023fa78adc0533d1}\label{_cartes_8h_a662fe60833c7c112023fa78adc0533d1}} 
+\index{Cartes.h@{Cartes.h}!Cards@{Cards}}
+\index{Cards@{Cards}!Cartes.h@{Cartes.h}}
+\doxysubsubsection{\texorpdfstring{Cards}{Cards}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{struct_cards}{Cards}} \mbox{\hyperlink{struct_cards}{Cards}}}
+
+
+
+Definition at line 1 of file Cartes.\+h.
+
+\mbox{\Hypertarget{_cartes_8h_a480a040facb94f90060562cd65274385}\label{_cartes_8h_a480a040facb94f90060562cd65274385}} 
+\index{Cartes.h@{Cartes.h}!Player@{Player}}
+\index{Player@{Player}!Cartes.h@{Cartes.h}}
+\doxysubsubsection{\texorpdfstring{Player}{Player}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{struct_player}{Player}} \mbox{\hyperlink{struct_player}{Player}}}
+
+
+
+Definition at line 1 of file Cartes.\+h.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_cartes_8h_a4614915e91f8d620c475bbd5c331cf18}\label{_cartes_8h_a4614915e91f8d620c475bbd5c331cf18}} 
+\index{Cartes.h@{Cartes.h}!ChangeScore@{ChangeScore}}
+\index{ChangeScore@{ChangeScore}!Cartes.h@{Cartes.h}}
+\doxysubsubsection{\texorpdfstring{ChangeScore()}{ChangeScore()}}
+{\footnotesize\ttfamily void Change\+Score (\begin{DoxyParamCaption}\item[{char}]{trump\+\_\+color,  }\item[{\mbox{\hyperlink{struct_player}{Player}} $\ast$}]{Player }\end{DoxyParamCaption})}
+
+
+
+Function that changes the score of each cards according to the chosen trump. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em trump\+\_\+color} & -\/ the trump\textquotesingle{}s color of the current round \\
+\hline
+{\em \mbox{\hyperlink{struct_player}{Player}}} & -\/ an array of players \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 139 of file Cartes.\+c.
+
+\mbox{\Hypertarget{_cartes_8h_ab50025445c4633f104394192aa882119}\label{_cartes_8h_ab50025445c4633f104394192aa882119}} 
+\index{Cartes.h@{Cartes.h}!DistributeCards@{DistributeCards}}
+\index{DistributeCards@{DistributeCards}!Cartes.h@{Cartes.h}}
+\doxysubsubsection{\texorpdfstring{DistributeCards()}{DistributeCards()}}
+{\footnotesize\ttfamily void Distribute\+Cards (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_player}{Player}} $\ast$}]{North,  }\item[{\mbox{\hyperlink{struct_player}{Player}} $\ast$}]{South,  }\item[{\mbox{\hyperlink{struct_player}{Player}} $\ast$}]{East,  }\item[{\mbox{\hyperlink{struct_player}{Player}} $\ast$}]{West }\end{DoxyParamCaption})}
+
+
+
+Sub-\/program that gathers the functions to distribute the cards to each \mbox{\hyperlink{struct_player}{Player}}. It will call the function \char`\"{}\+Fulling\+Hand\char`\"{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em North} & -\/ a pointer on the North player \\
+\hline
+{\em South} & -\/ a pointer on the South player \\
+\hline
+{\em East} & -\/ a pointer on the East player \\
+\hline
+{\em West} & -\/ a pointer on the West player \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 26 of file Cartes.\+c.
+
+\mbox{\Hypertarget{_cartes_8h_a31aad3250848e706176bbc8910cbf331}\label{_cartes_8h_a31aad3250848e706176bbc8910cbf331}} 
+\index{Cartes.h@{Cartes.h}!FindPosition@{FindPosition}}
+\index{FindPosition@{FindPosition}!Cartes.h@{Cartes.h}}
+\doxysubsubsection{\texorpdfstring{FindPosition()}{FindPosition()}}
+{\footnotesize\ttfamily int Find\+Position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_player}{Player}} $\ast$}]{player\+Array,  }\item[{char $\ast$}]{player }\end{DoxyParamCaption})}
+
+
+
+this function allows us to know where a given player is in an array of player. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player\+Array} & -\/ the array where we\textquotesingle{}re looking for the player \\
+\hline
+{\em player} & -\/ the player we\textquotesingle{}re looking for \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the position of the player in the array 
+\end{DoxyReturn}
+
+
+Definition at line 184 of file Cartes.\+c.
+
+\mbox{\Hypertarget{_cartes_8h_a32eb66c38875f1307e119e841c0813f8}\label{_cartes_8h_a32eb66c38875f1307e119e841c0813f8}} 
+\index{Cartes.h@{Cartes.h}!freeTheTrick@{freeTheTrick}}
+\index{freeTheTrick@{freeTheTrick}!Cartes.h@{Cartes.h}}
+\doxysubsubsection{\texorpdfstring{freeTheTrick()}{freeTheTrick()}}
+{\footnotesize\ttfamily void free\+The\+Trick (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_tricks_stats}{Tricks\+Stats}} $\ast$}]{trick }\end{DoxyParamCaption})}
+
+
+
+Definition at line 406 of file Cartes.\+c.
+
+\mbox{\Hypertarget{_cartes_8h_a879e88f5af04517a85f5ebf00982665b}\label{_cartes_8h_a879e88f5af04517a85f5ebf00982665b}} 
+\index{Cartes.h@{Cartes.h}!FullingHand@{FullingHand}}
+\index{FullingHand@{FullingHand}!Cartes.h@{Cartes.h}}
+\doxysubsubsection{\texorpdfstring{FullingHand()}{FullingHand()}}
+{\footnotesize\ttfamily int Fulling\+Hand (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_player}{Player}} $\ast$}]{player,  }\item[{int}]{l,  }\item[{\mbox{\hyperlink{struct_cards}{Cards}} $\ast$}]{Distribution }\end{DoxyParamCaption})}
+
+
+
+Function that randomly gives to each player 8 cards. It will call the function \char`\"{}\+Sorte\+Hand\char`\"{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player} & -\/ a pointer on a player \\
+\hline
+{\em Distribution} & -\/ the array of cards containing all the cards \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if the process was well executed 
+\end{DoxyReturn}
+
+
+Definition at line 71 of file Cartes.\+c.
+
+\mbox{\Hypertarget{_cartes_8h_ab5b7702134f2944cb75c6b2d61ccc405}\label{_cartes_8h_ab5b7702134f2944cb75c6b2d61ccc405}} 
+\index{Cartes.h@{Cartes.h}!Game\_of\_AI@{Game\_of\_AI}}
+\index{Game\_of\_AI@{Game\_of\_AI}!Cartes.h@{Cartes.h}}
+\doxysubsubsection{\texorpdfstring{Game\_of\_AI()}{Game\_of\_AI()}}
+{\footnotesize\ttfamily void Game\+\_\+of\+\_\+\+AI (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_player}{Player}} $\ast$}]{Player,  }\item[{int}]{turn,  }\item[{int}]{Card\+\_\+in\+\_\+the\+Trick,  }\item[{\mbox{\hyperlink{struct_tricks_stats}{Tricks\+Stats}} $\ast$}]{The\+Trick,  }\item[{char}]{trump\+\_\+color }\end{DoxyParamCaption})}
+
+
+
+these functions will allow the artificial player to play one card in a trick 
+
+these two functions will allow the player to play one card in a trick
+
+
+\begin{DoxyParams}{Parameters}
+{\em \mbox{\hyperlink{struct_player}{Player}}} & -\/ the struct of the artificial player \\
+\hline
+{\em turn} & -\/ it is two things \+: the number of turns it remains to do, and the size-\/1 (or the index of the last card) of the player\textquotesingle{}s hand. \\
+\hline
+{\em Card\+\_\+in\+\_\+the\+Trick} & -\/ the index of the last card of the actual trick \\
+\hline
+{\em The\+Trick} & -\/ the struct that will contain the cards of the trick \\
+\hline
+{\em trump\+\_\+color} & -\/ the color of the trump \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 189 of file A\+I.\+c.
+
+\mbox{\Hypertarget{_cartes_8h_a9d41caa57252a4c28cea0c92916759ce}\label{_cartes_8h_a9d41caa57252a4c28cea0c92916759ce}} 
+\index{Cartes.h@{Cartes.h}!Game\_of\_South@{Game\_of\_South}}
+\index{Game\_of\_South@{Game\_of\_South}!Cartes.h@{Cartes.h}}
+\doxysubsubsection{\texorpdfstring{Game\_of\_South()}{Game\_of\_South()}}
+{\footnotesize\ttfamily void Game\+\_\+of\+\_\+\+South (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_player}{Player}} $\ast$}]{South,  }\item[{int}]{turn,  }\item[{int}]{Card\+\_\+in\+\_\+the\+Trick,  }\item[{\mbox{\hyperlink{struct_tricks_stats}{Tricks\+Stats}} $\ast$}]{The\+Trick,  }\item[{char}]{trump\+\_\+color }\end{DoxyParamCaption})}
+
+
+
+these two functions will allow the player to play one card in a trick 
+
+
+\begin{DoxyParams}{Parameters}
+{\em South} & -\/ the struct of the user, if it is turn to play \\
+\hline
+{\em turn} & -\/ it is two things \+: the number of turns it remains to do, and the size-\/1 (or the index of the last card) of the player\textquotesingle{}s hand. \\
+\hline
+{\em Card\+\_\+in\+\_\+the\+Trick} & -\/ the index of the last card of the actual trick \\
+\hline
+{\em The\+Trick} & -\/ the struct that will contain the cards of the trick \\
+\hline
+{\em trump\+\_\+color} & -\/ the color of the trump \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 206 of file Cartes.\+c.
+
+\mbox{\Hypertarget{_cartes_8h_ab8495d8dde1d284832a5bff8b0226fb9}\label{_cartes_8h_ab8495d8dde1d284832a5bff8b0226fb9}} 
+\index{Cartes.h@{Cartes.h}!printTheTrick@{printTheTrick}}
+\index{printTheTrick@{printTheTrick}!Cartes.h@{Cartes.h}}
+\doxysubsubsection{\texorpdfstring{printTheTrick()}{printTheTrick()}}
+{\footnotesize\ttfamily void print\+The\+Trick (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_tricks_stats}{Tricks\+Stats}} $\ast$}]{The\+Trick,  }\item[{\mbox{\hyperlink{struct_player}{Player}} $\ast$}]{players }\end{DoxyParamCaption})}
+
+
+
+function that print the current trick 
+
+
+\begin{DoxyParams}{Parameters}
+{\em The\+Trick} & -\/ The structure that gathered the cards that will be played, the name of the winner... (see the rest above) \\
+\hline
+{\em players} & -\/ the array in which the players are placed according to when they play. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 331 of file Cartes.\+c.
+
+\mbox{\Hypertarget{_cartes_8h_af474ceb15b8edc974cae1c7151416113}\label{_cartes_8h_af474ceb15b8edc974cae1c7151416113}} 
+\index{Cartes.h@{Cartes.h}!shiftPlayers@{shiftPlayers}}
+\index{shiftPlayers@{shiftPlayers}!Cartes.h@{Cartes.h}}
+\doxysubsubsection{\texorpdfstring{shiftPlayers()}{shiftPlayers()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_player}{Player}}$\ast$ shift\+Players (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_player}{Player}} $\ast$}]{player\+Array,  }\item[{int}]{Index }\end{DoxyParamCaption})}
+
+
+
+this function shift an array of four players from a specified number. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player\+Array} & -\/ the array of player we want to shift \\
+\hline
+{\em Index} & -\/ the index of the future first player of the future array, so the index of the winner of the trick in player\+Array; \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the array of player shifted 
+\end{DoxyReturn}
+
+
+Definition at line 166 of file Cartes.\+c.
+
+\mbox{\Hypertarget{_cartes_8h_ac043c40393f30d2338b9eeaeeb7964c4}\label{_cartes_8h_ac043c40393f30d2338b9eeaeeb7964c4}} 
+\index{Cartes.h@{Cartes.h}!SorteHand@{SorteHand}}
+\index{SorteHand@{SorteHand}!Cartes.h@{Cartes.h}}
+\doxysubsubsection{\texorpdfstring{SorteHand()}{SorteHand()}}
+{\footnotesize\ttfamily void Sorte\+Hand (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_player}{Player}} $\ast$}]{Player }\end{DoxyParamCaption})}
+
+
+
+Function that sorte the hand of the player by group of color, and then by the power of each card. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \mbox{\hyperlink{struct_player}{Player}}} & -\/ the struct of the player that the function is treating \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 105 of file Cartes.\+c.
+
+\mbox{\Hypertarget{_cartes_8h_a5bf2f16b312cf9b51b149f65bcd51220}\label{_cartes_8h_a5bf2f16b312cf9b51b149f65bcd51220}} 
+\index{Cartes.h@{Cartes.h}!updatePlayerScore@{updatePlayerScore}}
+\index{updatePlayerScore@{updatePlayerScore}!Cartes.h@{Cartes.h}}
+\doxysubsubsection{\texorpdfstring{updatePlayerScore()}{updatePlayerScore()}}
+{\footnotesize\ttfamily void update\+Player\+Score (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_player}{Player}} $\ast$}]{player\+To\+Update,  }\item[{\mbox{\hyperlink{struct_player}{Player}} $\ast$}]{Array\+Of\+Players }\end{DoxyParamCaption})}
+
+
+
+a function used to update the scores of the player. We search the player inside the array of players and then we update the player 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player\+To\+Update} & -\/ a pointer on the player to update \\
+\hline
+{\em Array\+Of\+Player} & -\/ array of players containing the player to update\\
+\hline
+\end{DoxyParams}
+This function should not exist but we reach some problems with the update of our different players because we did not defined them as pointers, so we need to update just their score after 
+
+Definition at line 391 of file Cartes.\+c.
+

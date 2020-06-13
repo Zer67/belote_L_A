@@ -1,0 +1,140 @@
+\hypertarget{highscores_8c}{}\doxysection{highscores.\+c File Reference}
+\label{highscores_8c}\index{highscores.c@{highscores.c}}
+
+
+the library containing all the functions related to the highscores  
+
+
+{\ttfamily \#include \char`\"{}highscores.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{highscores_8c_ae8c9d59e1b52ef752ce252c08604648b}{Show\+Highscore}} (void)
+\begin{DoxyCompactList}\small\item\em a function that display the highscore board \end{DoxyCompactList}\item 
+\mbox{\hyperlink{menu_8h_ae7d38601dfbd73adbe5c1b3ec34e0e13}{Boolean}} \mbox{\hyperlink{highscores_8c_a035b7ab0ad3fb1354dc5e61b7331f276}{enter\+High\+Score}} (char $\ast$player, int score)
+\begin{DoxyCompactList}\small\item\em a function that add a score to the scoreboard or at least one win to the player and save it into \char`\"{}highscore.\+txt\char`\"{} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_h_i_g_h_s_c_o_r_e_s}{H\+I\+G\+H\+S\+C\+O\+R\+ES}} $\ast$ \mbox{\hyperlink{highscores_8c_acf9eeddefde47196f082c95e7609025c}{get\+Highscore}} (\mbox{\hyperlink{struct_h_i_g_h_s_c_o_r_e_s}{H\+I\+G\+H\+S\+C\+O\+R\+ES}} $\ast$hs)
+\begin{DoxyCompactList}\small\item\em a function that allows us to write the highscore contained in the file into a struct which is more simple to manage \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{highscores_8c_a3444dc55fc8e3514e26aac71bf911c6e}{find\+Awinner}} (char $\ast$name, \mbox{\hyperlink{struct_h_i_g_h_s_c_o_r_e_s}{H\+I\+G\+H\+S\+C\+O\+R\+ES}} hs\+\_\+array)
+\begin{DoxyCompactList}\small\item\em a function allowing to find a given winner in a struct \mbox{\hyperlink{struct_h_i_g_h_s_c_o_r_e_s}{H\+I\+G\+H\+S\+C\+O\+R\+ES}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{highscores_8c_a1f4b79da23040bb19f8b0945619703a1}{free\+Highscore}} (\mbox{\hyperlink{struct_h_i_g_h_s_c_o_r_e_s}{H\+I\+G\+H\+S\+C\+O\+R\+ES}} $\ast$hs)
+\begin{DoxyCompactList}\small\item\em a function which will free all the fields of a \mbox{\hyperlink{struct_h_i_g_h_s_c_o_r_e_s}{H\+I\+G\+H\+S\+C\+O\+R\+ES}} struct but it won\textquotesingle{}t free the pointer on \mbox{\hyperlink{struct_h_i_g_h_s_c_o_r_e_s}{H\+I\+G\+H\+S\+C\+O\+R\+ES}} because this depends of the way the struct was implemented \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+the library containing all the functions related to the highscores 
+
+\begin{DoxyAuthor}{Author}
+Alexandre Viala 
+
+Léonard Hesse 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+13th june 2020
+\end{DoxyDate}
+In this library, we use the the read and the write in a txt file named \char`\"{}highscore.\+txt\char`\"{} 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{highscores_8c_a035b7ab0ad3fb1354dc5e61b7331f276}\label{highscores_8c_a035b7ab0ad3fb1354dc5e61b7331f276}} 
+\index{highscores.c@{highscores.c}!enterHighScore@{enterHighScore}}
+\index{enterHighScore@{enterHighScore}!highscores.c@{highscores.c}}
+\doxysubsubsection{\texorpdfstring{enterHighScore()}{enterHighScore()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{menu_8h_ae7d38601dfbd73adbe5c1b3ec34e0e13}{Boolean}} enter\+High\+Score (\begin{DoxyParamCaption}\item[{char $\ast$}]{player,  }\item[{int}]{score }\end{DoxyParamCaption})}
+
+
+
+a function that add a score to the scoreboard or at least one win to the player and save it into \char`\"{}highscore.\+txt\char`\"{} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player} & -\/ a string containing the name of the player who won \\
+\hline
+{\em score} & -\/ an integer containing that the player made during his game \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+an integer \+: T\+R\+UE if the name entered has a number of letter strictly lower to 8 or F\+A\+L\+SE in the other case 
+\end{DoxyReturn}
+
+
+Definition at line 45 of file highscores.\+c.
+
+\mbox{\Hypertarget{highscores_8c_a3444dc55fc8e3514e26aac71bf911c6e}\label{highscores_8c_a3444dc55fc8e3514e26aac71bf911c6e}} 
+\index{highscores.c@{highscores.c}!findAwinner@{findAwinner}}
+\index{findAwinner@{findAwinner}!highscores.c@{highscores.c}}
+\doxysubsubsection{\texorpdfstring{findAwinner()}{findAwinner()}}
+{\footnotesize\ttfamily int find\+Awinner (\begin{DoxyParamCaption}\item[{char $\ast$}]{name,  }\item[{\mbox{\hyperlink{struct_h_i_g_h_s_c_o_r_e_s}{H\+I\+G\+H\+S\+C\+O\+R\+ES}}}]{hs\+\_\+array }\end{DoxyParamCaption})}
+
+
+
+a function allowing to find a given winner in a struct \mbox{\hyperlink{struct_h_i_g_h_s_c_o_r_e_s}{H\+I\+G\+H\+S\+C\+O\+R\+ES}} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & -\/ the name of the player we\textquotesingle{}re looking for \\
+\hline
+{\em hs\+\_\+array} & -\/ a \mbox{\hyperlink{struct_h_i_g_h_s_c_o_r_e_s}{H\+I\+G\+H\+S\+C\+O\+R\+ES}} struct where we want to search our winner \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the index of the player found in the winners field of hs\+\_\+array OR -\/1 if the player isn\textquotesingle{}t already there 
+\end{DoxyReturn}
+
+
+Definition at line 166 of file highscores.\+c.
+
+\mbox{\Hypertarget{highscores_8c_a1f4b79da23040bb19f8b0945619703a1}\label{highscores_8c_a1f4b79da23040bb19f8b0945619703a1}} 
+\index{highscores.c@{highscores.c}!freeHighscore@{freeHighscore}}
+\index{freeHighscore@{freeHighscore}!highscores.c@{highscores.c}}
+\doxysubsubsection{\texorpdfstring{freeHighscore()}{freeHighscore()}}
+{\footnotesize\ttfamily void free\+Highscore (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_h_i_g_h_s_c_o_r_e_s}{H\+I\+G\+H\+S\+C\+O\+R\+ES}} $\ast$}]{hs }\end{DoxyParamCaption})}
+
+
+
+a function which will free all the fields of a \mbox{\hyperlink{struct_h_i_g_h_s_c_o_r_e_s}{H\+I\+G\+H\+S\+C\+O\+R\+ES}} struct but it won\textquotesingle{}t free the pointer on \mbox{\hyperlink{struct_h_i_g_h_s_c_o_r_e_s}{H\+I\+G\+H\+S\+C\+O\+R\+ES}} because this depends of the way the struct was implemented 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hs} & -\/ the \mbox{\hyperlink{struct_h_i_g_h_s_c_o_r_e_s}{H\+I\+G\+H\+S\+C\+O\+R\+ES}} struct to free \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 183 of file highscores.\+c.
+
+\mbox{\Hypertarget{highscores_8c_acf9eeddefde47196f082c95e7609025c}\label{highscores_8c_acf9eeddefde47196f082c95e7609025c}} 
+\index{highscores.c@{highscores.c}!getHighscore@{getHighscore}}
+\index{getHighscore@{getHighscore}!highscores.c@{highscores.c}}
+\doxysubsubsection{\texorpdfstring{getHighscore()}{getHighscore()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_h_i_g_h_s_c_o_r_e_s}{H\+I\+G\+H\+S\+C\+O\+R\+ES}} $\ast$ get\+Highscore (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_h_i_g_h_s_c_o_r_e_s}{H\+I\+G\+H\+S\+C\+O\+R\+ES}} $\ast$}]{hs }\end{DoxyParamCaption})}
+
+
+
+a function that allows us to write the highscore contained in the file into a struct which is more simple to manage 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hs} & -\/ a pointer on a struct \mbox{\hyperlink{struct_h_i_g_h_s_c_o_r_e_s}{H\+I\+G\+H\+S\+C\+O\+R\+ES}} which will contain the highscore \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the pointer on \mbox{\hyperlink{struct_h_i_g_h_s_c_o_r_e_s}{H\+I\+G\+H\+S\+C\+O\+R\+ES}} hs which will be modified inside the function 
+\end{DoxyReturn}
+
+
+Definition at line 121 of file highscores.\+c.
+
+\mbox{\Hypertarget{highscores_8c_ae8c9d59e1b52ef752ce252c08604648b}\label{highscores_8c_ae8c9d59e1b52ef752ce252c08604648b}} 
+\index{highscores.c@{highscores.c}!ShowHighscore@{ShowHighscore}}
+\index{ShowHighscore@{ShowHighscore}!highscores.c@{highscores.c}}
+\doxysubsubsection{\texorpdfstring{ShowHighscore()}{ShowHighscore()}}
+{\footnotesize\ttfamily void Show\+Highscore (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+a function that display the highscore board 
+
+
+
+Definition at line 15 of file highscores.\+c.
+

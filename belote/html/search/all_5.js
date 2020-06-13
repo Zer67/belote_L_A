@@ -1,7 +1,10 @@
 var searchData=
 [
-  ['name_12',['name',['../struct_p_e_o_p_l_e.html#a5ac083a645d964373f022d03df4849c8',1,'PEOPLE']]],
-  ['nameofwinner_13',['NameOfWinner',['../struct_tricks_stats.html#a1cfb7226269de0607e5b4b41f547cf87',1,'TricksStats']]],
-  ['nbrstg_14',['nbrStg',['../struct_cardtype.html#ac3c76d5ae1513c1ecd61efcabcdd1ce3',1,'Cardtype']]],
-  ['nbrwin_15',['NbrWin',['../struct_p_e_o_p_l_e.html#a47c9a425a02db6f20f2453df8b44a058',1,'PEOPLE']]]
+  ['false_25',['FALSE',['../menu_8h.html#ae7d38601dfbd73adbe5c1b3ec34e0e13aa1e095cc966dbecf6a0d8aad75348d1a',1,'menu.h']]],
+  ['figures_26',['figures',['../struct_cardtype.html#a588f8bdca4522953e5e7f007c619ef98',1,'Cardtype']]],
+  ['findawinner_27',['findAwinner',['../highscores_8c.html#a3444dc55fc8e3514e26aac71bf911c6e',1,'findAwinner(char *name, HIGHSCORES hs_array):&#160;highscores.c'],['../highscores_8h.html#a3444dc55fc8e3514e26aac71bf911c6e',1,'findAwinner(char *name, HIGHSCORES hs_array):&#160;highscores.c']]],
+  ['findposition_28',['FindPosition',['../_cartes_8c.html#a31aad3250848e706176bbc8910cbf331',1,'FindPosition(Player *playerArray, char *player):&#160;Cartes.c'],['../_cartes_8h.html#a31aad3250848e706176bbc8910cbf331',1,'FindPosition(Player *playerArray, char *player):&#160;Cartes.c']]],
+  ['freehighscore_29',['freeHighscore',['../highscores_8c.html#a1f4b79da23040bb19f8b0945619703a1',1,'freeHighscore(HIGHSCORES *hs):&#160;highscores.c'],['../highscores_8h.html#a1f4b79da23040bb19f8b0945619703a1',1,'freeHighscore(HIGHSCORES *hs):&#160;highscores.c']]],
+  ['freethetrick_30',['freeTheTrick',['../_cartes_8c.html#a32eb66c38875f1307e119e841c0813f8',1,'freeTheTrick(TricksStats *trick):&#160;Cartes.c'],['../_cartes_8h.html#a32eb66c38875f1307e119e841c0813f8',1,'freeTheTrick(TricksStats *trick):&#160;Cartes.c']]],
+  ['fullinghand_31',['FullingHand',['../_cartes_8c.html#a879e88f5af04517a85f5ebf00982665b',1,'FullingHand(Player *player, int l, Cards *Distribution):&#160;Cartes.c'],['../_cartes_8h.html#a879e88f5af04517a85f5ebf00982665b',1,'FullingHand(Player *player, int l, Cards *Distribution):&#160;Cartes.c']]]
 ];

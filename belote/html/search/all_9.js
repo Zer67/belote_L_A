@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['winners_28',['winners',['../struct_h_i_g_h_s_c_o_r_e_s.html#a4aa3eccfdd6ff7ae215a5b950ec5946d',1,'HIGHSCORES']]]
+  ['line_41',['line',['../struct_p_e_o_p_l_e.html#a41ebd28ef1d7c6ade45642cb6acc1039',1,'PEOPLE']]]
 ];

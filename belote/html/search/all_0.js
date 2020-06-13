@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['bestscore_0',['bestScore',['../struct_p_e_o_p_l_e.html#ad1d2ebe3608dccbcbdcddae74232eb59',1,'PEOPLE']]],
-  ['bet_1',['bet',['../structbid.html#a063344a68805db4936a744627e4c9cb3',1,'bid']]],
-  ['bid_2',['bid',['../structbid.html',1,'']]],
-  ['biddings_3',['biddings',['../structbiddings.html',1,'']]]
+  ['addabet_0',['AddABet',['../menu_8c.html#ad42f0558ae02de2adc40253ca9612705',1,'AddABet(biddings *b, char *GivenPlayer, int sizeGivenPlayer, char *GivenBet, int sizeGivenBet, char GivenTrump):&#160;menu.c'],['../menu_8h.html#ab264ef67f3fa7509b0723947143a0517',1,'AddABet(biddings *b, char *GivenPlayer, int sizeGivenPlayer, char *GivenBet, int sizeGivenBet, char GivenTrump):&#160;menu.c']]],
+  ['ai_2ec_1',['AI.c',['../_a_i_8c.html',1,'']]],
+  ['ai_2eh_2',['AI.h',['../_a_i_8h.html',1,'']]],
+  ['aibid_3',['AIbid',['../_a_i_8c.html#aca0c8093aece2185b8a175c90723900c',1,'AIbid(Player *ai_player, int current_bet_value, biddings *current_bet):&#160;AI.c'],['../_a_i_8h.html#aca0c8093aece2185b8a175c90723900c',1,'AIbid(Player *ai_player, int current_bet_value, biddings *current_bet):&#160;AI.c']]],
+  ['askfortrump_4',['askForTrump',['../menu_8c.html#a480e7f706c8f794ab79d99f97478f670',1,'askForTrump(void):&#160;menu.c'],['../menu_8h.html#a480e7f706c8f794ab79d99f97478f670',1,'askForTrump(void):&#160;menu.c']]]
 ];

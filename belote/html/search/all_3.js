@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['hand_9',['hand',['../struct_player.html#aa0374458fa4b1a6370b465005182f000',1,'Player']]],
-  ['highscores_10',['HIGHSCORES',['../struct_h_i_g_h_s_c_o_r_e_s.html',1,'']]]
+  ['distributecards_23',['DistributeCards',['../_cartes_8c.html#ab50025445c4633f104394192aa882119',1,'DistributeCards(Player *North, Player *South, Player *East, Player *West):&#160;Cartes.c'],['../_cartes_8h.html#ab50025445c4633f104394192aa882119',1,'DistributeCards(Player *North, Player *South, Player *East, Player *West):&#160;Cartes.c']]]
 ];

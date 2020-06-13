@@ -1,0 +1,255 @@
+\hypertarget{menu_8h}{}\doxysection{menu.\+h File Reference}
+\label{menu_8h}\index{menu.h@{menu.h}}
+
+
+the library containing all the functions related to the menus.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include $<$limits.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}Cartes.\+h\char`\"{}}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structbid}{bid}}
+\begin{DoxyCompactList}\small\item\em the struct containing the bid of one player \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structbiddings}{biddings}}
+\begin{DoxyCompactList}\small\item\em an array with his size containing all the bids made by all the players \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{menu_8h_ae7d38601dfbd73adbe5c1b3ec34e0e13}{Boolean}} \{ \mbox{\hyperlink{menu_8h_ae7d38601dfbd73adbe5c1b3ec34e0e13aa82764c3079aea4e60c80e45befbb839}{T\+R\+UE}} = 0, 
+\mbox{\hyperlink{menu_8h_ae7d38601dfbd73adbe5c1b3ec34e0e13aa1e095cc966dbecf6a0d8aad75348d1a}{F\+A\+L\+SE}} = 1
+ \}
+\begin{DoxyCompactList}\small\item\em a simple boolean implemented which can be useful in some cases \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{menu_8h_a209453284e1e2ed32261e11e00d53760}{clrscr}} (void)
+\begin{DoxyCompactList}\small\item\em function which erase all the things on the screen no matter the OS usedvoid \mbox{\hyperlink{menu_8c_a209453284e1e2ed32261e11e00d53760}{clrscr()}} \end{DoxyCompactList}\item 
+char \mbox{\hyperlink{menu_8h_a480e7f706c8f794ab79d99f97478f670}{ask\+For\+Trump}} (void)
+\begin{DoxyCompactList}\small\item\em a function which ask the player to choose a trump during the bidding time \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{menu_8h_af05f207325e0104940b30bd9991ba754}{menu}} (char $\ast$$\ast$options, int nbre\+\_\+option)
+\begin{DoxyCompactList}\small\item\em a function displaying a menu with his title according to an array of strings \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{menu_8h_a219c351c9f40d16f05553c99a3b7e378}{main\+\_\+menu}} (void)
+\begin{DoxyCompactList}\small\item\em a simple function which display the main menu and get the input of the player \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{menu_8h_a112c622b3eb27312ef5fe91fdf3e32b2}{bid\+\_\+menu}} (int current\+\_\+contract, \mbox{\hyperlink{structbiddings}{biddings}} $\ast$struct\+\_\+bid)
+\begin{DoxyCompactList}\small\item\em display the menu of bidding and allow the player to make a bid \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{menu_8h_abed3a4453f4e00d127722d64726ab0cc}{menu\+\_\+surcoinche}} (\mbox{\hyperlink{structbiddings}{biddings}} $\ast$struct\+\_\+bid)
+\begin{DoxyCompactList}\small\item\em display the menu of surcoinche if someone made a coinche \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{menu_8h_a8f8e876634e8bbbc2acf6a4a85e0b4be}{print\+Bids}} (\mbox{\hyperlink{structbiddings}{biddings}} b)
+\begin{DoxyCompactList}\small\item\em a function useful to display a structure of type biddings \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structbiddings}{biddings}} $\ast$ \mbox{\hyperlink{menu_8h_ab264ef67f3fa7509b0723947143a0517}{Add\+A\+Bet}} (\mbox{\hyperlink{structbiddings}{biddings}} $\ast$b, char $\ast$Given\+Player, int size\+Given\+Player, char $\ast$Given\+Bet, int size\+Given\+Bet, char Given\+Trump)
+\begin{DoxyCompactList}\small\item\em A really significant function to add a bet inside a biddinngs struct. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+the library containing all the functions related to the menus. 
+
+\begin{DoxyAuthor}{Author}
+Alexandre Viala 
+
+Léonard Hesse 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+13th june 2020
+\end{DoxyDate}
+The header of this library is included in every other libraries. All the principals libraries of the c are included in this header. 
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{menu_8h_ae7d38601dfbd73adbe5c1b3ec34e0e13}\label{menu_8h_ae7d38601dfbd73adbe5c1b3ec34e0e13}} 
+\index{menu.h@{menu.h}!Boolean@{Boolean}}
+\index{Boolean@{Boolean}!menu.h@{menu.h}}
+\doxysubsubsection{\texorpdfstring{Boolean}{Boolean}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{menu_8h_ae7d38601dfbd73adbe5c1b3ec34e0e13}{Boolean}}}
+
+
+
+a simple boolean implemented which can be useful in some cases 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TRUE@{TRUE}!menu.h@{menu.h}}\index{menu.h@{menu.h}!TRUE@{TRUE}}}\mbox{\Hypertarget{menu_8h_ae7d38601dfbd73adbe5c1b3ec34e0e13aa82764c3079aea4e60c80e45befbb839}\label{menu_8h_ae7d38601dfbd73adbe5c1b3ec34e0e13aa82764c3079aea4e60c80e45befbb839}} 
+T\+R\+UE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FALSE@{FALSE}!menu.h@{menu.h}}\index{menu.h@{menu.h}!FALSE@{FALSE}}}\mbox{\Hypertarget{menu_8h_ae7d38601dfbd73adbe5c1b3ec34e0e13aa1e095cc966dbecf6a0d8aad75348d1a}\label{menu_8h_ae7d38601dfbd73adbe5c1b3ec34e0e13aa1e095cc966dbecf6a0d8aad75348d1a}} 
+F\+A\+L\+SE&value true \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 24 of file menu.\+h.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{menu_8h_ab264ef67f3fa7509b0723947143a0517}\label{menu_8h_ab264ef67f3fa7509b0723947143a0517}} 
+\index{menu.h@{menu.h}!AddABet@{AddABet}}
+\index{AddABet@{AddABet}!menu.h@{menu.h}}
+\doxysubsubsection{\texorpdfstring{AddABet()}{AddABet()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structbiddings}{biddings}}$\ast$ Add\+A\+Bet (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structbiddings}{biddings}} $\ast$}]{b,  }\item[{char $\ast$}]{Given\+Player,  }\item[{int}]{size\+Given\+Player,  }\item[{char $\ast$}]{Given\+Bet,  }\item[{int}]{size\+Given\+Bet,  }\item[{char}]{Given\+Trump }\end{DoxyParamCaption})}
+
+
+
+A really significant function to add a bet inside a biddinngs struct. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & -\/ a pointer on the struct of type biddings we want to modify \\
+\hline
+{\em Given\+Player} & -\/ the name of the player who made the bet \\
+\hline
+{\em size\+Given\+Player} & -\/ the size of the string containing the name of the player \\
+\hline
+{\em Given\+Bet} & -\/ the bet that the player want to make inside a string \\
+\hline
+{\em size\+Given\+Bet} & -\/ the size of the string containing the bet \\
+\hline
+{\em Given\+Trump} & -\/ the trump that the player chose ( can be \textquotesingle{}H\textquotesingle{}, \textquotesingle{}C\textquotesingle{}, \textquotesingle{}D\textquotesingle{} or \textquotesingle{}S\textquotesingle{}) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the pointer on the struct b modified 
+\end{DoxyReturn}
+
+
+Definition at line 287 of file menu.\+c.
+
+\mbox{\Hypertarget{menu_8h_a480e7f706c8f794ab79d99f97478f670}\label{menu_8h_a480e7f706c8f794ab79d99f97478f670}} 
+\index{menu.h@{menu.h}!askForTrump@{askForTrump}}
+\index{askForTrump@{askForTrump}!menu.h@{menu.h}}
+\doxysubsubsection{\texorpdfstring{askForTrump()}{askForTrump()}}
+{\footnotesize\ttfamily char ask\+For\+Trump (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+a function which ask the player to choose a trump during the bidding time 
+
+\begin{DoxyReturn}{Returns}
+a char which is the chosen trump 
+\end{DoxyReturn}
+
+
+Definition at line 30 of file menu.\+c.
+
+\mbox{\Hypertarget{menu_8h_a112c622b3eb27312ef5fe91fdf3e32b2}\label{menu_8h_a112c622b3eb27312ef5fe91fdf3e32b2}} 
+\index{menu.h@{menu.h}!bid\_menu@{bid\_menu}}
+\index{bid\_menu@{bid\_menu}!menu.h@{menu.h}}
+\doxysubsubsection{\texorpdfstring{bid\_menu()}{bid\_menu()}}
+{\footnotesize\ttfamily int bid\+\_\+menu (\begin{DoxyParamCaption}\item[{int}]{current\+\_\+contract,  }\item[{\mbox{\hyperlink{structbiddings}{biddings}} $\ast$}]{struct\+\_\+bid }\end{DoxyParamCaption})}
+
+
+
+display the menu of bidding and allow the player to make a bid 
+
+
+\begin{DoxyParams}{Parameters}
+{\em current\+\_\+contract} & -\/ the value of the current contract \\
+\hline
+{\em struct\+\_\+bid} & -\/ the structure containing all the bets \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+an integer \+: -\/1 if no correct choice have been chosen, 0 if the player skipped, 1 if the player made a \char`\"{}classic\char`\"{} bet, 2 if the player made a coinche 
+\end{DoxyReturn}
+
+
+Definition at line 100 of file menu.\+c.
+
+\mbox{\Hypertarget{menu_8h_a209453284e1e2ed32261e11e00d53760}\label{menu_8h_a209453284e1e2ed32261e11e00d53760}} 
+\index{menu.h@{menu.h}!clrscr@{clrscr}}
+\index{clrscr@{clrscr}!menu.h@{menu.h}}
+\doxysubsubsection{\texorpdfstring{clrscr()}{clrscr()}}
+{\footnotesize\ttfamily void clrscr (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+function which erase all the things on the screen no matter the OS usedvoid \mbox{\hyperlink{menu_8c_a209453284e1e2ed32261e11e00d53760}{clrscr()}} 
+
+
+
+Definition at line 16 of file menu.\+c.
+
+\mbox{\Hypertarget{menu_8h_a219c351c9f40d16f05553c99a3b7e378}\label{menu_8h_a219c351c9f40d16f05553c99a3b7e378}} 
+\index{menu.h@{menu.h}!main\_menu@{main\_menu}}
+\index{main\_menu@{main\_menu}!menu.h@{menu.h}}
+\doxysubsubsection{\texorpdfstring{main\_menu()}{main\_menu()}}
+{\footnotesize\ttfamily int main\+\_\+menu (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+a simple function which display the main menu and get the input of the player 
+
+\begin{DoxyReturn}{Returns}
+the option chosen in the main menu 
+\end{DoxyReturn}
+
+
+Definition at line 70 of file menu.\+c.
+
+\mbox{\Hypertarget{menu_8h_af05f207325e0104940b30bd9991ba754}\label{menu_8h_af05f207325e0104940b30bd9991ba754}} 
+\index{menu.h@{menu.h}!menu@{menu}}
+\index{menu@{menu}!menu.h@{menu.h}}
+\doxysubsubsection{\texorpdfstring{menu()}{menu()}}
+{\footnotesize\ttfamily int menu (\begin{DoxyParamCaption}\item[{char $\ast$$\ast$}]{options,  }\item[{int}]{nbr\+\_\+option }\end{DoxyParamCaption})}
+
+
+
+a function displaying a menu with his title according to an array of strings 
+
+
+\begin{DoxyParams}{Parameters}
+{\em options} & -\/ the array containing the options of the menu \\
+\hline
+{\em nbre\+\_\+option} & -\/ number of options in the menu \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+an integer which is the option chosen (from 1 to nbre\+\_\+option) 
+\end{DoxyReturn}
+
+
+Definition at line 49 of file menu.\+c.
+
+\mbox{\Hypertarget{menu_8h_abed3a4453f4e00d127722d64726ab0cc}\label{menu_8h_abed3a4453f4e00d127722d64726ab0cc}} 
+\index{menu.h@{menu.h}!menu\_surcoinche@{menu\_surcoinche}}
+\index{menu\_surcoinche@{menu\_surcoinche}!menu.h@{menu.h}}
+\doxysubsubsection{\texorpdfstring{menu\_surcoinche()}{menu\_surcoinche()}}
+{\footnotesize\ttfamily void menu\+\_\+surcoinche (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structbiddings}{biddings}} $\ast$}]{struct\+\_\+bid }\end{DoxyParamCaption})}
+
+
+
+display the menu of surcoinche if someone made a coinche 
+
+
+\begin{DoxyParams}{Parameters}
+{\em struct\+\_\+bid} & -\/ the structure containing all the bets \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 239 of file menu.\+c.
+
+\mbox{\Hypertarget{menu_8h_a8f8e876634e8bbbc2acf6a4a85e0b4be}\label{menu_8h_a8f8e876634e8bbbc2acf6a4a85e0b4be}} 
+\index{menu.h@{menu.h}!printBids@{printBids}}
+\index{printBids@{printBids}!menu.h@{menu.h}}
+\doxysubsubsection{\texorpdfstring{printBids()}{printBids()}}
+{\footnotesize\ttfamily void print\+Bids (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structbiddings}{biddings}}}]{b }\end{DoxyParamCaption})}
+
+
+
+a function useful to display a structure of type biddings 
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & -\/ the structure to display \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 269 of file menu.\+c.
+

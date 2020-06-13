@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['indexwinningcards_11',['indexWinningCards',['../struct_tricks_stats.html#ac77a98a3076d1829851a5d3f5a044221',1,'TricksStats']]]
+  ['enterhighscore_24',['enterHighScore',['../highscores_8c.html#a035b7ab0ad3fb1354dc5e61b7331f276',1,'enterHighScore(char *player, int score):&#160;highscores.c'],['../highscores_8h.html#a035b7ab0ad3fb1354dc5e61b7331f276',1,'enterHighScore(char *player, int score):&#160;highscores.c']]]
 ];

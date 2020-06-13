@@ -1,0 +1,115 @@
+\hypertarget{_a_i_8h}{}\doxysection{A\+I.\+h File Reference}
+\label{_a_i_8h}\index{AI.h@{AI.h}}
+
+
+the library containing all the functions related to the AI.  
+
+
+{\ttfamily \#include \char`\"{}menu.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Cartes.\+h\char`\"{}}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structchoice_maker}{choice\+Maker}}
+\begin{DoxyCompactList}\small\item\em this struct is helping the ai to make a choice by stocking the possibility she has \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{struct_cardtype}{Cardtype}}
+\begin{DoxyCompactList}\small\item\em structure containing datas necessary to improve the choice of ai. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{_a_i_8h_aca0c8093aece2185b8a175c90723900c}{A\+Ibid}} (\mbox{\hyperlink{struct_player}{Player}} $\ast$ai\+\_\+player, int current\+\_\+bet\+\_\+value, \mbox{\hyperlink{structbiddings}{biddings}} $\ast$current\+\_\+bet)
+\begin{DoxyCompactList}\small\item\em the function which allow the ai to make a bet. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_a_i_8h_ab5b7702134f2944cb75c6b2d61ccc405}{Game\+\_\+of\+\_\+\+AI}} (\mbox{\hyperlink{struct_player}{Player}} $\ast$\mbox{\hyperlink{struct_player}{Player}}, int turn, int Card\+\_\+in\+\_\+the\+Trick, \mbox{\hyperlink{struct_tricks_stats}{Tricks\+Stats}} $\ast$The\+Trick, char trump\+\_\+color)
+\begin{DoxyCompactList}\small\item\em these functions will allow the artificial player to play one card in a trick \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_cardtype}{Cardtype}} $\ast$$\ast$ \mbox{\hyperlink{_a_i_8h_adc03c6ea6e198aad53d47cc08ef95e4e}{Bubble\+Sort\+Choice}} (\mbox{\hyperlink{struct_cardtype}{Cardtype}} $\ast$$\ast$array)
+\begin{DoxyCompactList}\small\item\em a bubble sort which sort an array of \mbox{\hyperlink{struct_cardtype}{Cardtype}} according to their number strong cards contained \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+the library containing all the functions related to the AI. 
+
+\begin{DoxyAuthor}{Author}
+Léonard Hesse 
+
+Alexandre Viala 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+13th june 2020
+\end{DoxyDate}
+In this library, we define the way the AI will bet and how she will play. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_a_i_8h_aca0c8093aece2185b8a175c90723900c}\label{_a_i_8h_aca0c8093aece2185b8a175c90723900c}} 
+\index{AI.h@{AI.h}!AIbid@{AIbid}}
+\index{AIbid@{AIbid}!AI.h@{AI.h}}
+\doxysubsubsection{\texorpdfstring{AIbid()}{AIbid()}}
+{\footnotesize\ttfamily int A\+Ibid (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_player}{Player}} $\ast$}]{ai\+\_\+player,  }\item[{int}]{current\+\_\+bet\+\_\+value,  }\item[{\mbox{\hyperlink{structbiddings}{biddings}} $\ast$}]{current\+\_\+bet }\end{DoxyParamCaption})}
+
+
+
+the function which allow the ai to make a bet. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ai\+\_\+player} & -\/ the struct which allows us to know which ai\+\_\+player is playing \\
+\hline
+{\em current\+\_\+bet\+\_\+value} & -\/ the value of the current bet, by example a General have a value of 500 \\
+\hline
+{\em current\+\_\+bet} & -\/ the array containing all the bets already made \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 20 of file A\+I.\+c.
+
+\mbox{\Hypertarget{_a_i_8h_adc03c6ea6e198aad53d47cc08ef95e4e}\label{_a_i_8h_adc03c6ea6e198aad53d47cc08ef95e4e}} 
+\index{AI.h@{AI.h}!BubbleSortChoice@{BubbleSortChoice}}
+\index{BubbleSortChoice@{BubbleSortChoice}!AI.h@{AI.h}}
+\doxysubsubsection{\texorpdfstring{BubbleSortChoice()}{BubbleSortChoice()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_cardtype}{Cardtype}}$\ast$$\ast$ Bubble\+Sort\+Choice (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_cardtype}{Cardtype}} $\ast$$\ast$}]{array }\end{DoxyParamCaption})}
+
+
+
+a bubble sort which sort an array of \mbox{\hyperlink{struct_cardtype}{Cardtype}} according to their number strong cards contained 
+
+
+\begin{DoxyParams}{Parameters}
+{\em array} & -\/ an array of pointers on \mbox{\hyperlink{struct_cardtype}{Cardtype}} which will be sorted \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the array in argument sorted 
+\end{DoxyReturn}
+
+
+Definition at line 159 of file A\+I.\+c.
+
+\mbox{\Hypertarget{_a_i_8h_ab5b7702134f2944cb75c6b2d61ccc405}\label{_a_i_8h_ab5b7702134f2944cb75c6b2d61ccc405}} 
+\index{AI.h@{AI.h}!Game\_of\_AI@{Game\_of\_AI}}
+\index{Game\_of\_AI@{Game\_of\_AI}!AI.h@{AI.h}}
+\doxysubsubsection{\texorpdfstring{Game\_of\_AI()}{Game\_of\_AI()}}
+{\footnotesize\ttfamily void Game\+\_\+of\+\_\+\+AI (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_player}{Player}} $\ast$}]{Player,  }\item[{int}]{turn,  }\item[{int}]{Card\+\_\+in\+\_\+the\+Trick,  }\item[{\mbox{\hyperlink{struct_tricks_stats}{Tricks\+Stats}} $\ast$}]{The\+Trick,  }\item[{char}]{trump\+\_\+color }\end{DoxyParamCaption})}
+
+
+
+these functions will allow the artificial player to play one card in a trick 
+
+these two functions will allow the player to play one card in a trick
+
+
+\begin{DoxyParams}{Parameters}
+{\em \mbox{\hyperlink{struct_player}{Player}}} & -\/ the struct of the artificial player \\
+\hline
+{\em turn} & -\/ it is two things \+: the number of turns it remains to do, and the size-\/1 (or the index of the last card) of the player\textquotesingle{}s hand. \\
+\hline
+{\em Card\+\_\+in\+\_\+the\+Trick} & -\/ the index of the last card of the actual trick \\
+\hline
+{\em The\+Trick} & -\/ the struct that will contain the cards of the trick \\
+\hline
+{\em trump\+\_\+color} & -\/ the color of the trump \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 189 of file A\+I.\+c.
+
