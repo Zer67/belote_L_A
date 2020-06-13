@@ -112,15 +112,15 @@ int main() {
 
                 players = shiftPlayers(players,FindPosition(players,lastPlayer));
                 /*******************************************   Loop of the tricks  ******************************************************************************/
+                TricksStats* TheTrick = (TricksStats*) malloc(sizeof(TricksStats));
                 while (GameTurn >= 0){
-                    TricksStats* TheTrick = (TricksStats*) malloc(sizeof(TricksStats));
                     TheTrick->CardsOfTheTrick = (Cards*)malloc(sizeof(Cards)*4);
                     TheTrick->indexWinningCards = 0;
                     TheTrick->NameOfWinner = (char*) malloc(sizeof(char)*5);
                     TheTrick->TeamWinningNumber = 0;
-                    int y;
                     TheTrick->indexWinningCards = 0;
                     TheTrick->TeamWinningNumber = players[0].TeamNumber;
+                    int y;
 
                     for (y =0; y < 4; y++) {
                         TheTrick->indexWinningCards = 0;
@@ -166,7 +166,7 @@ int main() {
                 free(East.hand);
                 free(North.hand);
                 free(North.hand);
-                system("PAUSE");
+                freeTheTrick(TheTrick);
             }while (North.score + South.score < 701 || East.score + West.score < 701 );
 
             break;

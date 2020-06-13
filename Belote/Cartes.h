@@ -118,5 +118,11 @@ Player* shiftPlayers(Player* playerArray, int Index);
 int FindPosition(Player* playerArray,char* player);
 
 void updatePlayerScore(Player* playerToUpdate,Player* ArrayOfPlayers);
+/**
+ * \fn void freeTheTrick(TrickStats* trick)
+ * \brief a function useful to free a pointer on a TrickStats structure
+ * \param trick - the trick to free
+ */
+void freeTheTrick(TricksStats* trick);
 
 #endif /* Cartes_h */

@@ -372,3 +372,14 @@ void updatePlayerScore(Player* playerToUpdate,Player* ArrayOfPlayers){
     }
 }
 
+/**
+ * \fn void freeTheTrick(TrickStats* trick)
+ * \brief a function useful to free a pointer on a TrickStats structure
+ * \param trick - the trick to free
+ */
+void freeTheTrick(TricksStats* trick){
+    free(trick->NameOfWinner);
+    free(trick->CardsOfTheTrick);
+    free(trick);
+    trick = NULL;
+}
