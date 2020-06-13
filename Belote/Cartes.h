@@ -1,10 +1,10 @@
-//
-//  Cartes.h
-//  Belote
-//
-//  Created by Michel HESSE on 08/05/2020.
-//  Copyright © 2020 Léonard HESSE. All rights reserved.
-//
+/**
+  * \file Cartes.h
+  * \brief the library containing all the functions related to the cards.
+  * \author L�onard Hesse
+  * \author Alexandre Viala
+  * \date 13th june 2020
+  */
 
 #ifndef Cartes_h
 #define Cartes_h
@@ -45,14 +45,25 @@ typedef struct {
 
 typedef struct Cards Cards;
 typedef struct Player Player;
-
-//Sub-program that gathers the functions to distribute the cards to each Player. It will call the function "FullingHand".
+/**
+ * \fn void DistributeCards(Player* North, Player* South, Player* East, Player* West)
+ * \brief Sub-program that gathers the functions to distribute the cards to each Player. It will call the function "FullingHand".
+ * \param North - a pointer on the North player
+ * \param South - a pointer on the South player
+ * \param East - a pointer on the East player
+ * \param West - a pointer on the West player
+ */
 void DistributeCards(Player* North, Player* South, Player* East, Player* West);
 
 
 
-
-//Function that randomly gives to each player 8 cards. It will call the function "SorteHand".
+/**
+ * \fn int FullingHand (Player* player, int l, Cards* Distribution)
+ * \brief Function that randomly gives to each player 8 cards. It will call the function "SorteHand".
+ * \param player - a pointer on a player
+ * \param Distribution - the array of cards containing all the cards
+ * \return 1 if the process was well executed
+ */
 int FullingHand (Player* player, int l, Cards* Distribution);
 
 
@@ -63,11 +74,13 @@ int FullingHand (Player* player, int l, Cards* Distribution);
  * \param Player - the struct of the player that the function is treating
  */
 void SorteHand(Player* Player);
-
-//Function that changes the score of each cards according to the chosen trump.
+/**
+ * \fn void ChangeScore(char trump_color, Player* Player)
+ * \brief Function that changes the score of each cards according to the chosen trump.
+ * \param trump_color - the trump's color of the current round
+ * \param Player - an array of players
+ */
 void ChangeScore(char trump_color, Player* Player);
-
-//The function to make the AI play is very different from the function to make the user play.
 
 /**
  * \fn void Game_of_South(Player* South, int turn, int Card_in_theTrick, TricksStats* TheTrick, char trump_color)
@@ -117,6 +130,15 @@ Player* shiftPlayers(Player* playerArray, int Index);
  */
 int FindPosition(Player* playerArray,char* player);
 
+/**
+ * \fn void updatePlayerScore(Player* playerToUpdate,Player* ArrayOfPlayers)
+ * \brief a function used to update the scores of the player. We search the player inside the array of players and then we update the player
+ * \param playerToUpdate - a pointer on the player to update
+ * \param ArrayOfPlayer - array of players containing the player to update
+ *
+ * This function should not exist but we reach some problems with the update of our different players because we did not defined them as
+ * pointers, so we need to update just their score after
+ */
 void updatePlayerScore(Player* playerToUpdate,Player* ArrayOfPlayers);
 /**
  * \fn void freeTheTrick(TrickStats* trick)

@@ -1,3 +1,10 @@
+/**
+  * \file main.c
+  * \brief The main of the program containing the global functioning of the program
+  * \author Léonard Hesse
+  * \author Alexandre Viala
+  * \date 13th june 2020
+  */
 #include "menu.h"
 #include "Cartes.h"
 #include "AI.h"

@@ -1,3 +1,13 @@
+/**
+  * \file AI.c
+  * \brief the library containing all the functions related to the AI.
+  * \author Léonard Hesse
+  * \author Alexandre Viala
+  * \date 13th june 2020
+  *
+  * In this library, we define the way the AI will bet and how she will play.
+  */
+
 #include "AI.h"
 
 /**
@@ -140,7 +150,12 @@ int AIbid(Player* ai_player, int current_bet_value, biddings* current_bet){
     return -1;
 }
 
-
+/**
+ * \fn Cardtype** BubbleSortChoice(Cardtype** array)
+ * \brief a bubble sort which sort an array of Cardtype according to their number strong cards contained
+ * \param array - an array of pointers on Cardtype which will be sorted
+ * \return the array in argument sorted
+ */
 Cardtype** BubbleSortChoice(Cardtype** array){
     Boolean sorted=FALSE;
     Cardtype* buff = (Cardtype*) malloc(sizeof(Cardtype));

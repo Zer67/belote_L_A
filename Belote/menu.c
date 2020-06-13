@@ -1,3 +1,13 @@
+/**
+  * \file menu.c
+  * \brief the library containing all the functions related to the menus.
+  * \author Alexandre Viala
+  * \author Léonard Hesse
+  * \date 13th june 2020
+  *
+  * The header of this library is included in every other libraries.
+  */
+
 #include "menu.h"
 /**
  * \fn void clrscr(void)

@@ -1,3 +1,13 @@
+/**
+  * \file highscores.c
+  * \brief the library containing all the functions related to the highscores
+  * \author Alexandre Viala
+  * \author Léonard Hesse
+  * \date 13th june 2020
+  *
+  * In this library, we use the the read and the write in a txt file named "highscore.txt"
+  */
+
 #include "highscores.h"
 /**\fn void ShowHighscore(void)
  * \brief a function that display the highscore board

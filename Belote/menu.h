@@ -1,3 +1,13 @@
+/**
+  * \file menu.h
+  * \brief the library containing all the functions related to the menus.
+  * \author Alexandre Viala
+  * \author Léonard Hesse
+  * \date 13th june 2020
+  *
+  * The header of this library is included in every other libraries.
+  * All the principals libraries of the c are included in this header.
+  */
 #ifndef MENUHEADER
 #define MENUHEADER
 
