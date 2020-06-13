@@ -1,5 +1,5 @@
 PLAYER	HIGHSCORE	NBRWINS
-Paul	1200	2
-Alice	1110	4
-Bob	1100	2
-Jerome	1070	2
+Paul	1200	3
+Alice	1110	6
+Bob	1100	3
+Jerome	1070	3

@@ -362,3 +362,13 @@ void printTheTrick(TricksStats* TheTrick, Player* players) {
     printf("\x1b[0m \n");
 }
 
+void updatePlayerScore(Player* playerToUpdate,Player* ArrayOfPlayers){
+    int i = 0;
+    while((i<4) &&(playerToUpdate->name[0]!=ArrayOfPlayers[i].name[0])){
+        i++;
+    }
+    if(i<4){
+        playerToUpdate->score = ArrayOfPlayers[i].score;
+    }
+}
+

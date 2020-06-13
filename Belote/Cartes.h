@@ -117,4 +117,6 @@ Player* shiftPlayers(Player* playerArray, int Index);
  */
 int FindPosition(Player* playerArray,char* player);
 
+void updatePlayerScore(Player* playerToUpdate,Player* ArrayOfPlayers);
+
 #endif /* Cartes_h */
