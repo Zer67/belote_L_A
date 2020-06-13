@@ -53,8 +53,8 @@ int AIbid(Player* ai_player, int current_bet_value, biddings* current_bet){
                     h->counter++;
                     h->figures = realloc(h->figures,sizeof(char)*(h->counter));
                 }
-                h->figures[h->counter-1] = ai_player->hand[i].color[5];
-                if ((h->figures[h->counter-1]=='1')||(h->figures[h->counter-1]=='J') || (h->figures[h->counter-1]=='9') || (h->figures[h->counter-1]=='A')){
+                h->figures[h->counter-1] = ai_player->hand[i].color[4];
+                if ((h->figures[h->counter-1]=='1')||(h->figures[h->counter-1]=='J') || (h->figures[h->counter-1]=='9')){
                     h->nbrStg++;
                 }
                 break;
@@ -70,8 +70,8 @@ int AIbid(Player* ai_player, int current_bet_value, biddings* current_bet){
                     s->counter++;
                     s->figures = realloc(s->figures,sizeof(char)*(s->counter+1));
                 }
-                s->figures[s->counter-1] = ai_player->hand[i].color[5];
-                if ((s->figures[s->counter-1]=='1')||(s->figures[s->counter-1]=='J') || (s->figures[s->counter-1]=='9') || (s->figures[s->counter-1]=='A')){
+                s->figures[s->counter-1] = ai_player->hand[i].color[4];
+                if ((s->figures[s->counter-1]=='1')||(s->figures[s->counter-1]=='J') || (s->figures[s->counter-1]=='9')){
                     s->nbrStg++;
                 }
                 break;
@@ -87,8 +87,8 @@ int AIbid(Player* ai_player, int current_bet_value, biddings* current_bet){
                     d->counter++;
                     d->figures = realloc(d->figures,sizeof(char)*(d->counter));
                 }
-                d->figures[d->counter-1] = ai_player->hand[i].color[5];
-                if ((d->figures[d->counter-1]=='1')||(d->figures[d->counter-1]=='J') || (d->figures[d->counter-1]=='9') || (d->figures[d->counter-1]=='A')){
+                d->figures[d->counter-1] = ai_player->hand[i].color[4];
+                if ((d->figures[d->counter-1]=='1')||(d->figures[d->counter-1]=='J') || (d->figures[d->counter-1]=='9')){
                     d->nbrStg++;
                 }
                 break;
@@ -104,8 +104,8 @@ int AIbid(Player* ai_player, int current_bet_value, biddings* current_bet){
                     c->counter++;
                     c->figures = realloc(c->figures,sizeof(char)*(c->counter+1));
                 }
-                c->figures[c->counter-1] = ai_player->hand[i].color[5];
-                if ((c->figures[c->counter-1]=='1')||(c->figures[c->counter-1]=='J') || (c->figures[c->counter-1]=='9') || (c->figures[c->counter-1]=='A')){
+                c->figures[c->counter-1] = ai_player->hand[i].color[4];
+                if ((c->figures[c->counter-1]=='1')||(c->figures[c->counter-1]=='J') || (c->figures[c->counter-1]=='9')){
                     c->nbrStg++;
                 }
 
@@ -126,9 +126,11 @@ int AIbid(Player* ai_player, int current_bet_value, biddings* current_bet){
 
     if ((array_color[0]->nbrStg>= 4)&&(120>current_bet_value)){
         current_bet = AddABet(current_bet,ai_player->name,sizeof(ai_player->name),"120",3,array_color[0]->color);
+        printf("The ai-player %s decided to bet 120 points\n", ai_player->name);
         return 1;
     } else if((array_color[0]->nbrStg>= 3)&&(80>current_bet_value)) {
         current_bet = AddABet(current_bet,ai_player->name,sizeof(ai_player->name),"80",2,array_color[0]->color);
+        printf("The ai-player %s decided to bet 80 points\n", ai_player->name);
         return 1;
     } else {
         printf("The ai-player %s decided to skip\n", ai_player->name);
@@ -143,10 +145,10 @@ Cardtype** BubbleSortChoice(Cardtype** array){
     Boolean sorted=FALSE;
     Cardtype* buff = (Cardtype*) malloc(sizeof(Cardtype));
     int i = 3;
-    while((!sorted)&&(i>0)){
+    while((sorted==FALSE)&&(i>0)){
         sorted = TRUE;
         for(int j=0;j<i;j++){
-            if(array[j+1]->nbrStg<array[j]->nbrStg){
+            if(array[j+1]->nbrStg>array[j]->nbrStg){
                 buff = array[j+1];
                 array[j+1] = array[j];
                 array[j] = buff;
@@ -155,7 +157,6 @@ Cardtype** BubbleSortChoice(Cardtype** array){
         }
         i-= 1;
     }
-    free(buff);
     return array;
 }
 
