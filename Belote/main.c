@@ -15,14 +15,22 @@ int main() {
     biddings round_bets;
     char* lastPlayer = (char*)malloc(sizeof(char)*5); /* this string is used to know who is the last player who made a bet */
     int contract = 79;
+    int round = 0;
 
     switch(main_menu()){
 
 
 
         case 1:
-            while (North.score + South.score < 701 || East.score + West.score < 701 ){
+            printf("\n\nWe will start a new game, keep ready !");
+            do{
+                if(round>0){
+                    North.hand = (Cards*)malloc(sizeof(Cards)*8);
+                    South.hand = (Cards*)malloc(sizeof(Cards)*8);
+                    East.hand = (Cards*)malloc(sizeof(Cards)*8);
+                    West.hand = (Cards*)malloc(sizeof(Cards)*8);
 
+                }
                 round_bets.turn = 0;
                 round_bets.bidding_array = (bid**) malloc( sizeof(bid*));
                 round_bets.bidding_array[0] = NULL;
@@ -39,12 +47,13 @@ int main() {
                 clrscr();
                 contract = 79;
                 Boolean coinche = FALSE; /* a variable which is equal to FALSE while nobody makes a coinche and then TRUE if someone makes a coinche */
-                printf("\n\nWe will start a new game, keep ready !");
+
                 /* cards are distributed */
                 do {
+                    bet_choice = -1;
                     DistributeCards(&North, &South, &East, &West);
                     /************************************************************************************************************************************************
-                     ************************************************Start of the game loop**************************************************************************
+                     ************************************************Start of the round loop**************************************************************************
                      ************************************************************************************************************************************************/
 
                     /************************************************   Biddings    *********************************************************************************/
@@ -119,9 +128,9 @@ int main() {
                             if (y > 0){
                                 printTheTrick(TheTrick, players);
                             }
-                            Game_of_South(&South, GameTurn, y, TheTrick, round_bets.bidding_array[round_bets.turn-1]->trump);
+                            Game_of_South(&(players[y]), GameTurn, y, TheTrick, round_bets.bidding_array[round_bets.turn-1]->trump);
                         }else {
-                            Game_of_AI(&players[y], GameTurn, y, TheTrick, round_bets.bidding_array[round_bets.turn-1]->trump);
+                            Game_of_AI(&(players[y]), GameTurn, y, TheTrick, round_bets.bidding_array[round_bets.turn-1]->trump);
                         }
 
                         for (int A = 0; A<=y; A++){
@@ -151,7 +160,15 @@ int main() {
                 updatePlayerScore(&South,players);
                 printf("\nScore of the North-South team : %i", South.score + North.score);
                 printf("\nScore of the East-West team : %i", West.score + East.score);
-            }
+                round++;
+
+                free(West.hand);
+                free(East.hand);
+                free(North.hand);
+                free(North.hand);
+                system("PAUSE");
+            }while (North.score + South.score < 701 || East.score + West.score < 701 );
+
             break;
         case 2:
             printf("\n\nLet's see the higher scores, could you beat them ?");
