@@ -1,7 +1,7 @@
 /**
   * \file Cartes.c
   * \brief the library containing all the functions related to the cards.
-  * \author Léonard Hesse
+  * \author LÃ©onard Hesse
   * \author Alexandre Viala
   * \date 13th june 2020
   */
@@ -257,7 +257,7 @@ if ( Card_in_theTrick != 0) {                                    //If South isn'
                    }
 
 
-    if (i <= turn && o <= turn) {                                                            //If South has the trick's color
+    if (i <= turn) {                                                            //If South has the trick's color
         if (FirstCardColor != trump_color || South->hand[o].power < WinningCard.power){                             //If the trick's color is not the trump color, or if the trick's color is a trump and South doesn't have the biggest trump of trick
                     do {
                         do {
