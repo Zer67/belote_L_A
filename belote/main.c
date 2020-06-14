@@ -125,14 +125,12 @@ int main() {
                     TheTrick->CardsOfTheTrick = (Cards*)malloc(sizeof(Cards)*4);
                     TheTrick->indexWinningCards = 0;
                     TheTrick->NameOfWinner = (char*) malloc(sizeof(char)*5);
-                    TheTrick->TeamWinningNumber = 0;
-                    TheTrick->indexWinningCards = 0;
                     TheTrick->TeamWinningNumber = players[0].TeamNumber;
-                    int y;
 
-                    for (y =0; y < 4; y++) {
+                    for (int y =0; y < 4; y++) {
                         TheTrick->indexWinningCards = 0;
-                        if (players[y].name[0] == 'S' ){
+                        
+                        if (players[y].name[0] == 'S'){
                             if (y > 0){
                                 printTheTrick(TheTrick, players);
                             }
@@ -141,7 +139,7 @@ int main() {
                             Game_of_AI(&(players[y]), GameTurn, y, TheTrick, round_bets.bidding_array[round_bets.turn-1]->trump);
                         }
 
-                        for (int A = 0; A<=y; A++){
+                        for (int A = 0; A <= y; A++){
                             if (TheTrick->CardsOfTheTrick[A].power > TheTrick->CardsOfTheTrick[TheTrick->indexWinningCards].power){
                                 TheTrick->indexWinningCards = A;
                             }
@@ -166,8 +164,8 @@ int main() {
                 updatePlayerScore(&East,players);
                 updatePlayerScore(&North,players);
                 updatePlayerScore(&South,players);
-                printf("\nScore of the North-South team : %i", South.score + North.score);
-                printf("\nScore of the East-West team : %i", West.score + East.score);
+                printf("\nScore of the North-South team : %i\n", South.score + North.score);
+                printf("Score of the East-West team : %i", West.score + East.score);
                 round++;
                 free(players);
                 free(West.hand);
@@ -175,7 +173,7 @@ int main() {
                 free(North.hand);
                 free(North.hand);
                 freeTheTrick(TheTrick);
-            }while (North.score + South.score < 701 || East.score + West.score < 701 );
+            }while (North.score + South.score < 701 && East.score + West.score < 701 );
 
             break;
         case 2:

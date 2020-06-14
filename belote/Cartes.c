@@ -257,7 +257,7 @@ if ( Card_in_theTrick != 0) {                                    //If South isn'
                    }
 
 
-    if (i <= turn) {                                                            //If South has the trick's color
+    if (i <= turn && o <= turn) {                                                            //If South has the trick's color
         if (FirstCardColor != trump_color || South->hand[o].power < WinningCard.power){                             //If the trick's color is not the trump color, or if the trick's color is a trump and South doesn't have the biggest trump of trick
                     do {
                         do {
@@ -292,7 +292,7 @@ if ( Card_in_theTrick != 0) {                                    //If South isn'
 
 
         }
-    }else {                                                 //If South has not the trick's color
+    }else if (o <= turn){                                                 //If South has not the trick's color
 
             if (WinningCard.color[0] == trump_color && South->hand[o].power > WinningCard.power) {//If South has a biggest trump than the Winning Card
                     do {
@@ -358,9 +358,6 @@ void printTheTrick(TricksStats* TheTrick, Player* players) {
         printf("\x1b[107m\x1b[91m%s", TheTrick->CardsOfTheTrick[i].color);
     }else if (TheTrick->CardsOfTheTrick[i].color[0] == 'C' || TheTrick->CardsOfTheTrick[i].color[0] == 'S') {
         printf("\x1b[107m\x1b[30m%s", TheTrick->CardsOfTheTrick[i].color);
-    }
-    else{
-        printf("\t\t");
     }
     printf("\x1b[0m\t");
 
