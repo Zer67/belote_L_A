@@ -26,7 +26,7 @@ struct Cards{
  * \brief the structure containing the player
  */
 struct Player{
-    char name[6];   /** the name of the player */
+    char name[5];   /** the name of the player */
     struct Cards* hand; /** the array of cards containing all the cards he can possibly play */
     int score;  /** the score he has done */
     int TeamNumber;  /** Define the number of the Team : 1 for Team North-South, 2 for Team East-West */
@@ -134,7 +134,7 @@ int FindPosition(Player* playerArray,char* player);
  * \fn void updatePlayerScore(Player* playerToUpdate,Player* ArrayOfPlayers)
  * \brief a function used to update the scores of the player. We search the player inside the array of players and then we update the player
  * \param playerToUpdate - a pointer on the player to update
- * \param ArrayOfPlayer - array of players containing the player to update
+ * \param ArrayOfPlayers - array of players containing the player to update
  *
  * This function should not exist but we reach some problems with the update of our different players because we did not defined them as
  * pointers, so we need to update just their score after
@@ -148,3 +148,4 @@ void updatePlayerScore(Player* playerToUpdate,Player* ArrayOfPlayers);
 void freeTheTrick(TricksStats* trick);
 
 #endif /* Cartes_h */
+

@@ -49,16 +49,15 @@ void DistributeCards (Player* North, Player* South, Player* East, Player* West) 
 
     SorteHand(West);
 
-    printf("\nWest : ");
+   /* printf("\nWest : ");
        for (int i = 0; i<8; i++) {
           if (West->hand[i].color[0] == 'H' || West->hand[i].color[0] == 'D'){
                printf("\x1b[107m\x1b[91m%s", West->hand[i].color);
            }else {
                printf("\x1b[107m\x1b[30m%s", West->hand[i].color);
            }
-           printf("\x1b[0m, ");
+           printf("\x1b[0m, ");*/
        }
-}
 
 
 /**
@@ -83,15 +82,18 @@ int FullingHand(Player* player, int l, Cards* Distribution) {
     }
 
     SorteHand(player);
-    printf("\n%s : ", player->name);
-       for (int i = 0; i<8; i++) {
-           if (player->hand[i].color[0] == 'H' || player->hand[i].color[0] == 'D'){
-               printf("\x1b[107m\x1b[91m%s", player->hand[i].color);
-           }else {
-               printf("\x1b[107m\x1b[30m%s", player->hand[i].color);
-           }
-            printf("\x1b[0m, ");
-       }
+    if (player->name[0] == 'S'){
+        printf("\nYour Hand : ");
+        for (int i = 0; i<8; i++) {
+            if (player->hand[i].color[0] == 'H' || player->hand[i].color[0] == 'D'){
+                printf("\x1b[107m\x1b[91m%s", player->hand[i].color);
+            }else {
+                printf("\x1b[107m\x1b[30m%s", player->hand[i].color);
+            }
+             printf("\x1b[0m, ");
+        }
+    }
+
 
     return l;
 }
@@ -206,15 +208,32 @@ int FindPosition(Player* playerArray,char* player){
 void Game_of_South(Player* South, int turn, int Card_in_theTrick, TricksStats* TheTrick, char trump_color) {
     char readString[5];
     int ind = -1, i = 0, o = 0;
+    printf("\nThe trump color is ");
+
+    switch (trump_color) {
+        case 'C':
+            printf("Club.");
+            break;
+        case 'H':
+            printf("Heart.");
+            break;
+        case 'D':
+            printf("Diamond.");
+            break;
+        default:
+            printf("Spade.");
+            break;
+    }
 
     printf("\nYour Hand : ");
     for (int u = 0; u <= turn; u++) {
+        printf("(%i)", u+1);
         if (South->hand[u].color[0] == 'H' || South->hand[u].color[0] == 'D'){
             printf("\x1b[107m\x1b[91m%s", South->hand[u].color);
         }else {
             printf("\x1b[107m\x1b[30m%s", South->hand[u].color);
         }
-         printf("\x1b[0m, ");
+         printf("\x1b[0m,");
     }
 
     while (South->hand[i].color[0] != trump_color && i <= turn+1){  //We check if South has some trump
@@ -288,7 +307,7 @@ if ( Card_in_theTrick != 0) {                                    //If South isn'
                         }
 
                     }while (ind != o);
-            } else {                                                //If the winning card is not a trump or if South doesn't have the biggest trump
+            } else {                                       //If the winning card is not a trump or if South doesn't have the biggest trump
                     do {
                          printf("\nType the index of the Card you want to play (from 1 to %i) : ", turn+1);
                         scanf("%s",readString);
@@ -340,6 +359,9 @@ void printTheTrick(TricksStats* TheTrick, Player* players) {
     }else if (TheTrick->CardsOfTheTrick[i].color[0] == 'C' || TheTrick->CardsOfTheTrick[i].color[0] == 'S') {
         printf("\x1b[107m\x1b[30m%s", TheTrick->CardsOfTheTrick[i].color);
     }
+    else{
+        printf("\t\t");
+    }
     printf("\x1b[0m\t");
 
     i = FindPosition(players, "West");
@@ -350,7 +372,7 @@ void printTheTrick(TricksStats* TheTrick, Player* players) {
         }else if (TheTrick->CardsOfTheTrick[i].color[0] == 'C' || TheTrick->CardsOfTheTrick[i].color[0] == 'S'){
             printf("\x1b[107m\x1b[30m%s", TheTrick->CardsOfTheTrick[i].color);
         }else {
-        printf("\t\t");
+        printf("\t");
     }
     printf("\x1b[0m\t\t");
 
@@ -383,7 +405,7 @@ void printTheTrick(TricksStats* TheTrick, Player* players) {
  * \fn void updatePlayerScore(Player* playerToUpdate,Player* ArrayOfPlayers)
  * \brief a function used to update the scores of the player. We search the player inside the array of players and then we update the player
  * \param playerToUpdate - a pointer on the player to update
- * \param ArrayOfPlayer - array of players containing the player to update
+ * \param ArrayOfPlayers - array of players containing the player to update
  *
  * This function should not exist but we reach some problems with the update of our different players because we did not defined them as
  * pointers, so we need to update just their score after
@@ -395,6 +417,7 @@ void updatePlayerScore(Player* playerToUpdate,Player* ArrayOfPlayers){
     }
     if(i<4){
         playerToUpdate->score = ArrayOfPlayers[i].score;
+        playerToUpdate->hand = (Cards*)malloc(sizeof(Cards)*8);
     }
 }
 
@@ -404,12 +427,8 @@ void updatePlayerScore(Player* playerToUpdate,Player* ArrayOfPlayers){
  * \param trick - the trick to free
  */
 void freeTheTrick(TricksStats* trick){
-    if(trick->NameOfWinner != NULL){
-        free(trick->NameOfWinner);
-    }
-    if(trick->CardsOfTheTrick != NULL){
-        free(trick->CardsOfTheTrick);
-    }
+    free(trick->NameOfWinner);
+    free(trick->CardsOfTheTrick);
     free(trick);
     trick = NULL;
 }

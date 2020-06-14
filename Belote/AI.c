@@ -136,11 +136,11 @@ int AIbid(Player* ai_player, int current_bet_value, biddings* current_bet){
 
     if ((array_color[0]->nbrStg>= 4)&&(120>current_bet_value)){
         current_bet = AddABet(current_bet,ai_player->name,sizeof(ai_player->name),"120",3,array_color[0]->color);
-        printf("The ai-player %s decided to bet 120 points\n", ai_player->name);
+        printf("The ai-player %s decided to bet 120 points with the trump color %c\n", ai_player->name, array_color[0]->color);
         return 1;
     } else if((array_color[0]->nbrStg>= 3)&&(80>current_bet_value)) {
         current_bet = AddABet(current_bet,ai_player->name,sizeof(ai_player->name),"80",2,array_color[0]->color);
-        printf("The ai-player %s decided to bet 80 points\n", ai_player->name);
+        printf("The ai-player %s decided to bet 80 points with the trump color %c\n", ai_player->name, array_color[0]->color);
         return 1;
     } else {
         printf("The ai-player %s decided to skip\n", ai_player->name);
