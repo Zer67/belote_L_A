@@ -36,6 +36,7 @@ int main() {
                     South.hand = (Cards*)malloc(sizeof(Cards)*8);
                     East.hand = (Cards*)malloc(sizeof(Cards)*8);
                     West.hand = (Cards*)malloc(sizeof(Cards)*8);
+                    players  = (Player*) malloc(sizeof(Player)*4);
 
                 }
                 round_bets.turn = 0;
@@ -168,7 +169,7 @@ int main() {
                 printf("\nScore of the North-South team : %i", South.score + North.score);
                 printf("\nScore of the East-West team : %i", West.score + East.score);
                 round++;
-
+                free(players);
                 free(West.hand);
                 free(East.hand);
                 free(North.hand);

@@ -404,8 +404,12 @@ void updatePlayerScore(Player* playerToUpdate,Player* ArrayOfPlayers){
  * \param trick - the trick to free
  */
 void freeTheTrick(TricksStats* trick){
-    free(trick->NameOfWinner);
-    free(trick->CardsOfTheTrick);
+    if(trick->NameOfWinner != NULL){
+        free(trick->NameOfWinner);
+    }
+    if(trick->CardsOfTheTrick != NULL){
+        free(trick->CardsOfTheTrick);
+    }
     free(trick);
     trick = NULL;
 }
