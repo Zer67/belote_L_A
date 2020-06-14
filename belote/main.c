@@ -52,7 +52,7 @@ int main() {
                 players[3] = East;
 
 
-                clrscr();
+                /* clrscr(); */
                 contract = 79;
                 Boolean coinche = FALSE; /* a variable which is equal to FALSE while nobody makes a coinche and then TRUE if someone makes a coinche */
 
@@ -175,7 +175,7 @@ int main() {
                 free(North.hand);
                 free(North.hand);
                 freeTheTrick(TheTrick);
-            }while (North.score + South.score < 701 || East.score + West.score < 701 );
+            }while (North.score + South.score < 701 && East.score + West.score < 701 );
 
             break;
         case 2:

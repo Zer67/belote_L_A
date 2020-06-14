@@ -1,5 +1,9 @@
 # depslib dependency file v1.0
+<<<<<<< Updated upstream
 1592142228 source:c:\users\alex\documents\github\belote_l_a\belote\ai.c
+=======
+1592149884 source:c:\users\alex\documents\github\belote_l_a\belote\ai.c
+>>>>>>> Stashed changes
 	"AI.h"
 
 1592089272 c:\users\alex\documents\github\belote_l_a\belote\ai.h
@@ -19,7 +23,11 @@
 	<string.h>
 	"menu.h"
 
+<<<<<<< Updated upstream
 1592143025 source:c:\users\alex\documents\github\belote_l_a\belote\cartes.c
+=======
+1592149840 source:c:\users\alex\documents\github\belote_l_a\belote\cartes.c
+>>>>>>> Stashed changes
 	"Cartes.h"
 
 1592089272 source:c:\users\alex\documents\github\belote_l_a\belote\highscores.c
@@ -31,7 +39,11 @@
 1592089272 source:c:\users\alex\documents\github\belote_l_a\belote\menu.c
 	"menu.h"
 
+<<<<<<< Updated upstream
 1592143544 source:c:\users\alex\documents\github\belote_l_a\belote\main.c
+=======
+1592149659 source:c:\users\alex\documents\github\belote_l_a\belote\main.c
+>>>>>>> Stashed changes
 	"menu.h"
 	"Cartes.h"
 	"AI.h"
