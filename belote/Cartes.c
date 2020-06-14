@@ -257,7 +257,7 @@ if ( Card_in_theTrick != 0) {                                    //If South isn'
                    }
 
 
-    if (i <= turn) {                                                            //If South has the trick's color
+    if (i <= turn && o <= turn) {                                                            //If South has the trick's color
         if (FirstCardColor != trump_color || South->hand[o].power < WinningCard.power){                             //If the trick's color is not the trump color, or if the trick's color is a trump and South doesn't have the biggest trump of trick
                     do {
                         do {
@@ -317,7 +317,14 @@ if ( Card_in_theTrick != 0) {                                    //If South isn'
 
 
 
-            }
+
+    }else {
+            do {
+             printf("\nType the index of the Card you want to play (from 1 to %i) : ", turn+1);
+            scanf("%s",readString);
+        } while ((sscanf(readString, "%d", &ind) == EOF) || (ind <= 0) || (ind > turn+1));
+        ind--;
+    }
 
 }else{                                                  //If South is the first to play
         do {

@@ -189,16 +189,6 @@ Cardtype** BubbleSortChoice(Cardtype** array){
 void Game_of_AI(Player* Player, int turn, int Card_in_theTrick, TricksStats* TheTrick, char trump_color){
     Boolean HasPlayed = FALSE;
     int i = 0, min = 0, max = 0;
-    
-    printf("\n%s : ", Player->name);
-    for (int u = 0; u <= turn; u++) {
-        if (Player->hand[u].color[0] == 'H' || Player->hand[u].color[0] == 'D'){
-            printf("\x1b[107m\x1b[91m%s", Player->hand[u].color);
-        }else {
-            printf("\x1b[107m\x1b[30m%s", Player->hand[u].color);
-        }
-         printf("\x1b[0m, ");
-    }
 
         for (int u = 0; u <= turn; u++){
             if (Player->hand[u].color[0] != trump_color && Player->hand[u].power > Player->hand[max].power){
@@ -278,8 +268,9 @@ else {                                                                      //If
                 }
             }
         }else {                                              //If the player has not the trick's color
-                    o = 0; i =0;
-
+                    o = 0;
+            if (turn > 0) {
+                    i =0;
                     while (Player->hand[i].color[0] != trump_color && i <= turn+1){ //We check if the player still has some trump
                         i++;
                     }
@@ -303,13 +294,14 @@ else {                                                                      //If
 
 
 
-                    }else if (WinningCard.color[0] != trump_color && o <= turn) {        //If the winning card is not a trump and if he has a trump
+                    }else if (WinningCard.color[0] != trump_color && i <= turn) {        //If the winning card is not a trump and if he has a trump
                         o = i;                                                          //he plays the smallest trump card
 
                     }else{                                                               //If he has no trump card
                         o = min;                                                    //he plays the smallest card of his hand
                     }
             }
+        }
     TheTrick->CardsOfTheTrick[Card_in_theTrick] = Player->hand[o];
         for (int u = o; u <= turn; u++) {
               Player->hand[u] = Player->hand[u+1];

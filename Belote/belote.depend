@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1592145261 source:c:\users\alex\documents\github\belote_l_a\belote\ai.c
+1592153082 source:c:\users\alex\documents\github\belote_l_a\belote\ai.c
 	"AI.h"
 
 1592144984 c:\users\alex\documents\github\belote_l_a\belote\ai.h
@@ -14,12 +14,12 @@
 	<string.h>
 	"Cartes.h"
 
-1592145486 c:\users\alex\documents\github\belote_l_a\belote\cartes.h
+1592150608 c:\users\alex\documents\github\belote_l_a\belote\cartes.h
 	<time.h>
 	<string.h>
 	"menu.h"
 
-1592145261 source:c:\users\alex\documents\github\belote_l_a\belote\cartes.c
+1592151432 source:c:\users\alex\documents\github\belote_l_a\belote\cartes.c
 	"Cartes.h"
 
 1592144598 source:c:\users\alex\documents\github\belote_l_a\belote\highscores.c
@@ -31,7 +31,7 @@
 1592145262 source:c:\users\alex\documents\github\belote_l_a\belote\menu.c
 	"menu.h"
 
-1592144723 source:c:\users\alex\documents\github\belote_l_a\belote\main.c
+1592152762 source:c:\users\alex\documents\github\belote_l_a\belote\main.c
 	"menu.h"
 	"Cartes.h"
 	"AI.h"

@@ -190,19 +190,18 @@ void Game_of_AI(Player* Player, int turn, int Card_in_theTrick, TricksStats* The
     Boolean HasPlayed = FALSE;
     int i = 0, min = 0, max = 0;
 
-    for (int u = 0; u <= turn; u++){
-        if (Player->hand[u].color[0] != trump_color && Player->hand[u].power > Player->hand[max].power){
-            max = u;                                //max takes the index of the non-trump card with the most value in the player's hand
+        for (int u = 0; u <= turn; u++){
+            if (Player->hand[u].color[0] != trump_color && Player->hand[u].power > Player->hand[max].power){
+                max = u;                                //max takes the index of the non-trump card with the most value in the player's hand
+            }
         }
-    }
 
 
-    for (int u = 0; u <= turn; u++){
-        if (Player->hand[u].power < Player->hand[min].power){
-            min = u;                                //min takes the index of the card with the less value in the player's hand.
+        for (int u = 0; u <= turn; u++){
+            if (Player->hand[u].power < Player->hand[min].power){
+                min = u;                                //min takes the index of the card with the less value in the player's hand.
+            }
         }
-    }
-
 
 if (Card_in_theTrick == 0){                                   //Checks if the Player plays the first card of the trick.
 
@@ -269,15 +268,16 @@ else {                                                                      //If
                 }
             }
         }else {                                              //If the player has not the trick's color
-                    o = 0; i =0;
-
-                    while (Player->hand[i].color[0] != trump_color && i <= turn+1){ //We check if the player has still some trump
+                    o = 0;
+            if (turn > 0) {
+                    i =0;
+                    while (Player->hand[i].color[0] != trump_color && i <= turn+1){ //We check if the player still has some trump
                         i++;
                     }
                     // If i < turn+1, it means the player has at least a trump, and i is the index of the smallest trump card in his hand.
 
                     if(TheTrick->TeamWinningNumber == Player->TeamNumber){
-                        // if the winning card is a trump, if the player's team wins the trick and if the player is the last to play
+                        // if the player's team wins the trick"
                         o = max;                                                        //He plays the biggest non-trump card
 
                     }else if (WinningCard.color[0] == trump_color && TheTrick->TeamWinningNumber != Player->TeamNumber && i <= turn){
@@ -294,13 +294,14 @@ else {                                                                      //If
 
 
 
-                    }else if (WinningCard.color[0] != trump_color && o <= turn) {        //If the winning card is not a trump and if he has a trump
+                    }else if (WinningCard.color[0] != trump_color && i <= turn) {        //If the winning card is not a trump and if he has a trump
                         o = i;                                                          //he plays the smallest trump card
 
                     }else{                                                               //If he has no trump card
                         o = min;                                                    //he plays the smallest card of his hand
                     }
             }
+        }
     TheTrick->CardsOfTheTrick[Card_in_theTrick] = Player->hand[o];
         for (int u = o; u <= turn; u++) {
               Player->hand[u] = Player->hand[u+1];

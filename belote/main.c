@@ -12,7 +12,9 @@
 #include <string.h>
 
 int main() {
-
+    char cont;
+    char* name;
+    char cont_string[30];
     Player North = {"North", (Cards*)malloc(sizeof(Cards)*8), 0, 1};
     Player South = {"South", (Cards*)malloc(sizeof(Cards)*8), 0, 1};
     Player East = {"East", (Cards*)malloc(sizeof(Cards)*8), 0, 2};
@@ -30,6 +32,12 @@ int main() {
 
         case 1:
             printf("\n\nWe will start a new game, keep ready !");
+            do{
+                printf("\n\nGive me your name : ");
+                scanf("%s",cont_string);
+            } while(strlen(cont_string)>7);
+            name = (char*) malloc(sizeof(char)*strlen(cont_string));
+            name = strcpy(name,cont_string);
             do{
                 if(round>0){
                     North.hand = (Cards*)malloc(sizeof(Cards)*8);
@@ -67,12 +75,11 @@ int main() {
                     /************************************************   Biddings    *********************************************************************************/
 
                     int i = 0;
-                     printf("\nLet's start the switch");
                     while((i<4)&&(coinche==FALSE)){
                         if(players[i].name[0] == 'S'){
                             while (bet_choice == -1){
                                 bet_choice = bid_menu(contract,&round_bets);
-                                //clrscr();
+                                clrscr();
                             }
                         } else {
                             bet_choice = AIbid(&(players[i]),contract,&round_bets);
@@ -108,6 +115,12 @@ int main() {
                         }
                     }
                 } while(contract == 79);
+                cont = 'O';
+                do{
+                    printf("\n\n press 'r' to continue... ");
+                    scanf("%s",cont_string);
+                } while((sscanf(cont_string,"%c",&cont) == EOF) || (cont != 'r'));
+                clrscr();
                 lastPlayer = strcpy(lastPlayer, round_bets.bidding_array[round_bets.turn-1]->player);
                 ChangeScore(round_bets.bidding_array[round_bets.turn-1]->trump, &North);
                 ChangeScore(round_bets.bidding_array[round_bets.turn-1]->trump, &South);
@@ -128,8 +141,6 @@ int main() {
                     TheTrick->TeamWinningNumber = players[0].TeamNumber;
 
                     for (int y =0; y < 4; y++) {
-                        TheTrick->indexWinningCards = 0;
-                        
                         if (players[y].name[0] == 'S'){
                             if (y > 0){
                                 printTheTrick(TheTrick, players);
@@ -147,7 +158,9 @@ int main() {
                         TheTrick->NameOfWinner = players[TheTrick->indexWinningCards].name;
                         TheTrick->TeamWinningNumber = players[TheTrick->indexWinningCards].TeamNumber;
                     }
+                    clrscr();
                     printTheTrick(TheTrick, players);
+
 
 
 
@@ -156,7 +169,12 @@ int main() {
                     }
 
                     printf("\n%s wins the Trick, score : %i", players[TheTrick->indexWinningCards].name, players[TheTrick->indexWinningCards].score);
-
+                    cont = 'O';
+                    do{
+                        printf("\n\n press 'r' to continue... ");
+                        scanf("%s",cont_string);
+                    } while((sscanf(cont_string,"%c",&cont) == EOF) || (cont != 'r'));
+                    clrscr();
                     players = shiftPlayers(players, TheTrick->indexWinningCards);
                     GameTurn--;
                 }
@@ -166,6 +184,11 @@ int main() {
                 updatePlayerScore(&South,players);
                 printf("\nScore of the North-South team : %i\n", South.score + North.score);
                 printf("Score of the East-West team : %i", West.score + East.score);
+                do{
+                    printf("\n\n press 'r' to continue... ");
+                    scanf("%s",cont_string);
+                } while((sscanf(cont_string,"%c",&cont) == EOF) || (cont != 'r'));
+                clrscr();
                 round++;
                 free(players);
                 free(West.hand);
@@ -174,7 +197,10 @@ int main() {
                 free(North.hand);
                 freeTheTrick(TheTrick);
             }while (North.score + South.score < 701 && East.score + West.score < 701 );
-
+            if(North.score + South.score > West.score + East.score){
+                printf("North South team won the game !");
+                enterHighScore(name,(North.score +South.score));
+            }
             break;
         case 2:
             printf("\n\nLet's see the higher scores, could you beat them ?");
