@@ -43,7 +43,7 @@ char askForTrump(void){
  * \fn int menu(char** options, int nbre_option)
  * \brief a function displaying a menu with his title according to an array of strings
  * \param options - the array containing the options of the menu
- * \param nbre_option - number of options in the menu
+ * \param nbr_option - number of options in the menu
  * \return an integer which is the option chosen (from 1 to nbre_option)
  */
 int menu(char** options, int nbr_option){
@@ -124,7 +124,7 @@ int bid_menu(int current_contract, biddings* struct_bid){
             return 0;
         case 2:
             do{
-                printf("\nTell me your bid knowing that the last contract was %d:\t",current_contract);
+                printf("\nTell me your bid (You have to bid a multiple of ten) knowing that the last contract was %d:\t",current_contract);
                 scanf("%s",bidString);
             } while((strcmp(bidString,"u")!=0)&&((sscanf(bidString,"%d",&bid)==EOF)||(bid<current_contract)||(bid%10 != 0)));
             if (strcmp(bidString,"u")==0){
