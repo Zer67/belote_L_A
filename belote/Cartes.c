@@ -317,7 +317,14 @@ if ( Card_in_theTrick != 0) {                                    //If South isn'
 
 
 
-            }
+    }else {
+            do {
+             printf("\nType the index of the Card you want to play (from 1 to %i) : ", turn+1);
+            scanf("%s",readString);
+        } while ((sscanf(readString, "%d", &ind) == EOF) || (ind <= 0) || (ind > turn+1));
+        ind--;
+    
+
 
 }else{                                                  //If South is the first to play
         do {
