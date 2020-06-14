@@ -1,12 +1,12 @@
 # depslib dependency file v1.0
-1592142228 source:c:\users\alex\documents\github\belote_l_a\belote\ai.c
+1592145261 source:c:\users\alex\documents\github\belote_l_a\belote\ai.c
 	"AI.h"
 
-1592089272 c:\users\alex\documents\github\belote_l_a\belote\ai.h
+1592144984 c:\users\alex\documents\github\belote_l_a\belote\ai.h
 	"menu.h"
 	"Cartes.h"
 
-1592089272 c:\users\alex\documents\github\belote_l_a\belote\menu.h
+1592144984 c:\users\alex\documents\github\belote_l_a\belote\menu.h
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
@@ -14,24 +14,24 @@
 	<string.h>
 	"Cartes.h"
 
-1592142762 c:\users\alex\documents\github\belote_l_a\belote\cartes.h
+1592145486 c:\users\alex\documents\github\belote_l_a\belote\cartes.h
 	<time.h>
 	<string.h>
 	"menu.h"
 
-1592143025 source:c:\users\alex\documents\github\belote_l_a\belote\cartes.c
+1592145261 source:c:\users\alex\documents\github\belote_l_a\belote\cartes.c
 	"Cartes.h"
 
-1592089272 source:c:\users\alex\documents\github\belote_l_a\belote\highscores.c
+1592144598 source:c:\users\alex\documents\github\belote_l_a\belote\highscores.c
 	"highscores.h"
 
-1592089272 c:\users\alex\documents\github\belote_l_a\belote\highscores.h
+1592144598 c:\users\alex\documents\github\belote_l_a\belote\highscores.h
 	"menu.h"
 
-1592089272 source:c:\users\alex\documents\github\belote_l_a\belote\menu.c
+1592145262 source:c:\users\alex\documents\github\belote_l_a\belote\menu.c
 	"menu.h"
 
-1592143544 source:c:\users\alex\documents\github\belote_l_a\belote\main.c
+1592144723 source:c:\users\alex\documents\github\belote_l_a\belote\main.c
 	"menu.h"
 	"Cartes.h"
 	"AI.h"

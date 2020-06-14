@@ -26,7 +26,7 @@ struct Cards{
  * \brief the structure containing the player
  */
 struct Player{
-    char name[5];   /** the name of the player */
+    char name[6];   /** the name of the player */
     struct Cards* hand; /** the array of cards containing all the cards he can possibly play */
     int score;  /** the score he has done */
     int TeamNumber;  /** Define the number of the Team : 1 for Team North-South, 2 for Team East-West */
